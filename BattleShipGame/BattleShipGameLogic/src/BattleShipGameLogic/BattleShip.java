@@ -20,13 +20,13 @@ public class BattleShip extends GameObject
 	{
 		for (BattleShipGame.ShipTypes.ShipType shipType : i_ShipTypes.getShipType())
 		{
-			if(shipType.getId() == m_Id)
+			if(shipType.getId().equals(m_Id))
 			{
 				m_Category = BattleShipCategory.valueOf(shipType.getCategory());
 				m_Length = shipType.getLength();
 				m_Score = shipType.getScore();
 				m_BoardSign = BoardSigns.BATTLE_SHIP;
-				m_Location = new Point(i_Ship.getPosition().getX(), i_Ship.getPosition().getY());
+				m_Location = new Point(i_Ship.getPosition().getY(), i_Ship.getPosition().getX());
 				m_Direction = Direction.valueOf(i_Ship.getDirection());
 				validateShipParametes();
 

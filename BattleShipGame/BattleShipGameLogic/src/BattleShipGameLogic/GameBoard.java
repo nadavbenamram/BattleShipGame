@@ -27,7 +27,7 @@ public class GameBoard
 			throw new IllegalArgumentException("Board size should be from: " + BOARD_MIN_SIZE + " to: " + BOARD_MAX_SIZE);
 		}
 
-		m_Board = new BoardSigns[m_BoardSize][m_BoardSize];
+		m_Board = new BoardSigns[m_BoardSize + 1][m_BoardSize + 1];
 		for (BoardSigns[] row : m_Board)
 		{
 			Arrays.fill(row, BoardSigns.EMPTY);
@@ -37,5 +37,10 @@ public class GameBoard
 	public BoardSigns[][] GetBoard()
 	{
 		return m_Board;
+	}
+
+	public int GetBoardSize()
+	{
+		return m_BoardSize;
 	}
 }

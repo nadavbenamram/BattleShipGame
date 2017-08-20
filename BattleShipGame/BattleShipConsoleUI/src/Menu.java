@@ -1,15 +1,16 @@
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Menu
 {
-	private static final String m_Menu= "Your options are:" +
-	                                    "1. Load game details from XML" +
-	                                    "2. Start game" +
-	                                    "3. Show game status" +
-	                                    "4. Make turn" +
-	                                    "5. Show game statistics" +
-	                                    "6. Finish current game" +
-	                                    "7. Put mine" +
+	private static final String MENU_OPTIONS = "Your options are:\n" +
+	                                    "1. Load game details from XML\n" +
+	                                    "2. Start game\n" +
+	                                    "3. Show game status\n" +
+	                                    "4. Make turn\n" +
+	                                    "5. Show game statistics\n" +
+	                                    "6. Finish current game\n" +
+	                                    "7. Put mine\n" +
 	                                    "8. Exit game";
 
 	public Menu()
@@ -23,27 +24,27 @@ public class Menu
 
 	private void printMenu()
 	{
-		System.out.println(m_Menu);
+		System.out.println();
+		System.out.println(MENU_OPTIONS);
+		System.out.println();
+		System.out.print("Your choice: ");
 	}
 
 	private int getChoiceFromUser() throws IOException
 	{
 		int choice;
 		boolean firstIter = true;
+		Scanner input = new Scanner(System.in);
 
 		do
 		{
-			printMenu();
-
 			if(!firstIter)
 			{
-				System.out.println();
 				System.out.println("Invalid choice! values can be between 1 to 8 only!");
 			}
 
-			System.out.println();
-			System.out.println("Please enter your choice:");
-			choice = System.in.read();
+			printMenu();
+			choice = input.nextInt();
 			firstIter = false;
 		}
 		while(choice < 1 || choice > 8);

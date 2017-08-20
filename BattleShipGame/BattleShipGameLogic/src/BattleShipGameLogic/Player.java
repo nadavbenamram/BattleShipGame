@@ -43,4 +43,9 @@ public class Player
 	{
 		return m_TraceBoard;
 	}
+
+	public int GetPlayerNumber()
+	{
+		return m_PlayerNumber;
+	}
 }

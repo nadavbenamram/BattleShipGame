@@ -40,7 +40,7 @@ public class BattleShipGameBoard extends GameBoard
 			addBattleShipToBoard(battleShip);
 		}
 
-		m_NumOfMines = i_mines.getAmount();
+		m_NumOfMines = i_mines != null ? i_mines.getAmount() : 0;
 		validateNumOfMines();
 	}
 
@@ -164,16 +164,16 @@ public class BattleShipGameBoard extends GameBoard
 
 	private void checkPointValidation(Point p, GameObject i_GameObject)
 	{
-		if(checkIfInsideBoardBounds(p))
+		if(false == checkIfInsideBoardBounds(p))
 		{
 			throw new IndexOutOfBoundsException("Object " + i_GameObject.toString() + " out of game board bounds");
 		}
 
-		for(int x = p.x-1; x < p.x + 3; x++)
+		for(int x = p.x-1; x < p.x + 2; x++)
 		{
-			for(int y = p.y-1; y <  p.y + 3; y++)
+			for(int y = p.y-1; y <  p.y + 2; y++)
 			{
-				if(checkIfInsideBoardBounds(new Point(x,y)))
+				if(true == checkIfInsideBoardBounds(new Point(x,y)))
 				{
 					if(m_Board[x][y] != BoardSigns.EMPTY)
 					{
@@ -186,7 +186,7 @@ public class BattleShipGameBoard extends GameBoard
 
 	private boolean checkIfInsideBoardBounds(Point i_Point)
 	{
-		return (i_Point.x >= m_BoardSize || i_Point.x < 0 || i_Point.y >= m_BoardSize || i_Point.y < 0);
+		return (i_Point.x <= m_BoardSize && i_Point.x >= 1 && i_Point.y <= m_BoardSize && i_Point.y >= 1);
 	}
 
 }
