@@ -35,7 +35,7 @@ public class BattleShipGameBoard extends GameBoard
 		for(BattleShipGame.Boards.Board.Ship ship : i_boardConfiguration.getShip())
 		{
 			shipId = ship.getShipTypeId();
-			battleShip = new BattleShip((shipId));
+			battleShip = new BattleShip(shipId, this);
 			battleShip.FillShipDetails(i_shipTypes, ship);
 			addBattleShipToBoard(battleShip);
 		}
@@ -74,6 +74,7 @@ public class BattleShipGameBoard extends GameBoard
 			moveToNextPoint(p, i, i_GameObject);
 		}
 
+		i_GameObject.SetActivePoints(pointsToDraw);
 		drawPoints(pointsToDraw, objSign);
 	}
 
@@ -81,7 +82,7 @@ public class BattleShipGameBoard extends GameBoard
 	{
 		for(Point p : i_PointsToDraw)
 		{
-			m_Board[p.x][p.y] = i_BoardSign;
+			m_Board[p.y][p.x] = i_BoardSign;
 		}
 	}
 
@@ -189,4 +190,37 @@ public class BattleShipGameBoard extends GameBoard
 		return (i_Point.x <= m_BoardSize && i_Point.x >= 1 && i_Point.y <= m_BoardSize && i_Point.y >= 1);
 	}
 
+	public BattleShip GetBattleShipByPoint(Point i_Point)
+	{
+		for(BattleShip battleShip : m_BattleShips)
+		{
+			if(battleShip.IsPointOfObject(i_Point))
+			{
+				return battleShip;
+			}
+		}
+
+		throw new IllegalArgumentException("The point " + i_Point.toString() + "isn't of any BattleShip");
+	}
+
+	public void ObjectDrawn(GameObject i_Obj)
+	{
+		if(i_Obj instanceof  BattleShip)
+		{
+			m_BattleShips.remove(i_Obj);
+		}
+		else if(i_Obj instanceof  Mine)
+		{
+			m_Mines.remove(i_Obj);
+		}
+		else
+		{
+			throw new IllegalArgumentException("Unkown object type to be drawn");
+		}
+	}
+
+	public int AliveBattleShips()
+	{
+		return m_BattleShips.size();
+	}
 }

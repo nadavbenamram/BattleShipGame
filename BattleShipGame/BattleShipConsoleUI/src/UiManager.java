@@ -1,9 +1,7 @@
-import BattleShipGameLogic.BoardSigns;
-import BattleShipGameLogic.GameBoard;
-import BattleShipGameLogic.GameManager;
-import BattleShipGameLogic.Player;
+import BattleShipGameLogic.*;
 import com.sun.deploy.util.StringUtils;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -11,6 +9,7 @@ public class UiManager
 {
 	private static boolean m_XmlLoaded = false;
 	private static boolean m_GameStarted = false;
+	private static int m_BoardSize;
 
 	public static void main(String[] args) throws IOException
 	{
@@ -22,7 +21,26 @@ public class UiManager
 			try
 			{
 				userChoice = menu.ShowMenuAndGetUserChoice();
-				executeByUserChoide(userChoice);
+				if(executeByUserChoide(userChoice)) //game finished
+				{
+					if(userChoice == 6)
+					{
+						System.out.println("Game Finished!\n" +
+						                   "Player " + GameManager.Instance().GetCurrentPlayer().GetPlayerNumber() + " Quit\n" +
+						                   "Player " + ((GameManager.Instance().GetCurrentPlayer().GetPlayerNumber()+1) %2) + " WON!!!\n");
+					}
+					else
+					{
+						System.out.println("Game Finished!\n" +
+						                   "Player " + GameManager.Instance().GetCurrentPlayer().GetPlayerNumber() + " WON!!!\n");
+					}
+
+					printPlayersBattleShipBoards();
+					printGameStatistics();
+
+					System.out.println("Select 2 for start a new game");
+					m_GameStarted = false;
+				}
 			}
 			catch(Exception e)
 			{
@@ -31,8 +49,23 @@ public class UiManager
 		}
 	}
 
-	private static void executeByUserChoide(int userChoice) throws Exception
+	private static void printPlayersBattleShipBoards()
 	{
+		Player[] players = GameManager.Instance().GetAllPlayers();
+
+		for (Player p : players)
+		{
+			System.out.println("Player " + p.GetPlayerNumber() + " board:");
+			printBattleShipBoard(p);
+		}
+
+		System.out.println();
+	}
+
+	private static boolean executeByUserChoide(int userChoice) throws Exception
+	{
+		boolean isGameFinished = false;
+
 		switch(userChoice)
 		{
 			case 1:
@@ -44,7 +77,134 @@ public class UiManager
 			case 3:
 				printGameState();
 				break;
+			case 4:
+				isGameFinished = makeMove();
+				break;
+			case 5:
+				printGameStatistics();
+				break;
+			case 6:
+				playerFinishGame();
+				isGameFinished = true;
 		}
+
+		return isGameFinished;
+	}
+
+	private static void playerFinishGame()
+	{
+	}
+
+	private static void printGameStatistics() throws Exception
+	{
+		if(m_GameStarted == false)
+		{
+			throw new Exception("Start game before select game statistics");
+		}
+
+		GameStatistics gameStats = GameManager.Instance().GetGameStatistics();
+
+		System.out.println(gameStats.toString());
+
+		for(Player p : GameManager.Instance().GetAllPlayers())
+		{
+			System.out.println(p.GetPlayerStatistics().toString());
+		}
+	}
+
+	public static Point getPointFromUser(String i_For)
+	{
+		Scanner input = new Scanner(System.in);
+		Point res = new Point();
+
+		System.out.print("Please insert row for " + i_For + ": (1 - " + m_BoardSize + "): ");
+		res.y = input.nextInt();
+		System.out.println();
+		System.out.print("Please insert column to "+ i_For + ": (A - " + (char)('A' + m_BoardSize - 1) + "): ");
+		res.x = (int)(input.next().charAt(0) - 'A' + 1);
+
+		return res;
+	}
+
+	private static boolean setMine() throws Exception
+	{
+		boolean isGameFinished = false;
+
+		if(m_GameStarted == false)
+		{
+			throw new Exception("You can set mine after you start a game");
+		}
+
+		try
+		{
+			Point pointForMine = getPointFromUser("mine");
+			GameManager.Instance().GetCurrentPlayer().SetMine(pointForMine);
+		}
+		catch(Exception e)
+		{
+			throw new IllegalArgumentException("Invalid point to set mine - Should be:\n" +
+			                                   "Row: 1 - " + m_BoardSize + "\n" +
+			                                   "Column: A - " + (char)('A' + m_BoardSize - 1) + "\n");
+		}
+
+		Player attack = GameManager.Instance().GetCurrentPlayer();
+		AttackResult attackedResult = attack.HitPoint((attack.GetPlayerNumber() + 1) % 2, pointToAttack); //In this UI only two players playing...
+		if(attackedResult.GetBeforeAttackSign() == BoardSigns.BATTLE_SHIP)
+		{
+			System.out.println("Player " + attack.GetPlayerNumber() + " hit BattleShip!");
+		}
+
+		if(attackedResult.GetIsBattleShipDrawn())
+		{
+			System.out.println("Player " + attack.GetPlayerNumber() + " drawn BattleShip!!!");
+		}
+
+		if(attackedResult.GetPlayerWon())
+		{
+			isGameFinished = true;
+		}
+
+		return isGameFinished;
+	}
+
+	private static boolean makeMove() throws Exception
+	{
+		boolean isGameFinished = false;
+
+		if(m_GameStarted == false)
+		{
+			throw new Exception("You can make move after you start a game");
+		}
+
+		try
+		{
+			Point pointToAttack = getPointFromUser("attack");
+		}
+		catch(Exception e)
+		{
+			throw new IllegalArgumentException("Invalid point to attack - Should be:\n" +
+			                                   "Row: 1 - " + m_BoardSize + "\n" +
+			                                   "Column: A - " + (char)('A' + m_BoardSize - 1) + "\n");
+		}
+
+		Player attack = GameManager.Instance().GetCurrentPlayer();
+		AttackResult attackedResult = attack.HitPoint((attack.GetPlayerNumber() + 1) % 2, pointToAttack); //In this UI only two players playing...
+		if(attackedResult.GetBeforeAttackSign() == BoardSigns.BATTLE_SHIP)
+		{
+			System.out.println("Player " + attack.GetPlayerNumber() + " hit BattleShip!");
+		}
+
+		if(attackedResult.GetIsBattleShipDrawn())
+		{
+			System.out.println("Player " + attack.GetPlayerNumber() + " drawn BattleShip!!!");
+		}
+
+		if(attackedResult.GetPlayerWon())
+		{
+			isGameFinished = true;
+		}
+
+		return isGameFinished;
 	}
 
 	private static void printGameState() throws Exception
@@ -82,6 +242,7 @@ public class UiManager
 		{
 			GameManager.Instance().InitGame();
 			m_GameStarted = true;
+			m_BoardSize = GameManager.Instance().GetCurrentPlayer().GetBattleShipGameBoard().GetBoardSize();
 			System.out.println("Game Started!");
 		}
 		else
@@ -92,7 +253,7 @@ public class UiManager
 
 	private static void printBoard(GameBoard i_GameBoard)
 	{
-		int size = i_GameBoard.GetBoardSize();
+		int size = m_BoardSize;
 		BoardSigns[][] boardArr = i_GameBoard.GetBoard();
 		int rowLen;
 
@@ -116,7 +277,7 @@ public class UiManager
 
 			for(int j = 1; j <= size; ++j)
 			{
-				System.out.print(" " + boardArr[j][i].GetValue() + " |");
+				System.out.print(" " + boardArr[i][j].GetValue() + " |");
 			}
 
 			System.out.println();

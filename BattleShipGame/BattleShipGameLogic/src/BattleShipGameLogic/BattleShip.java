@@ -11,8 +11,9 @@ public class BattleShip extends GameObject
 	BattleShipCategory m_Category;
 	private int m_Score;
 
-	public BattleShip(String i_Id)
+	public BattleShip(String i_Id, BattleShipGameBoard i_GameBoard)
 	{
+		super(i_GameBoard);
 		m_Id = i_Id;
 	}
 

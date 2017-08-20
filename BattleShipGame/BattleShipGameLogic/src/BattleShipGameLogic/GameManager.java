@@ -3,6 +3,7 @@ package BattleShipGameLogic;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -15,6 +16,7 @@ public class GameManager
 	private Player[] m_Players;
 	private final int NUM_OF_PLAYERS = 2;
 	private GameStatistics m_Statistics;
+	private int m_NextPlayerTurn;
 
 	private GameManager()
 	{
@@ -30,6 +32,11 @@ public class GameManager
 		return m_Instance;
 	}
 
+	public GameStatistics GetGameStatistics()
+	{
+		 return m_Statistics;
+	}
+
 	public void LoadGameSettings(String i_XmlPath) throws  Exception
 	{
 		fromXmlFileToObject(i_XmlPath);
@@ -41,6 +48,8 @@ public class GameManager
 	{
 		initPlayers();
 		m_Statistics = new GameStatistics();
+		m_NextPlayerTurn = 0;
+		m_Players[m_NextPlayerTurn].TurnStarted();
 	}
 
 	private void fromXmlFileToObject(String i_FilePath) throws Exception
@@ -58,6 +67,30 @@ public class GameManager
 		{
 			throw new Exception("Couldn't load xml");
 		}
+	}
+
+	public AttackResult Attack(int i_AttackerIdx, int i_VictimIdx, Point i_Point)
+	{
+		Player attacker = m_Players[i_AttackerIdx];
+		Player victim = m_Players[i_VictimIdx];
+		AttackResult attackResult;
+
+		attackResult = victim.AttackedInPoint(i_Point);
+
+		if(attackResult.GetBeforeAttackSign() != BoardSigns.BATTLE_SHIP)
+		{
+			m_NextPlayerTurn = nextPlayerIndex();
+		}
+
+		m_Players[m_NextPlayerTurn].TurnStarted();
+		m_Statistics.AddStep();
+
+		return attackResult;
+	}
+
+	private int nextPlayerIndex()
+	{
+		return (m_NextPlayerTurn + 1) % NUM_OF_PLAYERS;
 	}
 
 	private void initPlayers()
@@ -88,6 +121,11 @@ public class GameManager
 
 	public Player GetCurrentPlayer()
 	{
-		return m_Players[m_Statistics.GetSteps() % NUM_OF_PLAYERS];
+		return m_Players[m_NextPlayerTurn];
+	}
+
+	public Player[] GetAllPlayers()
+	{
+		return m_Players;
 	}
 }

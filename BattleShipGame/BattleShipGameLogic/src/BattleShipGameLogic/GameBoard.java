@@ -43,4 +43,21 @@ public class GameBoard
 	{
 		return m_BoardSize;
 	}
+
+	public BoardSigns GetCellSign(Point i_Cell)
+	{
+		try
+		{
+			return m_Board[i_Cell.y][i_Cell.x];
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			throw new IndexOutOfBoundsException(i_Cell.toString() + "out of the game board bounds");
+		}
+	}
+
+	public void SetCellSign(Point i_Cell, BoardSigns i_NewSign)
+	{
+		m_Board[i_Cell.y][i_Cell.x] = i_NewSign;
+	}
 }
