@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu
@@ -32,7 +33,7 @@ public class Menu
 
 	private int getChoiceFromUser() throws IOException
 	{
-		int choice;
+		int choice = 0;
 		boolean firstIter = true;
 		Scanner input = new Scanner(System.in);
 
@@ -44,8 +45,18 @@ public class Menu
 			}
 
 			printMenu();
-			choice = input.nextInt();
-			firstIter = false;
+			try
+			{
+				choice = input.nextInt();
+				firstIter = false;
+			}
+			catch (InputMismatchException e)
+			{
+				System.out.println("Invalid choice format! values can be only numbers!");
+				firstIter = true;
+				choice = 0;
+				input.nextLine();
+			}
 		}
 		while(choice < 1 || choice > 8);
 

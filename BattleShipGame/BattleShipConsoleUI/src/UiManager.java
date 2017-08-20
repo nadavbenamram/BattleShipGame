@@ -23,11 +23,22 @@ public class UiManager
 				userChoice = menu.ShowMenuAndGetUserChoice();
 				if(executeByUserChoide(userChoice)) //game finished
 				{
-					if(userChoice == 6)
+					if(userChoice == 6 || userChoice == 8)
 					{
-						System.out.println("Game Finished!\n" +
-						                   "Player " + GameManager.Instance().GetCurrentPlayer().GetPlayerNumber() + " Quit\n" +
-						                   "Player " + ((GameManager.Instance().GetCurrentPlayer().GetPlayerNumber()+1) %2) + " WON!!!\n");
+						try
+						{
+							System.out.println("Game Finished!\n" +
+							                   "Player " + GameManager.Instance().GetCurrentPlayer().GetPlayerNumber() + " Quit\n" +
+							                   "Player " + ((GameManager.Instance().GetCurrentPlayer().GetPlayerNumber()+1) %2) + " WON!!!\n");
+						}
+						catch(Exception e)
+						{
+							if(userChoice == 8)
+							{
+								System.out.println("Exiting from game...");
+								System.exit(0);
+							}
+						}
 					}
 					else
 					{
@@ -38,8 +49,16 @@ public class UiManager
 					printPlayersBattleShipBoards();
 					printGameStatistics();
 
-					System.out.println("Select 2 for start a new game");
-					m_GameStarted = false;
+					if(userChoice != 8)
+					{
+						System.out.println("Select 2 for start a new game");
+						m_GameStarted = false;
+					}
+					else
+					{
+						System.out.println("Exiting from game...");
+						System.exit(0);
+					}
 				}
 			}
 			catch(Exception e)
@@ -84,15 +103,17 @@ public class UiManager
 				printGameStatistics();
 				break;
 			case 6:
-				playerFinishGame();
 				isGameFinished = true;
+				break;
+			case 7:
+				setMine();
+				break;
+			case 8:
+				isGameFinished = true;
+				break;
 		}
 
 		return isGameFinished;
-	}
-
-	private static void playerFinishGame()
-	{
 	}
 
 	private static void printGameStatistics() throws Exception
@@ -126,7 +147,7 @@ public class UiManager
 		return res;
 	}
 
-	private static boolean setMine() throws Exception
+	private static void setMine() throws Exception
 	{
 		boolean isGameFinished = false;
 
@@ -140,6 +161,10 @@ public class UiManager
 			Point pointForMine = getPointFromUser("mine");
 			GameManager.Instance().GetCurrentPlayer().SetMine(pointForMine);
 		}
+		catch(IllegalArgumentException e)
+		{
+			throw new IllegalArgumentException(e.getMessage());
+		}
 		catch(Exception e)
 		{
 			throw new IllegalArgumentException("Invalid point to set mine - Should be:\n" +
@@ -147,29 +172,13 @@ public class UiManager
 			                                   "Column: A - " + (char)('A' + m_BoardSize - 1) + "\n");
 		}
 
-		Player attack = GameManager.Instance().GetCurrentPlayer();
-		AttackResult attackedResult = attack.HitPoint((attack.GetPlayerNumber() + 1) % 2, pointToAttack); //In this UI only two players playing...
-		if(attackedResult.GetBeforeAttackSign() == BoardSigns.BATTLE_SHIP)
-		{
-			System.out.println("Player " + attack.GetPlayerNumber() + " hit BattleShip!");
-		}
-
-		if(attackedResult.GetIsBattleShipDrawn())
-		{
-			System.out.println("Player " + attack.GetPlayerNumber() + " drawn BattleShip!!!");
-		}
-
-		if(attackedResult.GetPlayerWon())
-		{
-			isGameFinished = true;
-		}
-
-		return isGameFinished;
 	}
 
 	private static boolean makeMove() throws Exception
 	{
 		boolean isGameFinished = false;
+
+		Point pointToAttack = null;
 
 		if(m_GameStarted == false)
 		{
@@ -178,7 +187,7 @@ public class UiManager
 
 		try
 		{
-			Point pointToAttack = getPointFromUser("attack");
+			pointToAttack = getPointFromUser("attack");
 		}
 		catch(Exception e)
 		{

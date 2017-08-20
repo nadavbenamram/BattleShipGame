@@ -223,4 +223,46 @@ public class BattleShipGameBoard extends GameBoard
 	{
 		return m_BattleShips.size();
 	}
+
+	public void AddMine(Point i_Point) throws Exception
+	{
+		if(GetCellSign(i_Point) != BoardSigns.EMPTY)
+		{
+			throw new IllegalArgumentException("can't put mine on non-empty cell");
+		}
+		else if(GameManager.Instance().GetMaxNumOfMines() == null)
+		{
+			throw new IllegalArgumentException("Mines not allowed with this game settings");
+		}
+		else if(m_Mines.size() == GameManager.Instance().GetMaxNumOfMines())
+		{
+			throw new Exception("The max num of mines is: " + GameManager.Instance().GetMaxNumOfMines());
+		}
+		else
+		{
+			m_Mines.add(new Mine(this, i_Point));
+			SetCellSign(i_Point, BoardSigns.MINE);
+		}
+	}
+
+	public void RemoveMine(Point i_Point)
+	{
+		Mine mine = null;
+
+		for(Mine m1 : m_Mines)
+		{
+			if (m1.GetLocation().equals(i_Point))
+			{
+				mine = m1;
+				break;
+			}
+		}
+
+		if(mine == null)
+		{
+			throw new IllegalArgumentException("Couldn't find mine in " + i_Point.toString());
+		}
+
+		m_Mines.remove(mine);
+	}
 }

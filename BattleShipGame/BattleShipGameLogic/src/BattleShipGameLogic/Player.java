@@ -59,7 +59,7 @@ public class Player
 						doWhenHitBattleShip(stepDuration);
 						break;
 					case MINE:
-						doWhenAttackedMine(i_Point);
+						doWhenAttackedMine(i_Point, i_AttackedPlayerIndex);
 						traceSign = BoardSigns.HIT;
 						break;
 					default:
@@ -82,14 +82,14 @@ public class Player
 		m_Statistics.Hit(stepDuration);
 	}
 
-	private void doWhenAttackedMine(Point i_Point)
+	private void doWhenAttackedMine(Point i_Point, int i_AttackedIdx)
 	{
-		AttackedInPoint(i_Point); //TODO: should the player with the mine know which sign attacked?
+		GameManager.Instance().GetAllPlayers()[i_AttackedIdx].HitPoint(m_PlayerNumber, i_Point);
 	}
 
-	public void SetMine(Point i_Point)
+	public void SetMine(Point i_Point) throws Exception
 	{
-
+		m_BattleShipsBoard.AddMine(i_Point);
 	}
 
 	//Input: point
@@ -111,6 +111,7 @@ public class Player
 				break;
 			case MINE:
 				afterSign = BoardSigns.HIT;
+				doWhenMineHurt(i_Point);
 				break;
 			default:
 				throw new IllegalArgumentException("Invalid board sign ("+beforeSign.GetValue()+") in player " + m_PlayerNumber + " in BattleShip board while attacked");
@@ -119,6 +120,11 @@ public class Player
 		m_BattleShipsBoard.SetCellSign(i_Point, afterSign);
 
 		return attackResult;
+	}
+
+	private void doWhenMineHurt(Point i_Point)
+	{
+		m_BattleShipsBoard.RemoveMine(i_Point);
 	}
 
 	private void doWhenBattleShipHurt(Point i_point, AttackResult i_AttackResults)

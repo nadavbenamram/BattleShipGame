@@ -52,6 +52,11 @@ public class GameManager
 		m_Players[m_NextPlayerTurn].TurnStarted();
 	}
 
+	public Integer GetMaxNumOfMines()
+	{
+		return m_BattleShipXmlObject.getMine() != null ? m_BattleShipXmlObject.getMine().getAmount() : null;
+	}
+
 	private void fromXmlFileToObject(String i_FilePath) throws Exception
 	{
 		try {
