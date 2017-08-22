@@ -176,7 +176,7 @@ public class BattleShipGameBoard extends GameBoard
 			{
 				if(true == checkIfInsideBoardBounds(new Point(x,y)))
 				{
-					if(m_Board[x][y] != BoardSigns.EMPTY)
+					if(m_Board[y][x] != BoardSigns.EMPTY)
 					{
 						throw new UnsupportedOperationException("Object " + i_GameObject.toString() + " near or on another object");
 					}

@@ -50,4 +50,10 @@ public class BattleShip extends GameObject
 			throw new IllegalArgumentException(m_Id + " Score is negative");
 		}
 	}
+
+	@Override
+	public String toString()
+	{
+		return m_Category + ":" + m_Id;
+	}
 }
