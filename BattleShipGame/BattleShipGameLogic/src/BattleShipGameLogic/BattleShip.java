@@ -51,6 +51,11 @@ public class BattleShip extends GameObject
 		}
 	}
 
+	public int GetBattleShipScore()
+	{
+		return m_Score;
+	}
+
 	@Override
 	public String toString()
 	{

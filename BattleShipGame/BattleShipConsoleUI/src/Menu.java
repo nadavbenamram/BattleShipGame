@@ -60,6 +60,8 @@ public class Menu
 		}
 		while(choice < 1 || choice > 8);
 
+		System.out.println();
+
 		return choice;
 	}
 }

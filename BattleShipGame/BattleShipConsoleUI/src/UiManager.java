@@ -159,7 +159,7 @@ public class UiManager
 		try
 		{
 			Point pointForMine = getPointFromUser("mine");
-			GameManager.Instance().GetCurrentPlayer().SetMine(pointForMine);
+			GameManager.Instance().SetMine(GameManager.Instance().GetCurrentPlayer(), pointForMine);
 		}
 		catch(IllegalArgumentException e)
 		{
@@ -187,6 +187,10 @@ public class UiManager
 
 		try
 		{
+			Player currentPlayer = GameManager.Instance().GetCurrentPlayer();
+			System.out.println("It's player " + currentPlayer.GetPlayerNumber() + " turn");
+			printBattleShipBoard(currentPlayer);
+			printTraceBoard(currentPlayer);
 			pointToAttack = getPointFromUser("attack");
 		}
 		catch(Exception e)
@@ -247,6 +251,11 @@ public class UiManager
 
 	private static void startGame() throws Exception
 	{
+		if(m_GameStarted)
+		{
+			throw new Exception("Please finish the current game before start a new one");
+		}
+
 		if(m_XmlLoaded)
 		{
 			GameManager.Instance().InitGame();
@@ -282,7 +291,14 @@ public class UiManager
 		for(int i = 1; i <= size; i++)
 		{
 			//Print row number
-			System.out.print(i + " |");
+			if(i < 10)
+			{
+				System.out.print(i + " |");
+			}
+			else
+			{
+				System.out.print(i + "|");
+			}
 
 			for(int j = 1; j <= size; ++j)
 			{

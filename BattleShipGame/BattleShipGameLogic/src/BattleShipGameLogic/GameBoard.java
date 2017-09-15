@@ -14,6 +14,10 @@ public class GameBoard
 	protected final int BOARD_MIN_SIZE = 5;
 	protected final int BOARD_MAX_SIZE = 20;
 
+	public GameBoard()
+	{
+	}
+
 	public GameBoard(int i_BoardSize)
 	{
 		initBoard(i_BoardSize);
@@ -59,5 +63,15 @@ public class GameBoard
 	public void SetCellSign(Point i_Cell, BoardSigns i_NewSign)
 	{
 		m_Board[i_Cell.y][i_Cell.x] = i_NewSign;
+	}
+
+	public GameBoard Clone()
+	{
+		GameBoard res = new GameBoard();
+
+		res.m_Board = m_Board.clone();
+		res.m_BoardSize = m_BoardSize;
+
+		return res;
 	}
 }

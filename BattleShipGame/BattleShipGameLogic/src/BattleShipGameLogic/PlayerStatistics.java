@@ -8,6 +8,9 @@ public class PlayerStatistics
 	private int m_Hit;
 	private long m_AverageStepTime; //seconds
 
+	public PlayerStatistics()
+	{}
+
 	public PlayerStatistics(int i_PlayerIdx)
 	{
 		m_PlayerIdx = i_PlayerIdx;
@@ -17,16 +20,33 @@ public class PlayerStatistics
 		m_AverageStepTime = 0;
 	}
 
-	private int totalSteps()
+	public PlayerStatistics Clone()
+	{
+		PlayerStatistics res = new PlayerStatistics();
+
+		res.m_PlayerIdx = m_PlayerIdx;
+		res.m_Points = m_Points;
+		res.m_Miss = m_Miss;
+		res.m_Hit = m_Hit;
+		res.m_AverageStepTime = m_AverageStepTime;
+
+		return res;
+	}
+
+	public int TotalSteps()
 	{
 		return m_Miss + m_Hit;
+	}
+
+	public void AddPoints(int i_Points)
+	{
+		m_Points += i_Points;
 	}
 
 	public void Hit(long i_StepTime)
 	{
 		updateAverageStepTime(i_StepTime);
 		m_Hit++;
-		m_Points++; //Each hurt is point in the first exercise only.
 	}
 
 	public void Missed(long i_StepTime)
@@ -48,7 +68,7 @@ public class PlayerStatistics
 		}
 		else
 		{
-			m_AverageStepTime = (m_AverageStepTime * totalSteps() + i_StepTime) / (totalSteps() + 1);
+			m_AverageStepTime = (m_AverageStepTime * TotalSteps() + i_StepTime) / (TotalSteps() + 1);
 		}
 	}
 

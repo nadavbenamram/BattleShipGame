@@ -4,8 +4,6 @@ import java.awt.*;
 
 public class Mine extends  GameObject
 {
-	private Point m_Location;
-
 	public Mine(BattleShipGameBoard i_GameBoard, Point i_Location)
 	{
 		super(i_GameBoard);

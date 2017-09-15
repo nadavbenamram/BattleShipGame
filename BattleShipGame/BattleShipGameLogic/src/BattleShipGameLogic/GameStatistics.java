@@ -11,8 +11,7 @@ public class GameStatistics
 	public GameStatistics()
 	{
 		m_Steps = 0;
-		m_StopWatch = new Stopwatch();
-		m_StopWatch.startThread();
+		m_StopWatch = new Stopwatch(System.currentTimeMillis());
 	}
 
 	public String GetGameDuration()

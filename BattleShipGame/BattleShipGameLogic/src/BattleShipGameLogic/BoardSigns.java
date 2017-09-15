@@ -2,11 +2,11 @@ package BattleShipGameLogic;
 
 public enum BoardSigns
 {
-	EMPTY  ('O'),
-	BATTLE_SHIP ('V'),
+	EMPTY  (' '),
+	BATTLE_SHIP ('@'),
 	MINE ('*'),
 	BATTLE_SHIP_HIT ('X'),
-	HIT('H');
+	HIT('#');
 
 	private char m_Char;
 

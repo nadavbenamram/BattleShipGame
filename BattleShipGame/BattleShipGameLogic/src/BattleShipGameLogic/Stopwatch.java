@@ -1,33 +1,22 @@
 package BattleShipGameLogic;
 
-public class Stopwatch extends Thread
+public class Stopwatch
 {
-	private long startTime;
-	private boolean started;
+	private volatile long m_StartTime;
 
-	public void startThread()
+	public Stopwatch(long i_StartTime)
 	{
-		this.startTime = System.currentTimeMillis();
-		this.started = true;
-		this.start();
+		m_StartTime = i_StartTime;
 	}
 
-	public void run()
+	public void ZeroTimer()
 	{
-		while (started)
-		{
-			// empty code since currentTimeMillis increases by itself
-		}
-	}
-
-	public void ZeroTImer()
-	{
-		startTime = System.currentTimeMillis();
+		m_StartTime = System.currentTimeMillis();
 	}
 
 	public String getTime()
 	{
-		long milliTime = System.currentTimeMillis() - this.startTime;
+		long milliTime = System.currentTimeMillis() - m_StartTime;
 		int[] out = new int[]{0, 0, 0, 0};
 		out[0] = (int)(milliTime / 3600000      );
 		out[1] = (int)(milliTime / 60000        );
@@ -39,12 +28,9 @@ public class Stopwatch extends Thread
 
 	public long GetTimeInSeconds()
 	{
-		long milliTime = System.currentTimeMillis() - this.startTime;
+		Player p = GameManager.Instance().GetAllPlayers()[0];
+		long test = System.currentTimeMillis();
+		long milliTime = test - m_StartTime;
 		return milliTime / 1000;
-	}
-
-	public void stopThread()
-	{
-		this.started = false;
 	}
 }

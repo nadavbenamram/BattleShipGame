@@ -176,7 +176,7 @@ public class BattleShipGameBoard extends GameBoard
 			{
 				if(true == checkIfInsideBoardBounds(new Point(x,y)))
 				{
-					if(m_Board[y][x] != BoardSigns.EMPTY)
+					if(m_Board[y][x] == BoardSigns.BATTLE_SHIP || m_Board[y][x] == BoardSigns.MINE)
 					{
 						throw new UnsupportedOperationException("Object " + i_GameObject.toString() + " near or on another object");
 					}
@@ -215,7 +215,7 @@ public class BattleShipGameBoard extends GameBoard
 		}
 		else
 		{
-			throw new IllegalArgumentException("Unkown object type to be drawn");
+			throw new IllegalArgumentException("Unknown object type to be drawn");
 		}
 	}
 
@@ -226,6 +226,8 @@ public class BattleShipGameBoard extends GameBoard
 
 	public void AddMine(Point i_Point) throws Exception
 	{
+		Mine mine;
+
 		if(GetCellSign(i_Point) != BoardSigns.EMPTY)
 		{
 			throw new IllegalArgumentException("can't put mine on non-empty cell");
@@ -236,11 +238,19 @@ public class BattleShipGameBoard extends GameBoard
 		}
 		else if(m_Mines.size() == GameManager.Instance().GetMaxNumOfMines())
 		{
-			throw new Exception("The max num of mines is: " + GameManager.Instance().GetMaxNumOfMines());
+			throw new IllegalArgumentException("The max num of mines is: " + GameManager.Instance().GetMaxNumOfMines());
 		}
 		else
 		{
-			m_Mines.add(new Mine(this, i_Point));
+			try
+			{
+				checkPointValidation(i_Point, mine = new Mine(this, i_Point));
+			}
+			catch (Exception e)
+			{
+				throw new IllegalArgumentException("mine can't be near Battleship");
+			}
+			m_Mines.add(mine);
 			SetCellSign(i_Point, BoardSigns.MINE);
 		}
 	}

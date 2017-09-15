@@ -6,6 +6,7 @@ import javax.xml.bind.Unmarshaller;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class GameManager
 {
@@ -17,9 +18,11 @@ public class GameManager
 	private final int NUM_OF_PLAYERS = 2;
 	private GameStatistics m_Statistics;
 	private int m_NextPlayerTurn;
+	private ArrayList<AttackResult> m_GameHistory;
 
 	private GameManager()
 	{
+		m_GameHistory = new ArrayList<>();
 	}
 
 	public static GameManager Instance()
@@ -30,6 +33,11 @@ public class GameManager
 		}
 
 		return m_Instance;
+	}
+
+	public int GetBoardSize()
+	{
+		return m_BoardSize;
 	}
 
 	public GameStatistics GetGameStatistics()
@@ -49,12 +57,12 @@ public class GameManager
 		initPlayers();
 		m_Statistics = new GameStatistics();
 		m_NextPlayerTurn = 0;
-		m_Players[m_NextPlayerTurn].TurnStarted();
 	}
 
 	public Integer GetMaxNumOfMines()
 	{
-		return m_BattleShipXmlObject.getMine() != null ? m_BattleShipXmlObject.getMine().getAmount() : null;
+		//return m_BattleShipXmlObject.getMine() != null ? m_BattleShipXmlObject.getMine().getAmount() : null;
+		return 2; //for Ex1 only. Upper line for Ex2.
 	}
 
 	private void fromXmlFileToObject(String i_FilePath) throws Exception
@@ -74,7 +82,13 @@ public class GameManager
 		}
 	}
 
-	public AttackResult Attack(int i_AttackerIdx, int i_VictimIdx, Point i_Point)
+	public void SetMine(Player i_Player, Point i_Point) throws Exception
+	{
+		i_Player.SetMine(i_Point);
+		m_NextPlayerTurn = nextPlayerIndex();
+	}
+
+	public AttackResult Attack(int i_AttackerIdx, int i_VictimIdx, Point i_Point, boolean i_IsMineAttack)
 	{
 		Player attacker = m_Players[i_AttackerIdx];
 		Player victim = m_Players[i_VictimIdx];
@@ -82,13 +96,16 @@ public class GameManager
 
 		attackResult = victim.AttackedInPoint(i_Point);
 
-		if(attackResult.GetBeforeAttackSign() != BoardSigns.BATTLE_SHIP)
+		if(attackResult.GetBeforeAttackSign() != BoardSigns.BATTLE_SHIP && i_IsMineAttack == false)
 		{
 			m_NextPlayerTurn = nextPlayerIndex();
 		}
 
 		m_Players[m_NextPlayerTurn].TurnStarted();
 		m_Statistics.AddStep();
+
+		attackResult.SetAttacker(attacker.Clone());
+		m_GameHistory.add(attackResult);
 
 		return attackResult;
 	}
