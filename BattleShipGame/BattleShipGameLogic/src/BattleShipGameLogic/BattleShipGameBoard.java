@@ -64,12 +64,11 @@ public class BattleShipGameBoard extends GameBoard
 		BoardSigns objSign = i_GameObject.GetBoardSign();
 		int length = i_GameObject.GetLength();
 		Point p = objLocation;
-		Direction direction = i_GameObject.GetDirection();
 		Point[] pointsToDraw = new Point[length];
 
 		for(int i = 0; i< length; ++i)
 		{
-			checkPointValidation(p, i_GameObject);
+			checkPointValidation(p, i_GameObject, pointsToDraw);
 			pointsToDraw[i] = (Point)p.clone();
 			moveToNextPoint(p, i, i_GameObject);
 		}
@@ -163,7 +162,7 @@ public class BattleShipGameBoard extends GameBoard
 		}
 	}
 
-	private void checkPointValidation(Point p, GameObject i_GameObject)
+	private void checkPointValidation(Point p, GameObject i_GameObject, Point[] i_ObjectPoints)
 	{
 		if(false == checkIfInsideBoardBounds(p))
 		{
@@ -178,6 +177,15 @@ public class BattleShipGameBoard extends GameBoard
 				{
 					if(m_Board[y][x] == BoardSigns.BATTLE_SHIP || m_Board[y][x] == BoardSigns.MINE)
 					{
+						//Patch: For L support
+						if(i_ObjectPoints != null &&
+						   m_Board[y][x] == BoardSigns.BATTLE_SHIP &&
+						   GameManager.Instance().IsAdvancedGameType() &&
+						   Arrays.asList(i_ObjectPoints).contains(new Point(x, y)))
+						{
+							continue;
+						}
+
 						throw new UnsupportedOperationException("Object " + i_GameObject.toString() + " near or on another object");
 					}
 				}
@@ -244,7 +252,7 @@ public class BattleShipGameBoard extends GameBoard
 		{
 			try
 			{
-				checkPointValidation(i_Point, mine = new Mine(this, i_Point));
+				checkPointValidation(i_Point, mine = new Mine(this, i_Point), null);
 			}
 			catch (Exception e)
 			{

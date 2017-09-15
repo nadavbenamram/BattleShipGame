@@ -35,6 +35,11 @@ public class GameManager
 		return m_Instance;
 	}
 
+	public boolean IsAdvancedGameType()
+	{
+		return m_GameType == GameType.ADVANCED;
+	}
+
 	public int GetBoardSize()
 	{
 		return m_BoardSize;
