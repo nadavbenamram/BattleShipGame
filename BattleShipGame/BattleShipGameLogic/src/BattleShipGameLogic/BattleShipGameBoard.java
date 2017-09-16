@@ -13,6 +13,10 @@ public class BattleShipGameBoard extends GameBoard
 	private ArrayList<Mine>  m_Mines;
 	private Integer m_NumOfMines;
 
+	public BattleShipGameBoard()
+	{
+	}
+
 	public BattleShipGameBoard(int i_BoardSize,
 	                           generated.BattleShipGame.Boards.Board i_BoardConfiguration,
 	                           generated.BattleShipGame.ShipTypes i_ShipTypes,
@@ -20,6 +24,17 @@ public class BattleShipGameBoard extends GameBoard
 	{
 		super(i_BoardSize);
 		fillBoard(i_BoardConfiguration, i_ShipTypes, i_Mines);
+	}
+
+	@Override
+	public GameBoard Clone()
+	{
+		BattleShipGameBoard res = new BattleShipGameBoard();
+
+		res.m_Board = m_Board.clone();
+		res.m_BoardSize = m_BoardSize;
+
+		return res;
 	}
 
 	private void fillBoard(BattleShipGame.Boards.Board i_boardConfiguration, BattleShipGame.ShipTypes i_shipTypes, generated.BattleShipGame.Mine i_mines)
@@ -282,5 +297,10 @@ public class BattleShipGameBoard extends GameBoard
 		}
 
 		m_Mines.remove(mine);
+	}
+
+	public ArrayList<BattleShip> GetBattleShip()
+	{
+		return m_BattleShips;
 	}
 }

@@ -8,13 +8,18 @@ import java.awt.*;
 public class BattleShip extends GameObject
 {
 	private String m_Id;
-	BattleShipCategory m_Category;
+	private BattleShipCategory m_Category;
 	private int m_Score;
 
 	public BattleShip(String i_Id, BattleShipGameBoard i_GameBoard)
 	{
 		super(i_GameBoard);
 		m_Id = i_Id;
+	}
+
+	public BattleShipCategory GetCategory()
+	{
+		return m_Category;
 	}
 
 	public void FillShipDetails(BattleShipGame.ShipTypes i_ShipTypes, BattleShipGame.Boards.Board.Ship i_Ship)

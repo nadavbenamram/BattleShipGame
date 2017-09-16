@@ -186,7 +186,7 @@ public class Player
 		return m_Statistics;
 	}
 
-	public GameBoard GetBattleShipGameBoard()
+	public BattleShipGameBoard GetBattleShipGameBoard()
 	{
 		return m_BattleShipsBoard;
 	}

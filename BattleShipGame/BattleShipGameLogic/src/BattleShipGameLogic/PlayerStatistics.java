@@ -85,4 +85,14 @@ public class PlayerStatistics
 		       "Miss: " + m_Miss + "\n" +
 		       "Average time for making move: " + GetAvgStepTimeInSeconds() + " seconds";
 	}
+
+	public int GetHits()
+	{
+		return m_Hit;
+	}
+
+	public int GetMisses()
+	{
+		return m_Miss;
+	}
 }
