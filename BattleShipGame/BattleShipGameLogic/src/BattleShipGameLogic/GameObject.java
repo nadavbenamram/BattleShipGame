@@ -9,8 +9,10 @@ public abstract class GameObject
 	protected int m_Length;
 	protected Direction m_Direction;
 	protected Point m_Location;
+	protected Point[] m_OriginalPoints;
 	protected Point[] m_ActivePoints;
 	protected BattleShipGameBoard m_GameBoard;
+	protected Point m_LastActivePoint = null;
 
 	public GameObject(BattleShipGameBoard i_GameBoard)
 	{
@@ -39,7 +41,12 @@ public abstract class GameObject
 
 	public void SetActivePoints(Point[] i_ActivePoints)
 	{
-		m_ActivePoints = i_ActivePoints;
+		m_OriginalPoints = m_ActivePoints = i_ActivePoints;
+	}
+
+	public Point[] GetOriginalPoints()
+	{
+		return m_OriginalPoints;
 	}
 
 	public boolean IsPointOfObject(Point i_Point)
@@ -47,8 +54,14 @@ public abstract class GameObject
 		return Arrays.asList(m_ActivePoints).contains(i_Point);
 	}
 
+	public Point GetLastActivePoint()
+	{
+		return m_LastActivePoint;
+	}
+
 	public void RemovePointFromObject(Point i_Point)
 	{
+		m_LastActivePoint = i_Point;
 		int newArrSize = m_ActivePoints.length - 1;
 		if(newArrSize == 0)
 		{

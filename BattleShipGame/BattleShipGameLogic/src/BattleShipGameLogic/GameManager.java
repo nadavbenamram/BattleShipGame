@@ -19,10 +19,35 @@ public class GameManager
 	private GameStatistics m_Statistics;
 	private int m_NextPlayerTurn;
 	private ArrayList<AttackResult> m_GameHistory;
+	private int m_CurrentGameHistory;
 
 	private GameManager()
 	{
-		m_GameHistory = new ArrayList<>();
+	}
+
+	public void SetGameHistoryIdx()
+	{
+		m_CurrentGameHistory = -1;
+	}
+
+	public AttackResult GetNextAttackHistory()
+	{
+		if(m_CurrentGameHistory > 0)
+		{
+			m_CurrentGameHistory--;
+		}
+
+		return m_GameHistory.get(m_CurrentGameHistory);
+	}
+
+	public AttackResult GetPrevAttackHistory()
+	{
+		if(m_CurrentGameHistory < m_GameHistory.size() - 1)
+		{
+			m_CurrentGameHistory++;
+		}
+
+		return m_GameHistory.get(m_CurrentGameHistory);
 	}
 
 	public static GameManager Instance()
@@ -37,7 +62,7 @@ public class GameManager
 
 	public boolean IsAdvancedGameType()
 	{
-		return m_GameType == GameType.ADVANCED;
+		return m_GameType == GameType.ADVANCE;
 	}
 
 	public int GetBoardSize()
@@ -61,6 +86,8 @@ public class GameManager
 	{
 		initPlayers();
 		m_Statistics = new GameStatistics();
+		m_GameHistory = new ArrayList<>();
+		m_CurrentGameHistory = 0;
 		m_NextPlayerTurn = 0;
 	}
 
@@ -90,6 +117,10 @@ public class GameManager
 	public void SetMine(Player i_Player, Point i_Point) throws Exception
 	{
 		i_Player.SetMine(i_Point);
+		AttackResult attack = new AttackResult(BoardSigns.EMPTY);
+		attack.SetPlayers(GetAllPlayers(), i_Player.GetPlayerNumber());
+		m_GameHistory.add(0, attack);
+
 		m_NextPlayerTurn = nextPlayerIndex();
 	}
 
@@ -109,8 +140,9 @@ public class GameManager
 		m_Players[m_NextPlayerTurn].TurnStarted();
 		m_Statistics.AddStep();
 
-		attackResult.SetAttacker(attacker.Clone());
-		m_GameHistory.add(attackResult);
+		Player p = attacker.Clone();
+		attackResult.SetPlayers(GetAllPlayers(), p.GetPlayerNumber());
+		m_GameHistory.add(0, attackResult);
 
 		return attackResult;
 	}

@@ -17,6 +17,16 @@ public class BattleShip extends GameObject
 		m_Id = i_Id;
 	}
 
+	public int GetLength()
+	{
+		return m_Length;
+	}
+
+	public void SetLength(int i_Length)
+	{
+		m_Length = i_Length;
+	}
+
 	public BattleShipCategory GetCategory()
 	{
 		return m_Category;

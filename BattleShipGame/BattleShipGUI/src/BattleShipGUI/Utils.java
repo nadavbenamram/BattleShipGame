@@ -4,6 +4,7 @@ import BattleShipGameLogic.AttackResult;
 import BattleShipGameLogic.BoardSigns;
 import BattleShipGameLogic.GameManager;
 import BattleShipGameLogic.Player;
+import javafx.scene.control.Alert;
 
 import java.awt.*;
 
@@ -24,21 +25,12 @@ public final class Utils
 		pointToAttack = new Point(i_Column, i_Row);
 		Player attack = GameManager.Instance().GetCurrentPlayer();
 		AttackResult attackedResult = attack.HitPoint((attack.GetPlayerNumber() + 1) % 2, pointToAttack); //In this UI only two players playing...
-		if(attackedResult.GetBeforeAttackSign() == BoardSigns.BATTLE_SHIP)
-		{
-			System.out.println("Player " + attack.GetPlayerNumber() + " hit BattleShip!");
-		}
-
-		if(attackedResult.GetIsBattleShipDrawn())
-		{
-			System.out.println("Player " + attack.GetPlayerNumber() + " drawn BattleShip!!!");
-		}
 
 		if(attackedResult.GetPlayerWon())
 		{
 			isGameFinished = true;
+			Main.DoWhenGameFinished();
 		}
-		System.out.println("clicked");
 
 		return attackedResult;
 	}

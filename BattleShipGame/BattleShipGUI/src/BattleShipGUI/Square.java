@@ -1,7 +1,6 @@
 package BattleShipGUI;
 
-import BattleShipGameLogic.AttackResult;
-import BattleShipGameLogic.BoardSigns;
+import BattleShipGameLogic.*;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -14,6 +13,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import java.awt.*;
+
 public class Square extends StackPane
 {
 	private BoardSigns m_Sign;
@@ -22,6 +23,16 @@ public class Square extends StackPane
 	private int m_Row;
 	private int m_Column;
 	private ImageView m_Image;
+
+	public ImageView GetImageView()
+	{
+		return m_Image;
+	}
+
+	public Rectangle GetBorder()
+	{
+		return m_Border;
+	}
 
 	public Square(BoardSigns i_Sign, int i_Row, int i_Column)
 	{
@@ -120,11 +131,56 @@ public class Square extends StackPane
 						{
 							AttackResult attackResult = Utils.MakeMove(m_Row, m_Column);
 							Main.SetBeforeMove();
+
+							BattleShip battleShip = attackResult.GetIsBattleShipDrawn();
+							if(Utils.isGameFinished == false)
+							{
+								if(battleShip != null)
+								{
+									Player attacker = attackResult.GetAttacker();
+									if(Main.ApproveAnimations)
+									{
+										Point[] shipPoints = battleShip.GetOriginalPoints();
+										Main.GetTraceBoard().ScaleCells(shipPoints);
+									}
+
+									Main.showMessageBox("BattleShip drwan", "Player " + attacker.GetPlayerNumber() + " drawn BattleShip!!!", Alert.AlertType.INFORMATION);
+								}
+								else
+								{
+									battleShip = attackResult.GetIsBattleShipHit();
+									if(battleShip != null)
+									{
+										Player attacker = attackResult.GetAttacker();
+										if(Main.ApproveAnimations)
+										{
+											Main.GetTraceBoard().RotateCells(new Point[]{battleShip.GetLastActivePoint()});
+										}
+									}
+									else
+									{
+										Mine mine = attackResult.GetMineAttacked();
+										if(mine != null)
+										{
+											ImageView mineImage = new ImageView();
+											Image image = new Image("BattleShipGUI/mine.png");
+											mineImage.setImage(image);
+
+											ImageView emptyImage = new ImageView();
+											Image emptyimage = new Image("BattleShipGUI/empty.png");
+											emptyImage.setImage(emptyimage);
+
+											Main.GetTraceBoard().ChangeImageAndRotate(emptyImage, mineImage, new Point[]{mine.GetLocation()});
+										}
+									}
+								}
+							}
 						}
 						catch (Exception e)
 						{
 							Main.showMessageBox("Move Error!", e.getMessage(), Alert.AlertType.ERROR);
 						}
+
 						event.consume();
 					}
 				});
@@ -132,5 +188,11 @@ public class Square extends StackPane
 
 			getChildren().add(m_Image);
 		}
+	}
+
+	public void SetNewImage(ImageView i_NewImage)
+	{
+		getChildren().removeAll(m_Image);
+		getChildren().add(i_NewImage);
 	}
 }

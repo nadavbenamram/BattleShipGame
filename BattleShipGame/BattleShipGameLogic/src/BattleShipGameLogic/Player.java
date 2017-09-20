@@ -14,6 +14,11 @@ public class Player
 	public Player()
 	{}
 
+	public int GetTotalMines()
+	{
+		return m_TotalMines;
+	}
+
 	public Player(int i_PlayerNumber)
 	{
 		m_PlayerNumber = i_PlayerNumber;
@@ -25,7 +30,7 @@ public class Player
 	{
 		Player res = new Player();
 
-		res.m_PlayerNumber = m_PlayerNumber;
+		res.m_PlayerNumber = new Integer(m_PlayerNumber);
 		res.m_Statistics = m_Statistics.Clone();
 		res.m_TraceBoard = m_TraceBoard.Clone();
 		res.m_BattleShipsBoard = (BattleShipGameBoard)(m_BattleShipsBoard.Clone());
@@ -92,7 +97,7 @@ public class Player
 				doWhenHitBattleShip(stepDuration);
 				break;
 			case MINE:
-				doWhenAttackedMine(i_Point, i_AttackedPlayerIndex);
+				doWhenAttackedMine(i_Point, i_AttackedPlayerIndex, stepDuration);
 				traceSign = BoardSigns.HIT;
 				break;
 			default:
@@ -109,8 +114,9 @@ public class Player
 		m_Statistics.Hit(stepDuration);
 	}
 
-	private void doWhenAttackedMine(Point i_Point, int i_AttackedIdx)
+	private void doWhenAttackedMine(Point i_Point, int i_AttackedIdx, long stepDuration)
 	{
+		m_Statistics.Hit(stepDuration);
 		GameManager.Instance().GetAllPlayers()[i_AttackedIdx].HandleAttack(m_PlayerNumber, i_Point, true);
 	}
 
@@ -145,34 +151,32 @@ public class Player
 				doWhenBattleShipHurt(i_Point, attackResult);
 				break;
 			case MINE:
-				afterSign = BoardSigns.BATTLE_SHIP_HIT;
-				doWhenMineHurt(i_Point);
+				afterSign = BoardSigns.HIT;
+				Mine mine = m_BattleShipsBoard.RemoveMine(i_Point);
+				attackResult.MarkMineAttacked(mine);
 				break;
 			default:
 				throw new IllegalArgumentException("Invalid board sign ("+beforeSign.GetValue()+") in player " + m_PlayerNumber + " in BattleShip board while attacked");
 		}
 
+		attackResult.AddAttackInfo(beforeSign.toString() + " cell (R: " + i_Point.y + " C: " + i_Point.x + ") attacked!");
 		m_BattleShipsBoard.SetCellSign(i_Point, afterSign);
 
 		return attackResult;
-	}
-
-	private void doWhenMineHurt(Point i_Point)
-	{
-		m_BattleShipsBoard.RemoveMine(i_Point);
 	}
 
 	private void doWhenBattleShipHurt(Point i_point, AttackResult i_AttackResults)
 	{
 		boolean isBattleShipDrawn;
 
-		i_AttackResults.MarkBattleShipAttacked();
 		BattleShip battleShip= m_BattleShipsBoard.GetBattleShipByPoint(i_point);
+		i_AttackResults.MarkBattleShipAttacked(battleShip);
 		battleShip.RemovePointFromObject(i_point);
 		if(battleShip.IsObjectDrawn())
 		{
 			m_Statistics.AddPoints(battleShip.GetBattleShipScore());
-			i_AttackResults.MarkBattleShipDrawn();
+			i_AttackResults.MarkBattleShipDrawn(battleShip);
+			i_AttackResults.AddAttackInfo("BattleShip of player " + m_PlayerNumber + " was drawn!");
 		}
 
 		if(m_BattleShipsBoard.AliveBattleShips() == 0)

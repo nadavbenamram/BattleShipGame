@@ -19,4 +19,9 @@ public enum BoardSigns
 	{
 		return m_Char;
 	}
+
+	public char Clone()
+	{
+		return m_Char;
+	}
 }

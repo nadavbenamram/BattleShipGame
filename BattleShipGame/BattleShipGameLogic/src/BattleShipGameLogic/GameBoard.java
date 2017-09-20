@@ -69,9 +69,23 @@ public class GameBoard
 	{
 		GameBoard res = new GameBoard();
 
-		res.m_Board = m_Board.clone();
+		res.m_Board = CloneBoard();
 		res.m_BoardSize = m_BoardSize;
 
 		return res;
+	}
+
+	protected BoardSigns[][] CloneBoard()
+	{
+		BoardSigns[][] board = new BoardSigns[m_BoardSize + 1][m_BoardSize + 1];
+		for(int i = 1; i <= m_BoardSize; ++i)
+		{
+			for(int j = 1 ; j <= m_BoardSize; ++j)
+			{
+				board[i][j] = BoardSigns.valueOf(m_Board[i][j].name());
+			}
+		}
+
+		return board;
 	}
 }

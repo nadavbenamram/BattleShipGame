@@ -3,6 +3,8 @@ package BattleShipGUI;
 import BattleShipGameLogic.*;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -10,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -27,6 +30,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import javax.lang.model.type.NullType;
 import java.awt.*;
 import java.io.File;
 import java.util.*;
@@ -40,6 +44,13 @@ public class Main extends Application {
 	private static GameBoard m_PlayerGameBoard;
 	private static GameBoard m_PlayerTraceBoard;
 	private static Stage m_PrimaryStage;
+	public static boolean ApproveAnimations = true;
+	private static CheckBox m_AllowAnimationCheckBox;
+
+	public static GameBoard GetTraceBoard()
+	{
+		return m_PlayerTraceBoard;
+	}
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -70,6 +81,10 @@ public class Main extends Application {
 				setGameSettings(primaryStage);
 				showMessageBox("Game settings has been Loaded!", "Game settings has been Loaded!\nYou can start the game now", Alert.AlertType.INFORMATION);
 			}
+			catch (IllegalArgumentException ea)
+			{
+				showMessageBox("Error!", ea.getMessage(), Alert.AlertType.ERROR);
+			}
 			catch(Exception e)
 			{
 				showMessageBox("Error!", "Error on loading xml!", Alert.AlertType.ERROR);
@@ -88,10 +103,33 @@ public class Main extends Application {
 		});
 
 		finishCurrentGameMenuItem.setOnAction(event -> {
-
+			try
+			{
+				doWhenGameFinished();
+			}
+			catch (Exception e)
+			{
+				showMessageBox("Can't finish game", e.getMessage(), Alert.AlertType.ERROR);
+			}
 		});
 
 		exitMenuItem.setOnAction(actionEvent-> Platform.exit());
+
+		m_AllowAnimationCheckBox= new CheckBox("Show Animations: ");
+		m_AllowAnimationCheckBox.setSelected(true);
+		m_AllowAnimationCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			public void changed(ObservableValue<? extends Boolean> ov,
+			                    Boolean old_val, Boolean new_val) {
+				if(new_val == true)
+				{
+					ApproveAnimations = true;
+				}
+				else
+				{
+					ApproveAnimations = false;
+				}
+			}
+		});
 
 		primaryStage.setTitle("Adding Menus");
 		primaryStage.setScene(scene);
@@ -125,7 +163,7 @@ public class Main extends Application {
 
 		for(Player player : allPlayers)
 		{
-			if(player.GetPlayerNumber() == currentPlayer.GetPlayerNumber())
+			if(Utils.isGameFinished == false && player.GetPlayerNumber() == currentPlayer.GetPlayerNumber())
 			{
 				continue;
 			}
@@ -147,7 +185,112 @@ public class Main extends Application {
 			gameStatisticsDetails.getChildren().addAll(new Separator());
 		}
 
+		if(Utils.isGameFinished)
+		{
+			Text watchMovesTitle = new Text("Watch Moves:");
+			watchMovesTitle.setUnderline(true);
+			watchMovesTitle.setFont(Font.font(14));
+			HBox buttons = new HBox();
+			buttons.setAlignment(Pos.BASELINE_CENTER);
+			Button prev = new Button("Prev");
+			prev.setOnAction(event -> {
+				AttackResult a = GameManager.Instance().GetPrevAttackHistory();
+				setHistory(a);
+			});
+
+			Button next = new Button("Next");
+			next.setOnAction(event -> {
+				AttackResult a = GameManager.Instance().GetNextAttackHistory();
+				setHistory(a);
+			});
+
+			buttons.getChildren().addAll(prev, new Separator(), next);
+
+			gameStatisticsDetails.getChildren().addAll(watchMovesTitle, buttons);
+		}
+		else
+		{
+			gameStatisticsDetails.getChildren().addAll(new Separator(), m_AllowAnimationCheckBox);
+		}
+
 		return gameStatisticsDetails;
+	}
+
+	private static void setHistory(AttackResult i_AttackResult)
+	{
+		m_Root.setLeft(currentUserToolbox(i_AttackResult));
+		m_PlayerTraceBoard.UpdateContent(i_AttackResult.GetAttacker().GetTraceGameBoard(), false);
+		m_PlayerGameBoard.UpdateContent(i_AttackResult.GetAttacker().GetBattleShipGameBoard(), false);
+	}
+
+	private static Node currentUserToolbox(AttackResult i_AttackResult)
+	{
+		VBox currentUserDetails = new VBox();
+
+		currentUserDetails.setPadding(new Insets(5, 5, 5, 0));
+		Player currentPlayer = i_AttackResult.GetAttacker();
+
+		Text blankLine = new Text("");
+
+		currentUserDetails.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		Text currentUserDetailsTitle = new Text("Current Player Toolbox");
+		currentUserDetailsTitle.setUnderline(true);
+		currentUserDetailsTitle.setFont(Font.font(16));
+		Text currentUserId = new Text("Player ID: " + currentPlayer.GetPlayerNumber());
+		currentUserId.setFont(Font.font(14));
+
+		currentUserDetails.getChildren().addAll(currentUserDetailsTitle, blankLine, currentUserId, new Separator());
+
+		Text battleShipsList = new Text("BattleShips list: ");
+		battleShipsList.setFont(Font.font(14));
+		currentUserDetails.getChildren().addAll(battleShipsList);
+		Map<Integer, Integer> dict = getPlayerBattleShipsList(currentPlayer);
+		for (Integer length : dict.keySet())
+		{
+			Text text = new Text("Length " + length.toString() + ": " + dict.get(length));
+			currentUserDetails.getChildren().add(text);
+		}
+
+		Text opponenetBattleShipsList = new Text("Opponent BattleShips list: ");
+		opponenetBattleShipsList.setFont(Font.font(14));
+		currentUserDetails.getChildren().addAll(new Separator(), opponenetBattleShipsList);
+		dict = getPlayerBattleShipsList(i_AttackResult.GetAttacked());
+		for (Integer length : dict.keySet())
+		{
+			Text text = new Text("Length " + length.toString() + ": " + dict.get(length));
+			currentUserDetails.getChildren().add(text);
+		}
+
+		Text points = new Text("Points: " + currentPlayer.GetPlayerStatistics().GetPoints());
+		points.setFont(Font.font(14));
+		Text hits = new Text("Hits: " + currentPlayer.GetPlayerStatistics().GetHits());
+		hits.setFont(Font.font(14));
+		Text misses = new Text("Missed: " + currentPlayer.GetPlayerStatistics().GetMisses());
+		misses.setFont(Font.font(14));
+		Text avgMoveTime = new Text("Average move time: " + currentPlayer.GetPlayerStatistics().GetAvgStepTimeInSeconds());
+		avgMoveTime.setFont(Font.font(14));
+
+
+		int remainsMains = GameManager.Instance().GetMaxNumOfMines() - currentPlayer.GetTotalMines();
+		Text minesTitle = new Text(("Mines NO: " + remainsMains));
+		minesTitle.setFont(Font.font(14));
+
+		currentUserDetails.getChildren().addAll(new Separator(), points, new Separator(), hits, new Separator(), misses,
+				new Separator(), avgMoveTime, new Separator(), minesTitle);
+
+		Text attackInfo = new Text("Attack Info: ");
+		attackInfo.setFont(Font.font(14));
+		currentUserDetails.getChildren().addAll(new Separator(), attackInfo);
+		int i = 1;
+		for (String info : i_AttackResult.GetAttackInfo())
+		{
+			Text text = new Text(i + ". " + info);
+			currentUserDetails.getChildren().add(text);
+			++i;
+		}
+
+		return currentUserDetails;
+
 	}
 
 	private static Node currentUserToolbox()
@@ -197,74 +340,87 @@ public class Main extends Application {
 		Text avgMoveTime = new Text("Average move time: " + currentPlayer.GetPlayerStatistics().GetAvgStepTimeInSeconds());
 		avgMoveTime.setFont(Font.font(14));
 
-		Image tempMine = new Image("BattleShipGUI/mine.png");
-		ImageView imageView = new ImageView();
-		imageView.setPreserveRatio(true);
-		imageView.setImage(tempMine);
-		final GridPane target = m_GameBoardGirdPane;
 
-		imageView.setOnDragDetected(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
-				ClipboardContent cbContent = new ClipboardContent();
-				cbContent.putImage(imageView.getImage());
-				db.setContent(cbContent);
-				event.consume();
-			}
-		});
-
-		target.setOnDragOver(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				if(event.getGestureSource() != target && event.getDragboard().hasImage()){
-					event.acceptTransferModes(TransferMode.MOVE);
-				}
-				event.consume();
-			}
-		});
-
-		target.setOnDragEntered(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				if(event.getGestureSource() != target && event.getDragboard().hasImage()){
-					imageView.setVisible(false);
-					target.setOpacity(0.7);
-				}
-				event.consume();
-			}
-		});
-
-		target.setOnDragExited(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				imageView.setVisible(true);
-				target.setOpacity(1);
-				event.consume();
-			}
-		});
-
-		target.setOnDragDropped(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event){
-				Dragboard db = event.getDragboard();
-				boolean success = false;
-				if(db.hasImage()){
-					success = true;
-					Point point = getColAndRowInGameBoardGrid(event.getX(), event.getY());
-					try
-					{
-						setMine(point);
-						SetBeforeMove();
-					}
-					catch (Exception e)
-					{
-						showMessageBox("Mine set Error!", e.getMessage(), Alert.AlertType.ERROR);
-					}
-				}
-
-				event.setDropCompleted(success);
-				event.consume();
-			}
-		});
+		int remainsMains = GameManager.Instance().GetMaxNumOfMines() - currentPlayer.GetTotalMines();
+		Text minesTitle = new Text(("Mines NO: " + remainsMains));
+		minesTitle.setFont(Font.font(14));
 
 		currentUserDetails.getChildren().addAll(new Separator(), points, new Separator(), hits, new Separator(), misses,
-												new Separator(), avgMoveTime, new Separator(), imageView);
+				new Separator(), avgMoveTime, new Separator(), minesTitle);
+
+		if(remainsMains > 0)
+		{
+			Text minesExpl = new Text("Drag the Mine to your gameboard");
+			minesExpl.setFont(Font.font(8));
+
+			Image tempMine = new Image("BattleShipGUI/mine.png");
+			ImageView imageView = new ImageView();
+			imageView.setPreserveRatio(true);
+			imageView.setImage(tempMine);
+			final GridPane target = m_GameBoardGirdPane;
+
+			imageView.setOnDragDetected(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
+					ClipboardContent cbContent = new ClipboardContent();
+					cbContent.putImage(imageView.getImage());
+					db.setContent(cbContent);
+					event.consume();
+				}
+			});
+
+			target.setOnDragOver(new EventHandler<DragEvent>() {
+				public void handle(DragEvent event) {
+					if(event.getGestureSource() != target && event.getDragboard().hasImage()){
+						event.acceptTransferModes(TransferMode.MOVE);
+					}
+					event.consume();
+				}
+			});
+
+			target.setOnDragEntered(new EventHandler<DragEvent>() {
+				public void handle(DragEvent event) {
+					if(event.getGestureSource() != target && event.getDragboard().hasImage()){
+						imageView.setVisible(false);
+						target.setOpacity(0.7);
+					}
+					event.consume();
+				}
+			});
+
+			target.setOnDragExited(new EventHandler<DragEvent>() {
+				public void handle(DragEvent event) {
+					imageView.setVisible(true);
+					target.setOpacity(1);
+					event.consume();
+				}
+			});
+
+			target.setOnDragDropped(new EventHandler<DragEvent>() {
+				public void handle(DragEvent event){
+					Dragboard db = event.getDragboard();
+					boolean success = false;
+					if(db.hasImage()){
+						success = true;
+						Point point = getColAndRowInGameBoardGrid(event.getX(), event.getY());
+						try
+						{
+							setMine(point);
+							SetBeforeMove();
+						}
+						catch (Exception e)
+						{
+							showMessageBox("Mine set Error!", e.getMessage(), Alert.AlertType.ERROR);
+						}
+					}
+
+					event.setDropCompleted(success);
+					event.consume();
+				}
+			});
+
+			currentUserDetails.getChildren().addAll(new Separator(),  minesExpl, imageView) ;
+		}
 
 		return currentUserDetails;
 	}
@@ -327,27 +483,56 @@ public class Main extends Application {
 
 	private void doWhenStartNewGame(Stage primaryStage) throws Exception
 	{
-		if(m_IsXmlLoaded == false)
+		if (m_IsXmlLoaded == false)
 		{
 			throw new Exception("You have to load xml before starts new game");
 		}
 
-		if(Utils.isGameStarted == true)
+		if (Utils.isGameStarted == true)
 		{
 			throw new Exception("Finish the current game before starts a new one");
 		}
 
 		GameManager.Instance().InitGame();
 		Utils.isGameStarted = true;
+		Utils.isGameFinished = false;
 		showMessageBox("Game Started!", "Game Started!", Alert.AlertType.INFORMATION);
 		initBoards();
 		SetBeforeMove();
 	}
 
-	private static GridPane m_GameBoardGirdPane = new GridPane();
+	private void doWhenGameFinished() throws Exception
+	{
+		if(Utils.isGameStarted == false)
+		{
+			throw new Exception("Start new game before finish");
+		}
+
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure want to finish the game?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+		alert.showAndWait();
+		if(alert.getResult() == ButtonType.YES)
+		{
+			GameManager.Instance().SetGameHistoryIdx();
+			Utils.isGameStarted = false;
+			Utils.isGameFinished = true;
+			showMessageBox("Game Finished!", "Player " + ((GameManager.Instance().GetCurrentPlayer().GetPlayerNumber() + 1) % 2) + " won!", Alert.AlertType.INFORMATION);
+			SetBeforeMove();
+
+		}
+	}
+
+	private void cleanUI()
+	{
+		m_Root.setLeft(null);
+		m_Root.setRight(null);
+		m_Root.setCenter(null);
+	}
+
+	private static GridPane m_GameBoardGirdPane;
 
 	private void initBoards()
 	{
+		m_GameBoardGirdPane = new GridPane();
 		ScrollPane scrollPane = new ScrollPane();
 		VBox gameBoard = new VBox();
 		Text gameBoardTitle = new Text("Game Board");
@@ -413,6 +598,10 @@ public class Main extends Application {
 
 	private void setGameSettings(Stage i_Stage) throws Exception
 	{
+		if(Utils.isGameStarted == true)
+		{
+			throw new IllegalArgumentException("You can't loading xml while playing...\nPlease finish the game first!");
+		}
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open game settings xml");
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Game settings (*.xml)", "*.xml");
@@ -423,6 +612,10 @@ public class Main extends Application {
 			GameManager.Instance().LoadGameSettings(xmlFile.getPath());
 			m_IsXmlLoaded = true;
 		}
+		else
+		{
+			throw new IllegalArgumentException("You needs to load xml file for game settings loading...");
+		}
 	}
 
 	/**
@@ -432,4 +625,12 @@ public class Main extends Application {
 		launch(args);
 	}
 
+	public static void DoWhenGameFinished()
+	{
+		GameManager.Instance().SetGameHistoryIdx();
+		Utils.isGameStarted = false;
+		Utils.isGameFinished = true;
+		SetBeforeMove();
+		showMessageBox("Game Finished!", "Player " + GameManager.Instance().GetCurrentPlayer().GetPlayerNumber() + " WON!!!", Alert.AlertType.INFORMATION);
+	}
 }

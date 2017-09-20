@@ -207,7 +207,7 @@ public class UiManager
 			System.out.println("Player " + attack.GetPlayerNumber() + " hit BattleShip!");
 		}
 
-		if(attackedResult.GetIsBattleShipDrawn())
+		if(attackedResult.GetIsBattleShipDrawn() != null)
 		{
 			System.out.println("Player " + attack.GetPlayerNumber() + " drawn BattleShip!!!");
 		}

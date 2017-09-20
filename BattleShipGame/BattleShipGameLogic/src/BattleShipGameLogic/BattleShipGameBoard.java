@@ -25,14 +25,27 @@ public class BattleShipGameBoard extends GameBoard
 		super(i_BoardSize);
 		fillBoard(i_BoardConfiguration, i_ShipTypes, i_Mines);
 	}
-
+	int t = 0;
 	@Override
 	public GameBoard Clone()
 	{
 		BattleShipGameBoard res = new BattleShipGameBoard();
 
-		res.m_Board = m_Board.clone();
+
 		res.m_BoardSize = m_BoardSize;
+		res.m_BattleShips = new ArrayList<BattleShip>(m_BattleShips.size());
+		for (BattleShip battleShip : m_BattleShips)
+		{
+			BattleShip newBattleShip = new BattleShip(null, null);
+			newBattleShip.SetLength(battleShip.GetLength());
+			res.m_BattleShips.add(newBattleShip);
+		}
+		res.m_Mines = new ArrayList<Mine>(m_Mines.size());
+		for(Mine mine : m_Mines){
+			res.m_Mines.add(new Mine(null, null));
+		}
+
+		res.m_Board = CloneBoard();
 
 		return res;
 	}
@@ -69,7 +82,15 @@ public class BattleShipGameBoard extends GameBoard
 
 	private void addBattleShipToBoard(BattleShip i_BattleShip)
 	{
-		addObjectToBoard(i_BattleShip);
+		if(i_BattleShip.GetCategory() == BattleShipCategory.L_SHAPE)
+		{
+			addLBattleShipToBoard(i_BattleShip);
+		}
+		else
+		{
+			addObjectToBoard(i_BattleShip);
+		}
+
 		m_BattleShips.add(i_BattleShip);
 	}
 
@@ -78,17 +99,49 @@ public class BattleShipGameBoard extends GameBoard
 		Point objLocation = i_GameObject.GetLocation();
 		BoardSigns objSign = i_GameObject.GetBoardSign();
 		int length = i_GameObject.GetLength();
-		Point p = objLocation;
+		Point p = (Point)objLocation.clone();
 		Point[] pointsToDraw = new Point[length];
 
 		for(int i = 0; i< length; ++i)
 		{
 			checkPointValidation(p, i_GameObject, pointsToDraw);
 			pointsToDraw[i] = (Point)p.clone();
-			moveToNextPoint(p, i, i_GameObject);
+			moveToNextPoint(p, i_GameObject, true);
 		}
 
 		i_GameObject.SetActivePoints(pointsToDraw);
+		drawPoints(pointsToDraw, objSign);
+	}
+
+	private void addLBattleShipToBoard(BattleShip i_BattleShip)
+	{
+		Point origin = i_BattleShip.GetLocation();
+		BoardSigns objSign = i_BattleShip.GetBoardSign();
+		int lengthEachSide = i_BattleShip.GetLength();
+		Point p = (Point)origin.clone();
+		Point[] pointsToDraw = new Point[(lengthEachSide * 2) - 1];
+		int i;
+
+		for(i = 0; i< lengthEachSide; ++i)
+		{
+			checkPointValidation(p, i_BattleShip, pointsToDraw);
+			pointsToDraw[i] = (Point)p.clone();
+			moveToNextPoint(p, i_BattleShip, true);
+		}
+
+		p = (Point)origin.clone();
+		for(; i< lengthEachSide * 2; ++i)
+		{
+			if(i != lengthEachSide)
+			{
+				checkPointValidation(p, i_BattleShip, pointsToDraw);
+				pointsToDraw[i - 1] = (Point)p.clone();
+			}
+
+			moveToNextPoint(p, i_BattleShip, false);
+		}
+
+		i_BattleShip.SetActivePoints(pointsToDraw);
 		drawPoints(pointsToDraw, objSign);
 	}
 
@@ -100,7 +153,7 @@ public class BattleShipGameBoard extends GameBoard
 		}
 	}
 
-	private void moveToNextPoint(Point p, int i, GameObject i_GameObject)
+	private void moveToNextPoint(Point p, GameObject i_GameObject, boolean i_IsFirstSide)
 	{
 		int length = i_GameObject.GetLength();
 		Direction direction = i_GameObject.GetDirection();
@@ -121,9 +174,9 @@ public class BattleShipGameBoard extends GameBoard
 
 			case RIGHT_DOWN:
 			{
-				if(i < (length/2 + 1))
+				if(i_IsFirstSide)
 				{
-					p.x++;
+					p.x--;
 					break;
 				}
 				else
@@ -135,9 +188,9 @@ public class BattleShipGameBoard extends GameBoard
 
 			case RIGHT_UP:
 			{
-				if(i < (length/2 + 1))
+				if(i_IsFirstSide)
 				{
-					p.x++;
+					p.x--;
 					break;
 				}
 				else
@@ -149,7 +202,7 @@ public class BattleShipGameBoard extends GameBoard
 
 			case UP_RIGHT:
 			{
-				if(i < (length/2 + 1))
+				if(i_IsFirstSide)
 				{
 					p.y--;
 					break;
@@ -163,7 +216,7 @@ public class BattleShipGameBoard extends GameBoard
 
 			case DOWN_RIGHT:
 			{
-				if(i < (length/2 + 1))
+				if(i_IsFirstSide)
 				{
 					p.y++;
 					break;
@@ -278,7 +331,7 @@ public class BattleShipGameBoard extends GameBoard
 		}
 	}
 
-	public void RemoveMine(Point i_Point)
+	public Mine RemoveMine(Point i_Point)
 	{
 		Mine mine = null;
 
@@ -297,6 +350,8 @@ public class BattleShipGameBoard extends GameBoard
 		}
 
 		m_Mines.remove(mine);
+
+		return mine;
 	}
 
 	public ArrayList<BattleShip> GetBattleShip()
