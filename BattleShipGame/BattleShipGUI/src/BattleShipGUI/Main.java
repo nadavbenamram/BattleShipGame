@@ -140,7 +140,10 @@ public class Main extends Application {
 	{
 		VBox gameStatisticsDetails = new VBox();
 
-		gameStatisticsDetails.setPadding(new Insets(5, 5, 5, 0));
+		gameStatisticsDetails.setFillWidth(true);
+		gameStatisticsDetails.setPrefWidth(200);
+
+		gameStatisticsDetails.setPadding(new Insets(10, 10, 10, 4));
 		Player currentPlayer = GameManager.Instance().GetCurrentPlayer();
 		Player[] allPlayers = GameManager.Instance().GetAllPlayers();
 		GameStatistics gameStatistics = GameManager.Instance().GetGameStatistics();
@@ -227,6 +230,9 @@ public class Main extends Application {
 	{
 		VBox currentUserDetails = new VBox();
 
+		currentUserDetails.setFillWidth(true);
+		currentUserDetails.setPrefWidth(200);
+
 		currentUserDetails.setPadding(new Insets(5, 5, 5, 0));
 		Player currentPlayer = i_AttackResult.GetAttacker();
 
@@ -297,6 +303,9 @@ public class Main extends Application {
 	{
 		VBox currentUserDetails = new VBox();
 
+		currentUserDetails.setFillWidth(true);
+		currentUserDetails.setPrefWidth(200);
+
 		currentUserDetails.setPadding(new Insets(5, 5, 5, 0));
 		Player currentPlayer = GameManager.Instance().GetCurrentPlayer();
 
@@ -351,7 +360,7 @@ public class Main extends Application {
 		if(remainsMains > 0)
 		{
 			Text minesExpl = new Text("Drag the Mine to your gameboard");
-			minesExpl.setFont(Font.font(8));
+			minesExpl.setFont(Font.font(11));
 
 			Image tempMine = new Image("BattleShipGUI/mine.png");
 			ImageView imageView = new ImageView();
@@ -540,6 +549,9 @@ public class Main extends Application {
 		gameBoardTitle.setUnderline(true);
 		m_PlayerGameBoard = new GameBoard(m_GameBoardGirdPane);
 		gameBoard.setAlignment(Pos.CENTER);
+		int size = (GameManager.Instance().GetBoardSize() + 1) * Square.Size;
+		gameBoard.setPrefWidth(size);
+		gameBoard.setPrefHeight(size);
 		gameBoard.getChildren().addAll(gameBoardTitle, m_GameBoardGirdPane);
 
 		VBox traceBoard = new VBox();
@@ -549,12 +561,18 @@ public class Main extends Application {
 		GridPane traceBoardgrGridPane = new GridPane();
 		m_PlayerTraceBoard = new GameBoard(traceBoardgrGridPane);
 		traceBoard.setAlignment(Pos.CENTER);
+		traceBoard.setPrefWidth(size);
+		traceBoard.setPrefHeight(size);
 		traceBoard.getChildren().addAll(traceBoardTitle, traceBoardgrGridPane);
 
 		HBox centerPane = new HBox();
 		centerPane.getChildren().addAll(gameBoard, new Separator(), traceBoard);
+		centerPane.setPrefHeight((size));
+		centerPane.setPrefWidth((size));
 		scrollPane.setContent(centerPane);
+		scrollPane.setPrefSize(size, size);
 		m_Root.setCenter(scrollPane);
+		m_PrimaryStage.setWidth(450 + size*2);
 	}
 
 	public static void SetBeforeMove()

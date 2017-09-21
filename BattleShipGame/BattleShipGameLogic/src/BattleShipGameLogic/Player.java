@@ -97,7 +97,11 @@ public class Player
 				doWhenHitBattleShip(stepDuration);
 				break;
 			case MINE:
-				doWhenAttackedMine(i_Point, i_AttackedPlayerIndex, stepDuration);
+				if(i_IsMineAttack == false)
+				{
+					doWhenAttackedMine(i_Point, i_AttackedPlayerIndex, stepDuration);
+				}
+
 				traceSign = BoardSigns.HIT;
 				break;
 			default:
@@ -159,7 +163,7 @@ public class Player
 				throw new IllegalArgumentException("Invalid board sign ("+beforeSign.GetValue()+") in player " + m_PlayerNumber + " in BattleShip board while attacked");
 		}
 
-		attackResult.AddAttackInfo(beforeSign.toString() + " cell (R: " + i_Point.y + " C: " + i_Point.x + ") attacked!");
+		attackResult.AddAttackInfo(beforeSign.toString() + " cell (R: " + i_Point.y + " C: " + ((char)('A' + i_Point.x - 1)) + ") attacked!");
 		m_BattleShipsBoard.SetCellSign(i_Point, afterSign);
 
 		return attackResult;

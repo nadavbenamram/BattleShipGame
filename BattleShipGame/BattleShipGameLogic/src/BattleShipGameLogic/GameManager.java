@@ -119,6 +119,7 @@ public class GameManager
 		i_Player.SetMine(i_Point);
 		AttackResult attack = new AttackResult(BoardSigns.EMPTY);
 		attack.SetPlayers(GetAllPlayers(), i_Player.GetPlayerNumber());
+		attack.AddAttackInfo("Player " + i_Player.GetPlayerNumber() + " set mine in (R: " + i_Point.y + ", C: " + (((char)('A' + i_Point.x - 1))) + ")");
 		m_GameHistory.add(0, attack);
 
 		m_NextPlayerTurn = nextPlayerIndex();

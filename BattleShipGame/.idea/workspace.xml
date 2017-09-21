@@ -7,37 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54857b19-ffe3-4551-a49d-cd57a440ae7b" name="Default" comment="Checking point bug fix.">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BattleShipConsoleUI/UiManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Square$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Square$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Square.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BattleShipGameLogic/BattleShipGameLogic/GameManager.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/GameBoard.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/GameBoard.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main$1.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main$2.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main$3.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main$4.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main$5.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Utils.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGUI/BattleShipGUI/Utils.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGameLogic/BattleShipGameLogic/AttackResult.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGameLogic/BattleShipGameLogic/AttackResult.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGameLogic/BattleShipGameLogic/GameObject.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGameLogic/BattleShipGameLogic/GameObject.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGameLogic/BattleShipGameLogic/Player$1.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGameLogic/BattleShipGameLogic/Player$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipGameLogic/BattleShipGameLogic/Player.class" afterPath="$PROJECT_DIR$/out/production/BattleShipGameLogic/BattleShipGameLogic/Player.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipConsoleUI/src/UiManager.java" afterPath="$PROJECT_DIR$/BattleShipConsoleUI/src/UiManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/GameBoard.java" afterPath="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/GameBoard.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Main.java" afterPath="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Square.java" afterPath="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Square.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Utils.java" afterPath="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/AttackResult.java" afterPath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/AttackResult.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BattleShip.java" afterPath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BattleShip.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BattleShipGameBoard.java" afterPath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BattleShipGameBoard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BoardSigns.java" afterPath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BoardSigns.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameBoard.java" afterPath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameBoard.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameManager.java" afterPath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameObject.java" afterPath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameType.java" afterPath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameType.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/Player.java" afterPath="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/Player.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -68,11 +40,28 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="155" column="36" lean-forward="false" selection-start-line="155" selection-start-column="36" selection-end-line="155" selection-end-column="36" />
+            <state relative-caret-position="663">
+              <caret line="165" column="114" lean-forward="false" selection-start-line="165" selection-start-column="103" selection-end-line="165" selection-end-column="114" />
               <folding>
                 <element signature="method#Player#1;class#Player#0" expanded="false" />
                 <element signature="method#TurnStarted#0;class#Player#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="447">
+              <caret line="121" column="145" lean-forward="false" selection-start-line="121" selection-start-column="145" selection-end-line="121" selection-end-column="145" />
+              <folding>
+                <element signature="method#Instance#0;class#GameManager#0" expanded="false" />
+                <element signature="method#LoadGameSettings#0;class#GameManager#0" expanded="false" />
+                <element signature="method#GetMaxNumOfMines#0;class#GameManager#0" expanded="false" />
+                <element signature="method#fromXmlFileToObject#0;class#GameManager#0" expanded="false" />
+                <element signature="method#initPlayers#0;class#GameManager#0" expanded="false" />
+                <element signature="method#createPlayerBattleShipGameBoard#0;class#GameManager#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -91,23 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="408" column="28" lean-forward="false" selection-start-line="408" selection-start-column="28" selection-end-line="408" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Square.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Square.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="154" column="66" lean-forward="true" selection-start-line="154" selection-start-column="66" selection-end-line="154" selection-end-column="66" />
+            <state relative-caret-position="507">
+              <caret line="574" column="35" lean-forward="false" selection-start-line="574" selection-start-column="35" selection-end-line="574" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -118,8 +95,20 @@
       <file leaf-file-name="GameBoard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/GameBoard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="75" column="21" lean-forward="true" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
+            <state relative-caret-position="1000">
+              <caret line="52" column="12" lean-forward="true" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Square.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Square.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="735">
+              <caret line="21" column="32" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -156,16 +145,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BattleShipCategory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BattleShipCategory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BattleShipGameBoard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BattleShipGameBoard.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -187,11 +166,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>TurnStarted</find>
-      <find>Player</find>
-      <find>Column</find>
-      <find>'A' - 1 +</find>
-      <find>attack</find>
       <find>Attack</find>
       <find>finish</find>
       <find>m_GameStarted</find>
@@ -213,10 +187,15 @@
       <find>GetLen</find>
       <find>Clone</find>
       <find>doWhen</find>
-      <find>SetMine</find>
       <find>SetPla</find>
       <find>m_Image = new</find>
+      <find>C:</find>
+      <find>'A' + i_Point.</find>
+      <find>'A' + i_Poi</find>
+      <find>SetMine</find>
+      <find>Drag</find>
       <find>Update</find>
+      <find>initBoar</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -243,14 +222,14 @@
         <option value="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BattleShip.java" />
         <option value="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Utils.java" />
         <option value="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameType.java" />
-        <option value="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameManager.java" />
         <option value="$PROJECT_DIR$/BattleShipConsoleUI/src/UiManager.java" />
-        <option value="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Main.java" />
         <option value="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BattleShipGameBoard.java" />
-        <option value="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/Player.java" />
         <option value="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/AttackResult.java" />
-        <option value="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/GameBoard.java" />
         <option value="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Square.java" />
+        <option value="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/Player.java" />
+        <option value="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameManager.java" />
+        <option value="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/GameBoard.java" />
+        <option value="$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Main.java" />
       </list>
     </option>
   </component>
@@ -519,7 +498,7 @@
       <workItem from="1503609296816" duration="1318000" />
       <workItem from="1504046234826" duration="24000" />
       <workItem from="1505475612450" duration="6114000" />
-      <workItem from="1505490248522" duration="69376000" />
+      <workItem from="1505490248522" duration="74012000" />
     </task>
     <task id="LOCAL-00001" summary="Almost finished first exercise">
       <created>1503247157402</created>
@@ -546,7 +525,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130892000" />
+    <option name="totallyTimeSpent" value="135528000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
@@ -568,7 +547,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15052083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18949649" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4818625" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03627504" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -627,38 +606,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/AttackResult.java</url>
-          <line>97</line>
-          <properties />
-          <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Main.java</url>
-          <line>220</line>
-          <properties />
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameManager.java</url>
-          <line>142</line>
-          <properties />
-          <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BattleShipGameBoard.java</url>
-          <line>248</line>
-          <properties />
-          <option name="timeStamp" value="98" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Square.java</url>
-          <line>180</line>
-          <properties />
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -1019,21 +966,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="132" column="39" lean-forward="true" selection-start-line="132" selection-start-column="39" selection-end-line="132" selection-end-column="39" />
-          <folding>
-            <element signature="method#Instance#0;class#GameManager#0" expanded="false" />
-            <element signature="method#LoadGameSettings#0;class#GameManager#0" expanded="false" />
-            <element signature="method#GetMaxNumOfMines#0;class#GameManager#0" expanded="false" />
-            <element signature="method#fromXmlFileToObject#0;class#GameManager#0" expanded="false" />
-            <element signature="method#initPlayers#0;class#GameManager#0" expanded="false" />
-            <element signature="method#createPlayerBattleShipGameBoard#0;class#GameManager#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/BattleShipCategory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -1074,17 +1006,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="155" column="36" lean-forward="false" selection-start-line="155" selection-start-column="36" selection-end-line="155" selection-end-column="36" />
-          <folding>
-            <element signature="method#Player#1;class#Player#0" expanded="false" />
-            <element signature="method#TurnStarted#0;class#Player#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/AttackResult.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -1107,20 +1028,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/GameBoard.java">
+    <entry file="file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="75" column="21" lean-forward="true" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
+        <state relative-caret-position="663">
+          <caret line="165" column="114" lean-forward="false" selection-start-line="165" selection-start-column="103" selection-end-line="165" selection-end-column="114" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#Player#1;class#Player#0" expanded="false" />
+            <element signature="method#TurnStarted#0;class#Player#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Main.java">
+    <entry file="file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="408" column="28" lean-forward="false" selection-start-line="408" selection-start-column="28" selection-end-line="408" selection-end-column="28" />
+        <state relative-caret-position="447">
+          <caret line="121" column="145" lean-forward="false" selection-start-line="121" selection-start-column="145" selection-end-line="121" selection-end-column="145" />
+          <folding>
+            <element signature="method#Instance#0;class#GameManager#0" expanded="false" />
+            <element signature="method#LoadGameSettings#0;class#GameManager#0" expanded="false" />
+            <element signature="method#GetMaxNumOfMines#0;class#GameManager#0" expanded="false" />
+            <element signature="method#fromXmlFileToObject#0;class#GameManager#0" expanded="false" />
+            <element signature="method#initPlayers#0;class#GameManager#0" expanded="false" />
+            <element signature="method#createPlayerBattleShipGameBoard#0;class#GameManager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/GameBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1000">
+          <caret line="52" column="12" lean-forward="true" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1129,8 +1066,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Square.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="154" column="66" lean-forward="true" selection-start-line="154" selection-start-column="66" selection-end-line="154" selection-end-column="66" />
+        <state relative-caret-position="735">
+          <caret line="21" column="32" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipGUI/src/BattleShipGUI/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="574" column="35" lean-forward="false" selection-start-line="574" selection-start-column="35" selection-end-line="574" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
