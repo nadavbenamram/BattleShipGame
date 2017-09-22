@@ -1,15 +1,11 @@
 <component name="ArtifactManager">
-  <artifact name="BattleShipGame:jar">
+  <artifact type="jar" name="BattleShipGame:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/BattleShipGame_jar</output-path>
-    <root id="root">
-      <element id="archive" name="BattleShipGame.jar">
-        <element id="directory" name="META-INF">
-          <element id="file-copy" path="$PROJECT_DIR$/src/2/META-INF/MANIFEST.MF" />
-        </element>
-        <element id="module-output" name="BattleShipGameLogic" />
-        <element id="module-output" name="BattleShipConsoleUI" />
-        <element id="module-output" name="BattleShipGame" />
-      </element>
+    <root id="archive" name="BattleShipGame.jar">
+      <element id="module-output" name="BattleShipGame" />
+      <element id="module-output" name="BattleShipConsoleUI" />
+      <element id="module-output" name="BattleShipGameLogic" />
+      <element id="module-output" name="BattleShipGUI" />
     </root>
   </artifact>
 </component>

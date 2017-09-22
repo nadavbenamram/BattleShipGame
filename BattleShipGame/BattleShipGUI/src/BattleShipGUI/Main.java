@@ -115,7 +115,7 @@ public class Main extends Application {
 
 		exitMenuItem.setOnAction(actionEvent-> Platform.exit());
 
-		m_AllowAnimationCheckBox= new CheckBox("Show Animations: ");
+		m_AllowAnimationCheckBox= new CheckBox("Show Animations");
 		m_AllowAnimationCheckBox.setSelected(true);
 		m_AllowAnimationCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> ov,
@@ -131,7 +131,7 @@ public class Main extends Application {
 			}
 		});
 
-		primaryStage.setTitle("Adding Menus");
+		primaryStage.setTitle("BattleShip game");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -194,6 +194,7 @@ public class Main extends Application {
 			watchMovesTitle.setUnderline(true);
 			watchMovesTitle.setFont(Font.font(14));
 			HBox buttons = new HBox();
+			buttons.setPadding(new Insets(5, 0, 5, 0));
 			buttons.setAlignment(Pos.BASELINE_CENTER);
 			Button prev = new Button("Prev");
 			prev.setOnAction(event -> {
@@ -213,7 +214,7 @@ public class Main extends Application {
 		}
 		else
 		{
-			gameStatisticsDetails.getChildren().addAll(new Separator(), m_AllowAnimationCheckBox);
+			gameStatisticsDetails.getChildren().addAll(m_AllowAnimationCheckBox);
 		}
 
 		return gameStatisticsDetails;
@@ -233,7 +234,7 @@ public class Main extends Application {
 		currentUserDetails.setFillWidth(true);
 		currentUserDetails.setPrefWidth(200);
 
-		currentUserDetails.setPadding(new Insets(5, 5, 5, 0));
+		currentUserDetails.setPadding(new Insets(10, 10, 10, 4));
 		Player currentPlayer = i_AttackResult.GetAttacker();
 
 		Text blankLine = new Text("");
@@ -306,7 +307,7 @@ public class Main extends Application {
 		currentUserDetails.setFillWidth(true);
 		currentUserDetails.setPrefWidth(200);
 
-		currentUserDetails.setPadding(new Insets(5, 5, 5, 0));
+		currentUserDetails.setPadding(new Insets(10, 10, 10, 4));
 		Player currentPlayer = GameManager.Instance().GetCurrentPlayer();
 
 		Text blankLine = new Text("");
@@ -429,6 +430,24 @@ public class Main extends Application {
 			});
 
 			currentUserDetails.getChildren().addAll(new Separator(),  minesExpl, imageView) ;
+
+			VBox finishGame = new VBox();
+			finishGame.setAlignment(Pos.CENTER);
+			finishGame.setPadding(new Insets(5, 0, 5, 0));
+			Button finishGameButton = new Button("Finish Game");
+			finishGameButton.setOnAction(action -> {
+				try
+				{
+					doWhenGameFinished();
+				}
+				catch (Exception e)
+				{
+					showMessageBox("Can't finish game", e.getMessage(), Alert.AlertType.ERROR);
+				}
+			});
+
+			finishGame.getChildren().addAll(new Separator(), finishGameButton);
+			currentUserDetails.getChildren().add(finishGame);
 		}
 
 		return currentUserDetails;
@@ -510,7 +529,7 @@ public class Main extends Application {
 		SetBeforeMove();
 	}
 
-	private void doWhenGameFinished() throws Exception
+	private static void doWhenGameFinished() throws Exception
 	{
 		if(Utils.isGameStarted == false)
 		{
