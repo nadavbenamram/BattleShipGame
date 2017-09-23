@@ -42,13 +42,17 @@ public class UploadGameServlet extends HttpServlet
 		{
 			Game game = new Game(gameTItle);
 			game.SetXmlPath(file.getAbsolutePath());
-			User owner = SessionManager.Instance().GetCurrentUser();
+			User owner = SessionManager.Instance(request.getSession()).GetCurrentUser();
 			game.SetOwner(owner);
-			ContextManager.Instance().AddGame(game);
+			ContextManager.Instance().AddGame(game, owner);
 		}
 		catch (IllegalArgumentException e)
 		{
-			request.setAttribute(GAME_LOAD_FAILED_ATT_NAME, gameTItle);
+			request.setAttribute(GAME_LOAD_FAILED_ATT_NAME, "There is already game with this title ("+gameTItle+")");
+		}
+		catch(Exception e)
+		{
+			request.setAttribute(GAME_LOAD_FAILED_ATT_NAME, e.getMessage());
 		}
 		finally
 		{

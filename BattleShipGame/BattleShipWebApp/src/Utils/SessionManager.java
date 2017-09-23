@@ -4,7 +4,6 @@ import javax.servlet.http.HttpSession;
 
 public class SessionManager
 {
-	private User m_CurrentUser;
 	private static SessionManager m_Instance;
 	private static HttpSession m_Session;
 
@@ -12,28 +11,26 @@ public class SessionManager
 	{
 	}
 
-	public static SessionManager Instance()
+	public static SessionManager Instance(HttpSession i_Session)
 	{
 		if(m_Instance == null)
 		{
 			m_Instance = new SessionManager();
 		}
 
-		return m_Instance;
-	}
-
-	public static void SetSession(HttpSession i_Session)
-	{
 		m_Session = i_Session;
+
+		return m_Instance;
 	}
 
 	public void SetCurrentUser(User i_User)
 	{
-		m_CurrentUser = i_User;
+		m_Session.setAttribute("user", i_User);
 	}
 
 	public User GetCurrentUser()
 	{
-		return m_CurrentUser;
+		User user = (User)m_Session.getAttribute("user");
+		return user;
 	}
 }

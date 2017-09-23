@@ -21,15 +21,13 @@ public class SignUpServlet extends HttpServlet
 	protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
 		ContextManager.SetContext(request.getServletContext());
-		String username = (String) request.getParameter(Constants.USER_NAME_ATT_NAME);
+		String username = (String) request.getParameter(Constants.USER_NAME_PARAM_NAME);
 		PrintWriter writer = response.getWriter();
 		try
 		{
 			User user = new User(username);
 			ContextManager.Instance().AddUser(user);
-			HttpSession session = request.getSession(true);
-			SessionManager.SetSession(session);
-			SessionManager.Instance().SetCurrentUser(user);
+			SessionManager.Instance(request.getSession(true)).SetCurrentUser(user);
 			writer.println("YES");
 		}
 		catch (IllegalArgumentException e)

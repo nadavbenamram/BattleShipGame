@@ -21,7 +21,7 @@ public class GameManager
 	private ArrayList<AttackResult> m_GameHistory;
 	private int m_CurrentGameHistory;
 
-	private GameManager()
+	public GameManager()
 	{
 	}
 

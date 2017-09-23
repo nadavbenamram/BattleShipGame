@@ -3,8 +3,9 @@ package Utils;
 import com.sun.jndi.cosnaming.CNCtx;
 
 import javax.servlet.ServletContext;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class ContextManager
 {
@@ -80,7 +81,7 @@ public class ContextManager
 			}
 		}
 
-	public void AddGame(Game i_Game)
+	public void AddGame(Game i_Game, User i_Owner)
 	{
 		getAllGames();
 
@@ -91,7 +92,7 @@ public class ContextManager
 		}
 
 		m_AllGames.add(i_Game);
-		SessionManager.Instance().GetCurrentUser().AddGame(i_Game);
+		i_Owner.AddGame(i_Game);
 		m_Context.setAttribute(Constants.ALL_GAMES_ATT_NAME, m_AllGames);
 	}
 
@@ -108,5 +109,17 @@ public class ContextManager
 		getAllGames();
 
 		return m_AllGames;
+	}
+
+	public User GetUserByName(String userName)
+	{
+		List<User> users = m_ConnectedUsers.stream().filter(usr -> usr.GetName().equals(userName)).collect(Collectors.toList());
+		return users.get(0);
+	}
+
+	public Game GetGameByTitle(String gameTitle)
+	{
+		List<Game> games = m_AllGames.stream().filter(game -> game.GetTitle().equals(gameTitle)).collect(Collectors.toList());
+		return games.get(0);
 	}
 }

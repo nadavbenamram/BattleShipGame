@@ -2,6 +2,9 @@
 <%@ page import="Utils.Game" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Utils.Constants" %>
+<%@ page import="Utils.SessionManager" %>
+<%@ page import="static Utils.Constants.USER_NAME_PARAM_NAME" %>
+<%@ page import="static Utils.Constants.GAME_TITLE_PARAM_NAME" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <HTML>
@@ -17,7 +20,7 @@
     if(value != null)
     {%>
 <script type="text/javascript">
-        alert("There is already game with this name (" + value + ")");
+    alert("<%= value %>");
 </script>
 <%}%>
 
@@ -35,18 +38,24 @@
         List<Game> games = ContextManager.Instance().GetAllGames();
         for (Game game: games) {
     %>
-    <tr>
-        <td align="center"><%=game.GetTitle()%> </td>
-        <td align="center"><%=game.GetOwner().GetName()%> </td>
-        <td align="center">#boardsize#</td>
-        <td align="center">#gameType#</td>
-        <td align="center"><%if (game.IsActive() == true){%>
-            <img src="../resources/green.jpg" alt="active game" style="width:15px;height:15px;">
-            <%}else{%>
-            <img src="../resources/red.png" alt="inactive game" style="width:15px;height:15px;">
-            <%}%>
-        </td>
-    </tr>
+        <form method="post" action="../joingame">
+            <tr>
+                <td align="center"><%=game.GetTitle()%> </td>
+                <td align="center"><%=game.GetOwner().GetName()%> </td>
+                <td align="center"><%=game.GetGameManager().GetBoardSize()%></td>
+                <td align="center"><%=game.GetGameManager().GetGameType()%></td>
+                <td align="center"><%if (game.IsActive() == true){%>
+                    <img src="../resources/red.png" alt="active game" style="width:15px;height:15px;">
+                    <%}else if(game.GetActivePlayersNum() == 1){%>
+                    <img src="../resources/yellow.png" alt="inactive game" style="width:15px;height:15px;">
+                    <%}else{%>
+                    <img src="../resources/green.jpg" alt="inactive game" style="width:15px;height:15px;">
+                    <%}%>
+                </td>
+                <td><input type="hidden" name="<%= GAME_TITLE_PARAM_NAME%>" value="<%= game.GetTitle() %>" /></td>
+                <td align="center"><%if (game.IsActive() == false){%><input type="submit" value="Join"><%}%></td>
+            </tr>
+        </form>
     <%}%>
     </table>
 </div>
