@@ -1,6 +1,10 @@
 package Utils;
 
-import com.sun.jndi.cosnaming.CNCtx;
+import JsonObjects.GameJson;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import javax.servlet.ServletContext;
 import java.util.*;
@@ -109,6 +113,25 @@ public class ContextManager
 		getAllGames();
 
 		return m_AllGames;
+	}
+
+	public List<GameJson> GetAllGamesAsJson()
+	{
+		getAllGames();
+		List<GameJson> jsonList = new ArrayList<>(m_AllGames.size());
+		GameJson gameJson = new GameJson();
+
+		for(Game game : m_AllGames)
+		{
+			gameJson = new GameJson();
+			gameJson.setTitle(game.GetTitle());
+			gameJson.setOwner(game.GetOwner().GetName());
+			gameJson.setBoardSize(game.GetGameManager().GetBoardSize());
+
+			jsonList.add(gameJson);
+		}
+
+		return jsonList;
 	}
 
 	public User GetUserByName(String userName)
