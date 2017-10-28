@@ -50,13 +50,13 @@ public class GameManager
 		return m_GameHistory.get(m_CurrentGameHistory);
 	}
 
+	public static void SetGameManager(GameManager i_Instance)
+	{
+		m_Instance = i_Instance;
+	}
+
 	public static GameManager Instance()
 	{
-		if(m_Instance == null)
-		{
-			m_Instance = new GameManager();
-		}
-
 		return m_Instance;
 	}
 

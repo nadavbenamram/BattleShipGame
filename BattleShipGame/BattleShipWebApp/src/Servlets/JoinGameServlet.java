@@ -19,7 +19,7 @@ import static Utils.Constants.USER_NAME_PARAM_NAME;
 @WebServlet(name = "JoinGameServlet", urlPatterns = {"/joingame"})
 public class JoinGameServlet extends HttpServlet
 {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		User user = SessionManager.Instance(request.getSession()).GetCurrentUser();
 		String gameTitle = request.getParameter(GAME_TITLE_PARAM_NAME);
@@ -32,6 +32,8 @@ public class JoinGameServlet extends HttpServlet
 		try
 		{
 			boolean startGame = game.AddUser(user);
+			request.setAttribute(GAME_TITLE_PARAM_NAME, gameTitle);
+			request.setAttribute(USER_NAME_PARAM_NAME, user.GetName());
 		}
 		catch (Exception e)
 		{
@@ -39,11 +41,17 @@ public class JoinGameServlet extends HttpServlet
 		}
 		finally
 		{
-			request.getRequestDispatcher("/games/games.jsp").forward(request,response);
+			request.getRequestDispatcher("/games/gameshow.jsp").forward(request,response);
 		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		processRequest(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		processRequest(request, response);
 	}
 }

@@ -1,6 +1,7 @@
 package Utils;
 
 import JsonObjects.GameJson;
+import JsonObjects.UserJson;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -13,53 +14,53 @@ import java.util.stream.Collectors;
 
 public class ContextManager
 {
-		private static ServletContext m_Context;
-		private static ContextManager m_Instance = null;
-		private List<User> m_ConnectedUsers;
-		private List<Game> m_AllGames;
-		private List<Game> m_ActiveGames;
+	private static ServletContext m_Context;
+	private static ContextManager m_Instance = null;
+	private List<User> m_ConnectedUsers;
+	private List<Game> m_AllGames;
+	private List<Game> m_ActiveGames;
 
-		private ContextManager()
+	private ContextManager()
+	{
+	}
+
+	public static void SetContext(ServletContext i_Context)
+	{
+		m_Context = i_Context;
+	}
+
+	public static ContextManager Instance()
+	{
+		if(m_Instance == null)
 		{
+			m_Instance = new ContextManager();
 		}
 
-		public static void SetContext(ServletContext i_Context)
+		return  m_Instance;
+	}
+
+	public void AddUser(User i_User)
+	{
+		getConnectedUsers();
+		boolean isUserExists = m_ConnectedUsers.stream().anyMatch(usr -> usr.GetName().equals(i_User.GetName()));
+		if(true == isUserExists)
 		{
-			m_Context = i_Context;
+			throw new IllegalArgumentException("There is already registerd user with the name" + i_User.GetName());
 		}
 
-		public static ContextManager Instance()
+		m_ConnectedUsers.add(i_User);
+		m_Context.setAttribute(Constants.USERS_LIST_ATT_NAME, m_ConnectedUsers);
+	}
+
+	private void getConnectedUsers()
+	{
+		m_ConnectedUsers = (List<User>)m_Context.getAttribute(Constants.USERS_LIST_ATT_NAME);
+		if(m_ConnectedUsers == null)
 		{
-			if(m_Instance == null)
-			{
-				m_Instance = new ContextManager();
-			}
-
-			return  m_Instance;
-		}
-
-		public void AddUser(User i_User)
-		{
-			getConnectedUsers();
-			boolean isUserExists = m_ConnectedUsers.stream().anyMatch(usr -> usr.GetName().equals(i_User.GetName()));
-			if(true == isUserExists)
-			{
-				throw new IllegalArgumentException("There is already registerd user with the name" + i_User.GetName());
-			}
-
-			m_ConnectedUsers.add(i_User);
+			m_ConnectedUsers = new ArrayList<>();
 			m_Context.setAttribute(Constants.USERS_LIST_ATT_NAME, m_ConnectedUsers);
 		}
-
-		private void getConnectedUsers()
-		{
-			m_ConnectedUsers = (List<User>)m_Context.getAttribute(Constants.USERS_LIST_ATT_NAME);
-			if(m_ConnectedUsers == null)
-			{
-				m_ConnectedUsers = new ArrayList<>();
-				m_Context.setAttribute(Constants.USERS_LIST_ATT_NAME, m_ConnectedUsers);
-			}
-		}
+	}
 
 	private void getAllGames()
 	{
@@ -71,19 +72,19 @@ public class ContextManager
 		}
 	}
 
-		public void RemoveUser(User i_User) throws Exception
-		{
-			getConnectedUsers();
+	public void RemoveUser(User i_User) throws Exception
+	{
+		getConnectedUsers();
 
-			try
-			{
-				m_ConnectedUsers.remove(i_User);
-			}
-			catch(Exception e)
-			{
-				throw new Exception("Can't find user " + i_User.GetName());
-			}
+		try
+		{
+			m_ConnectedUsers.remove(i_User);
 		}
+		catch(Exception e)
+		{
+			throw new Exception("Can't find user " + i_User.GetName());
+		}
+	}
 
 	public void AddGame(Game i_Game, User i_Owner)
 	{
@@ -127,11 +128,50 @@ public class ContextManager
 			gameJson.setTitle(game.GetTitle());
 			gameJson.setOwner(game.GetOwner().GetName());
 			gameJson.setBoardSize(game.GetGameManager().GetBoardSize());
+			gameJson.setGameType(game.GetGameManager().GetGameType());
+			gameJson.setActivePlayersNum(game.GetActivePlayersNum());
 
 			jsonList.add(gameJson);
 		}
 
 		return jsonList;
+	}
+
+	public List<UserJson> GetAllConnectedUsersAsJson()
+	{
+		getConnectedUsers();
+
+		List<UserJson> jsonList = new ArrayList<>(m_ConnectedUsers.size());
+		UserJson userJson;
+
+		for(User user : m_ConnectedUsers)
+		{
+			userJson = new UserJson();
+			userJson.setName(user.GetName());
+			userJson.setNumOfGames(user.GetNumOfGames());
+
+			jsonList.add(userJson);
+		}
+
+		return jsonList;
+	}
+
+	public GameJson GetGameAsJson(String i_GameTitle) throws Exception
+	{
+		getAllGames();
+		GameJson gameJson = new GameJson();
+
+		for(Game game : m_AllGames)
+		{
+			if(i_GameTitle == game.GetTitle())
+			{
+				gameJson = game.GetGameAsJson();
+			}
+
+			return gameJson;
+		}
+
+		throw new Exception("game isn't found");
 	}
 
 	public User GetUserByName(String userName)

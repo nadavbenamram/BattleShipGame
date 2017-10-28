@@ -199,7 +199,7 @@ public class BattleShipGameBoard extends GameBoard
 				}
 			}
 
-			case UP_RIGHT:
+			case DOWN_RIGHT:
 			{
 				if(i_IsFirstSide)
 				{
@@ -213,7 +213,7 @@ public class BattleShipGameBoard extends GameBoard
 				}
 			}
 
-			case DOWN_RIGHT:
+			case UP_RIGHT:
 			{
 				if(i_IsFirstSide)
 				{

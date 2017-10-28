@@ -1,5 +1,8 @@
 package Utils;
 
+import JsonObjects.UserJson;
+
+import javax.naming.Name;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +10,7 @@ public class User
 {
 	private String m_Name;
 	private List<Game> m_GamesList;
+	private int PlayerIndex;
 
 	public User(String i_Name)
 	{
@@ -31,5 +35,30 @@ public class User
 	public String GetName()
 	{
 		return m_Name;
+	}
+
+	public int GetNumOfGames()
+	{
+		return m_GamesList == null ? 0 : m_GamesList.size();
+	}
+
+	public int getPlayerIndex()
+	{
+		return PlayerIndex;
+	}
+
+	public void setPlayerIndex(int playerIndex)
+	{
+		PlayerIndex = playerIndex;
+	}
+
+	public UserJson GetUserAsJson()
+	{
+		UserJson userJson = new UserJson();
+
+		userJson.setName(m_Name);
+		userJson.setNumOfGames(GetNumOfGames());
+
+		return userJson;
 	}
 }

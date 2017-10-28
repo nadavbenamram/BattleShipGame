@@ -29,6 +29,11 @@ public class GameManager
 		m_CurrentGameHistory = -1;
 	}
 
+	public int GetNextPlayerIdx()
+	{
+		return m_NextPlayerTurn;
+	}
+
 	public AttackResult GetNextAttackHistory()
 	{
 		if(m_CurrentGameHistory > 0)
@@ -49,13 +54,13 @@ public class GameManager
 		return m_GameHistory.get(m_CurrentGameHistory);
 	}
 
+	public static void SetInstance(GameManager i_Instance)
+	{
+		m_Instance = i_Instance;
+	}
+
 	public static GameManager Instance()
 	{
-		if(m_Instance == null)
-		{
-			m_Instance = new GameManager();
-		}
-
 		return m_Instance;
 	}
 
