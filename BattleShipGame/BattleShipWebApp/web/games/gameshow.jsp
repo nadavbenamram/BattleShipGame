@@ -51,10 +51,6 @@
             float: left;
         }
 
-        #rightSideBar p {
-            height: 50px;
-        }
-
         #footer {
             height: 10%;
             width: 100%;
@@ -73,7 +69,7 @@
             margin-right: 10px;
         }
 
-        #title {
+        .title {
             text-align: center;
             vertical-align: middle;
             font-size:      20px;
@@ -135,13 +131,13 @@
 <!-- Boards -->
 <div id="mainContent">
     <div id="GameDiv" overflow-y:auto;>
-        <p id="title">Game Board</p>
+        <p class="title">Game Board</p>
         <table id="GameTable">
         </table>
     </div>
 
     <div id="TraceDiv">
-        <p id="title">Trace Board</p>
+        <p class="title">Trace Board</p>
         <table id="TraceTable">
         </table>
     </div>

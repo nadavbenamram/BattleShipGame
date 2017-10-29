@@ -31,7 +31,7 @@
                 }
                 else
                 {
-                    alert("Username " + $("#loginName").val() + " already signed up!")
+                    alert(data)
                 }
             });
         });

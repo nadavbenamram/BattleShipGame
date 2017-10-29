@@ -179,6 +179,7 @@ public class Player
 		if(battleShip.IsObjectDrawn())
 		{
 			m_Statistics.AddPoints(battleShip.GetBattleShipScore());
+			//GameManager.Instance().GetCurrentPlayer().GetPlayerStatistics().AddPoints(battleShip.GetBattleShipScore());
 			i_AttackResults.MarkBattleShipDrawn(battleShip);
 			i_AttackResults.AddAttackInfo("BattleShip of player " + m_PlayerNumber + " was drawn!");
 		}

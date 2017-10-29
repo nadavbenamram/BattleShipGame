@@ -6,7 +6,8 @@ $("#loginButton").click(function(){
         }
         else
         {
-            alert("Username " + $("#loginName").val() + " already signed up!")
+            //alert("Username " + $("#loginName").val() + " already signed up!")
+            alert(data)
         }
     });
 });

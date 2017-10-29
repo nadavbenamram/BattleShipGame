@@ -5,6 +5,7 @@ import BattleShipGameLogic.GameType;
 import JsonObjects.GameJson;
 import JsonObjects.GameStatisticsJson;
 
+import javax.xml.ws.Dispatch;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,10 +76,31 @@ public class Game
 
 	public void SetXmlPath(String i_XmlPath) throws Exception
 	{
+		if (i_XmlPath == null || i_XmlPath.equals(""))
+		{
+			throw new IllegalArgumentException("please choose xml file");
+		}
+
 		m_XmlPath = i_XmlPath;
+		initGame();
+	}
+
+	private void initGame() throws Exception
+	{
+		if(m_XmlPath == null || m_XmlPath.equals(""))
+		{
+			throw new IllegalArgumentException("Please choose xml");
+		}
 		m_GameManager = new GameManager();
-		m_GameManager.LoadGameSettings(i_XmlPath);
+		m_GameManager.LoadGameSettings(m_XmlPath);
 		m_GameManager.InitGame();
+	}
+
+	public void ResetGame() throws Exception
+	{
+		m_GameUsersList = null;
+		DiAactivateGame();
+		initGame();
 	}
 
 	public String GetXmlPath()
@@ -195,5 +217,21 @@ public class Game
 	public void SetCurrentPlayerIdx(int i_Idx)
 	{
 		m_CurrentPlayerIdx = i_Idx;
+	}
+
+	public User GetUserByIdx(int i_Idx)
+	{
+		if (i_Idx == 0)
+		{
+			return m_GameUsersList.get(0);
+		}
+		else if (i_Idx == 1)
+		{
+			return m_GameUsersList.get(1);
+		}
+		else
+		{
+			throw new IllegalArgumentException("Player index isn't in the range 0-1");
+		}
 	}
 }

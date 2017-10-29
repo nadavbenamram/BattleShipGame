@@ -27,36 +27,44 @@ public class UploadGameServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String gameTItle = (String)request.getParameter("gameTitle"); // Retrieves <input type="file" name="file">
-		Part filePart = request.getPart("gameData"); // Retrieves <input type="file" name="file">
-		String xmlFolderPath = new File("").getAbsolutePath();
-		xmlFolderPath += "/" + Constants.XML_FILES_DIR_NAME;
-		File dir = new File(xmlFolderPath);
-		dir.mkdir();
-		File file = File.createTempFile(gameTItle + "_", ".xml", new File(xmlFolderPath));
-		try (InputStream fileContent = filePart.getInputStream())
+		if(gameTItle == null || gameTItle.equals(""))
 		{
-			Files.copy(fileContent, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		}
-
-		try
-		{
-			Game game = new Game(gameTItle);
-			game.SetXmlPath(file.getAbsolutePath());
-			User owner = SessionManager.Instance(request.getSession()).GetCurrentUser();
-			game.SetOwner(owner);
-			ContextManager.Instance().AddGame(game, owner);
-		}
-		catch (IllegalArgumentException e)
-		{
-			request.setAttribute(GAME_LOAD_FAILED_ATT_NAME, "There is already game with this title ("+gameTItle+")");
-		}
-		catch(Exception e)
-		{
-			request.setAttribute(GAME_LOAD_FAILED_ATT_NAME, e.getMessage());
-		}
-		finally
-		{
+			request.setAttribute(GAME_LOAD_FAILED_ATT_NAME, "Game title can't be empty");
 			request.getRequestDispatcher("/games/games.jsp").forward(request,response);
+		}
+		else
+		{
+			Part filePart = request.getPart("gameData"); // Retrieves <input type="file" name="file">
+			String xmlFolderPath = new File("").getAbsolutePath();
+			xmlFolderPath += "/" + Constants.XML_FILES_DIR_NAME;
+			File dir = new File(xmlFolderPath);
+			dir.mkdir();
+			File file = File.createTempFile(gameTItle + "_", ".xml", new File(xmlFolderPath));
+			try (InputStream fileContent = filePart.getInputStream())
+			{
+				Files.copy(fileContent, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			}
+
+			try
+			{
+				Game game = new Game(gameTItle);
+				game.SetXmlPath(file.getAbsolutePath());
+				User owner = SessionManager.Instance(request.getSession()).GetCurrentUser();
+				game.SetOwner(owner);
+				ContextManager.Instance().AddGame(game, owner);
+			}
+			catch (IllegalArgumentException e)
+			{
+				request.setAttribute(GAME_LOAD_FAILED_ATT_NAME, "There is already game with this title ("+gameTItle+")");
+			}
+			catch(Exception e)
+			{
+				request.setAttribute(GAME_LOAD_FAILED_ATT_NAME, e.getMessage());
+			}
+			finally
+			{
+				request.getRequestDispatcher("/games/games.jsp").forward(request,response);
+			}
 		}
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

@@ -38,7 +38,7 @@ function refreshGameShow(gamesFromServer) {
         if(jsonObj.IsGameFinished)
         {
             window.location.replace("../gamefinished?gametitle=" + jsonObj.GameJson.Title + "&"
-                + "username=" + $("#parametersFromJsp").attr("userName"));
+                + "username=/"/"");
         }
     })();
 }

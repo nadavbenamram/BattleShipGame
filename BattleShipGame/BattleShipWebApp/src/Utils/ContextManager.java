@@ -45,7 +45,7 @@ public class ContextManager
 		boolean isUserExists = m_ConnectedUsers.stream().anyMatch(usr -> usr.GetName().equals(i_User.GetName()));
 		if(true == isUserExists)
 		{
-			throw new IllegalArgumentException("There is already registerd user with the name" + i_User.GetName());
+			throw new IllegalArgumentException("There is already registerd user with the name " + i_User.GetName());
 		}
 
 		m_ConnectedUsers.add(i_User);
@@ -90,10 +90,14 @@ public class ContextManager
 	{
 		getAllGames();
 
-		boolean isUserExists = m_AllGames.stream().anyMatch(game -> game.GetTitle().equals(i_Game.GetTitle()));
-		if(true == isUserExists)
+		boolean isGameTitleExists = m_AllGames.stream().anyMatch(game -> game.GetTitle().equals(i_Game.GetTitle()));
+		if(true == isGameTitleExists)
 		{
-			throw new IllegalArgumentException("There is already registerd user with the name" + i_Game.GetTitle());
+			throw new IllegalArgumentException("There is already registerd game with the title" + i_Game.GetTitle());
+		}
+		else if(i_Game.GetTitle().equals(""))
+		{
+			throw new IllegalArgumentException("Game title shouldn't be empty!");
 		}
 
 		m_AllGames.add(i_Game);

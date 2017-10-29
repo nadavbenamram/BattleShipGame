@@ -25,14 +25,28 @@ public class SignUpServlet extends HttpServlet
 		PrintWriter writer = response.getWriter();
 		try
 		{
-			User user = new User(username);
-			ContextManager.Instance().AddUser(user);
-			SessionManager.Instance(request.getSession(true)).SetCurrentUser(user);
-			writer.println("YES");
+			if(username == null || username.equals(""))
+			{
+				writer.println("user name can't be empty!");
+			}
+			else
+			{
+				if(SessionManager.Instance(request.getSession(true)).GetCurrentUser() != null)
+				{
+					writer.println("You are already connected with the username " + SessionManager.Instance(request.getSession()).GetCurrentUser().GetName());
+				}
+				else
+				{
+					User user = new User(username);
+					ContextManager.Instance().AddUser(user);
+					SessionManager.Instance(request.getSession(true)).SetCurrentUser(user);
+					writer.println("YES");
+				}
+			}
 		}
 		catch (IllegalArgumentException e)
 		{
-			writer.println("NO");
+			writer.println(e.getMessage());
 		}
 	}
 	
