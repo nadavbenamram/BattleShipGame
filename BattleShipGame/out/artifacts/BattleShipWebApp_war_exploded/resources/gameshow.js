@@ -1,3 +1,5 @@
+globalJsonObj = NaN;
+
 $(function() {
     $("#leaveGameButton").click(function ()
     {
@@ -30,6 +32,7 @@ function refreshGameShow(gamesFromServer) {
         xmlHttp.send( null );
         var jsonData = xmlHttp.responseText;
         var jsonObj = JSON.parse(jsonData);
+        globalJsonObj = jsonObj;
         fillTables(jsonObj);
         fillPlayerStatistics(jsonObj);
         fillGameStatistics(jsonObj);
@@ -119,22 +122,31 @@ function fillTables(jsonObj)
                     var imgSrc;
                     switch(jsonObj.GameBoard[i][j]) {
                         case 'EMPTY':
-                            imgSrc = "<img src=\"/resources/empty.png\" alt=\"empty cell\" style=\"width:42px;height:42px;\">"
+                            imgSrc = "<img src=\"/resources/empty.png\" alt=\"empty cell\" style=\"width:13px;height:13px;\" "
                             break;
                         case 'BATTLE_SHIP':
-                            imgSrc = "<img src=\"/resources/battleShip.png\" alt=\"battle ship cell\" style=\"width:42px;height:42px;\">"
+                            imgSrc = "<img src=\"/resources/battleShip.png\" alt=\"battle ship cell\" style=\"width:13px;height:13px;\" "
                             break;
                         case 'MINE':
-                            imgSrc = "<img src=\"/resources/mine.png\" alt=\"mine cell\" style=\"width:42px;height:42px;\">"
+                            imgSrc = "<img src=\"/resources/mine.png\" alt=\"mine cell\" style=\"width:13px;height:13px;\" "
                             break;
                         case 'BATTLE_SHIP_HIT':
-                            imgSrc = "<img src=\"/resources/battleShipHit.png\" alt=\"battle ship hit cell\" style=\"width:42px;height:42px;\">"
+                            imgSrc = "<img src=\"/resources/battleShipHit.png\" alt=\"battle ship hit cell\" style=\"width:13px;height:13px;\" "
                             break;
                         case 'HIT':
-                            imgSrc = "<img src=\"/resources/hit.png\" alt=\"hit cell\" style=\"width:42px;height:42px;\">"
+                            imgSrc = "<img src=\"/resources/hit.png\" alt=\"hit cell\" style=\"width:13px;height:13px;\" "
                             break;
                     }
-                    td = "<td align=\"center\">" + imgSrc + "</td>";
+
+                    td = "<td align=\"center\">"
+                        + "<div class=\"divCell\" ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\">"
+                        + imgSrc
+                        + "x-value=\""
+                        + j.toString()
+                        + "\" y-value=\""
+                        + i.toString()
+                        + "\">"
+                        + "</div></td>";
                 }
 
                 $("#GameTable").append(td);
@@ -176,19 +188,19 @@ function fillTables(jsonObj)
                     var imgSrc;
                     switch(jsonObj.TraceBoard[i][j]) {
                         case 'EMPTY':
-                            imgSrc = "<img src=\"/resources/empty.png\" alt=\"empty cell\" style=\"width:42px;height:42px;\">"
+                            imgSrc = "<img src=\"/resources/empty.png\" alt=\"empty cell\" style=\"width:13px;height:13px;\">"
                             break;
                         case 'BATTLE_SHIP':
-                            imgSrc = "<img src=\"/resources/battleShip.png\" alt=\"battle ship cell\" style=\"width:42px;height:42px;\">"
+                            imgSrc = "<img src=\"/resources/battleShip.png\" alt=\"battle ship cell\" style=\"width:13px;height:13px;\">"
                             break;
                         case 'MINE':
-                            imgSrc = "<img src=\"/resources/mine.png\" alt=\"mine cell\" style=\"width:42px;height:42px;\">"
+                            imgSrc = "<img src=\"/resources/mine.png\" alt=\"mine cell\" style=\"width:13px;height:13px;\">"
                             break;
                         case 'BATTLE_SHIP_HIT':
-                            imgSrc = "<img src=\"/resources/battleShipHit.png\" alt=\"battle ship hit cell\" style=\"width:42px;height:42px;\">"
+                            imgSrc = "<img src=\"/resources/battleShipHit.png\" alt=\"battle ship hit cell\" style=\"width:13px;height:13px;\">"
                             break;
                         case 'HIT':
-                            imgSrc = "<img src=\"/resources/hit.png\" alt=\"hit cell\" style=\"width:42px;height:42px;\">"
+                            imgSrc = "<img src=\"/resources/hit.png\" alt=\"hit cell\" style=\"width:13px;height:13px;\">"
                             break;
                     }
 
@@ -232,7 +244,52 @@ function fillTables(jsonObj)
                     alert("You should wait for your turn!");
                 }
             }
+            else
+            {
+                alert("You should wait for other player!");
+            }
             ajaxGameShow();
         });
     }
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ajaxGameShow();
+    if(!globalJsonObj.IsWaitingToSecondPlayer)
+    {
+        if(globalJsonObj.PlayerStatistics.Name == globalJsonObj.GameJson.CurrentPlayer.Name)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", "putmine?"
+                + "pointx=" + ev.target.getAttribute("x-value") + "&"
+                + "pointy=" + ev.target.getAttribute("y-value") + "&"
+                + "gametitle=" + globalJsonObj.GameJson.Title
+                , false );
+            xmlHttp.send( null );
+            var responseData = xmlHttp.responseText;
+            if(responseData != "")
+            {
+                alert(responseData);
+            }
+        }
+        else
+        {
+            alert("You should wait for your turn!");
+        }
+    }
+    else
+    {
+        alert("You should wait for other player!");
+    }
+    ajaxGameShow();
 }

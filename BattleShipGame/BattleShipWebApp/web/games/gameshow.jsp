@@ -124,6 +124,10 @@
     <p id="playerName"></p>
     <label for="playerScore">Player score: </label>
     <p id="playerScore"></p>
+    <label for="mineDiv">Put mine: </label>
+    <div id="mineDiv">
+        <img src="resources/mine.png" draggable="true" ondragstart="drag(event)" id="mineDrag" width=13px height=13px>
+    </div>
     <label for="leaveGameButton">Leave game: </label>
     <input type="button" value="Leave game" id="leaveGameButton"></input>
 </div>
