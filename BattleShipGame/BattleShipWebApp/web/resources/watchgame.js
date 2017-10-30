@@ -3,30 +3,22 @@ globalJsonObj = NaN;
 $(function() {
     $("#leaveGameButton").click(function ()
     {
-        window.location.replace("../gamefinished?gametitle="
-            + $("#parametersFromJsp").attr("gameName") + "&"
-            + "username=" + $("#parametersFromJsp").attr("userName"));
+        window.location.replace("../games");
     });
     $.ajaxSetup({cache: false});
-    ajaxGameShow();
-    setInterval(ajaxGameShow, 2000);
+    ajaxWatchGame();
+    setInterval(ajaxWatchGame, 2000);
 });
 
-function ajaxGameShow() {
-    $.ajax({
-        url: "gameshow",
-        success: function (gameFromServer) {
-            refreshGameShow(gameFromServer);
-        }
-    });
+function ajaxWatchGame() {
+    refreshGameWatch();
 }
 
-function refreshGameShow(gamesFromServer) {
+function refreshGameWatch()
+{
     (function (){
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open( "GET", "gameshow?"
-            + "valueOfError=" + $("#parametersFromJsp").attr("valueOfError") + "&"
-            + "userName=" + $("#parametersFromJsp").attr("userName") + "&"
+        xmlHttp.open( "GET", "watchgame?"
             + "gameName=" + $("#parametersFromJsp").attr("gameName")
             , false );
         xmlHttp.send( null );
@@ -36,30 +28,12 @@ function refreshGameShow(gamesFromServer) {
         fillTables(jsonObj);
         fillPlayerStatistics(jsonObj);
         fillGameStatistics(jsonObj);
-        fillStatusLabel(jsonObj);
-        //console.log(jsonObj);
         if(jsonObj.IsGameFinished)
         {
-            window.location.replace("../gamefinished?gametitle=" + jsonObj.GameJson.Title + "&"
-                + "username=/"/"");
+            alert("The game finished");
+            window.location.replace("../games");
         }
     })();
-}
-
-function fillStatusLabel(jsonObj)
-{
-    if (typeof jsonObj != 'undefined')
-    {
-        $("#statusLabel").empty();
-        if(jsonObj.IsWaitingToSecondPlayer)
-        {
-            $("#statusLabel").text("Waiting for second player...");
-        }
-        else if(jsonObj.IsGameStartedNow)
-        {
-            $("#statusLabel").text("Game Started!");
-        }
-    }
 }
 
 function fillGameStatistics(jsonObj)
@@ -139,14 +113,8 @@ function fillTables(jsonObj)
                     }
 
                     td = "<td align=\"center\">"
-                        + "<div class=\"divCell\" ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\">"
                         + imgSrc
-                        + "x-value=\""
-                        + j.toString()
-                        + "\" y-value=\""
-                        + i.toString()
-                        + "\">"
-                        + "</div></td>";
+                        + "</td>";
                 }
 
                 $("#GameTable").append(td);
@@ -204,11 +172,7 @@ function fillTables(jsonObj)
                             break;
                     }
 
-                    td = "<td align=\"center\" class=\"touchableCell\" x-value=\""
-                        + j.toString()
-                        + "\" y-value=\""
-                        + i.toString()
-                        + "\">"
+                    td = "<td align=\"center\">"
                         + imgSrc
                         + "</td>";
                 }
@@ -217,79 +181,5 @@ function fillTables(jsonObj)
             }
             $("#TraceTable").append(trEnd);
         }
-
-        $(".touchableCell").click(function ()
-        {
-            self = $(this);
-            ajaxGameShow();
-            if(!jsonObj.IsWaitingToSecondPlayer)
-            {
-                if(jsonObj.PlayerStatistics.Name == jsonObj.GameJson.CurrentPlayer.Name)
-                {
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.open( "GET", "attack?"
-                        + "pointx=" + self.attr("x-value") + "&"
-                        + "pointy=" + self.attr("y-value") + "&"
-                        + "gametitle=" + jsonObj.GameJson.Title
-                        , false );
-                    xmlHttp.send( null );
-                    var responseData = xmlHttp.responseText;
-                    if(responseData != "")
-                    {
-                        alert(responseData);
-                    }
-                }
-                else
-                {
-                    alert("You should wait for your turn!");
-                }
-            }
-            else
-            {
-                alert("You should wait for other player!");
-            }
-            ajaxGameShow();
-        });
     }
-}
-
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ajaxGameShow();
-    if(!globalJsonObj.IsWaitingToSecondPlayer)
-    {
-        if(globalJsonObj.PlayerStatistics.Name == globalJsonObj.GameJson.CurrentPlayer.Name)
-        {
-            var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open( "GET", "putmine?"
-                + "pointx=" + ev.target.getAttribute("x-value") + "&"
-                + "pointy=" + ev.target.getAttribute("y-value") + "&"
-                + "gametitle=" + globalJsonObj.GameJson.Title
-                , false );
-            xmlHttp.send( null );
-            var responseData = xmlHttp.responseText;
-            if(responseData != "")
-            {
-                alert(responseData);
-            }
-        }
-        else
-        {
-            alert("You should wait for your turn!");
-        }
-    }
-    else
-    {
-        alert("You should wait for other player!");
-    }
-    ajaxGameShow();
 }

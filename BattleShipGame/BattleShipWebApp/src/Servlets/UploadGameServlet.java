@@ -32,6 +32,11 @@ public class UploadGameServlet extends HttpServlet
 			request.setAttribute(GAME_LOAD_FAILED_ATT_NAME, "Game title can't be empty");
 			request.getRequestDispatcher("/games/games.jsp").forward(request,response);
 		}
+		else if(gameTItle.length() < 3)
+		{
+			request.setAttribute(GAME_LOAD_FAILED_ATT_NAME, "Game title can't be less then 3 characters");
+			request.getRequestDispatcher("/games/games.jsp").forward(request,response);
+		}
 		else
 		{
 			Part filePart = request.getPart("gameData"); // Retrieves <input type="file" name="file">

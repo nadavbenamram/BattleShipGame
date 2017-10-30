@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="BattleShipWebApp">
+    <output-path>$PROJECT_DIR$/out/artifacts/BattleShipWebApp</output-path>
+    <root id="archive" name="BattleShipWebApp.war">
+      <element id="javaee-facet-resources" facet="BattleShipWebApp/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="BattleShipWebApp" />
+          <element id="module-output" name="BattleShipGameLogic" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/BattleShipWebApp/web/WEB-INF/lib/gson-2.2.3.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

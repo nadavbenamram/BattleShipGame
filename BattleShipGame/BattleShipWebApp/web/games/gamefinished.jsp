@@ -79,17 +79,17 @@
     String title;
     if(gameStats.isPlayerLeft() == true)
     {
-    	title = "player " + gameStats.getPlayerLeftName() + " left the game and lose!";
+        title = "player " + gameStats.getPlayerLeftName() + " left the game and lose!";
     }
     else
     {
-    	if(gameStats.getPlayersStatistics()[0].getPoints() == gameStats.getPlayersStatistics()[1].getPoints())
+        if(gameStats.getPlayersStatistics()[0].getPoints() == gameStats.getPlayersStatistics()[1].getPoints())
         {
             title = "Draw!";
         }
         else if (gameStats.getPlayersStatistics()[0].getPoints() > gameStats.getPlayersStatistics()[1].getPoints())
         {
-        	title = "player " + gameStats.getPlayersStatistics()[1].getPlayerName() + " won!";
+            title = "player " + gameStats.getPlayersStatistics()[1].getPlayerName() + " won!";
         }
         else
         {

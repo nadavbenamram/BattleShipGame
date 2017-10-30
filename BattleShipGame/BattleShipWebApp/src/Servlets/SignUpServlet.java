@@ -49,7 +49,7 @@ public class SignUpServlet extends HttpServlet
 			writer.println(e.getMessage());
 		}
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		handleRequest(request, response);

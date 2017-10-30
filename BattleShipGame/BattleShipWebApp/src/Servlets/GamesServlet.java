@@ -3,6 +3,7 @@ package Servlets;
 import Utils.Constants;
 import Utils.ContextManager;
 import Utils.Game;
+import Utils.SessionManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,7 @@ public class GamesServlet extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		request.setAttribute("username", SessionManager.Instance(request.getSession()).GetCurrentUser().GetName());
 		request.getRequestDispatcher("/games/games.jsp").forward(request,response);
 	}
 }

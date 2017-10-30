@@ -5,23 +5,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%
-    String valueOfError = (String)request.getAttribute(Constants.GAME_LOAD_FAILED_ATT_NAME);
-    String userName = (String)request.getAttribute(Constants.USER_NAME_PARAM_NAME);
     String gameName = (String)request.getAttribute(Constants.GAME_TITLE_PARAM_NAME);
-    User user = ContextManager.Instance().GetUserByName(userName);
     Game game = ContextManager.Instance().GetGameByTitle(gameName);
-    int userIdx = game.GetUserIdx(user);
-    if(valueOfError != null)
-    {%>
-<script type="text/javascript">
-    alert("<%= valueOfError %>");
-</script>
-<%}%>
+%>
 <head>
     <link rel="stylesheet" type="text/css" href="../resources/style.css">
     <script type="text/javascript" src="../resources/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../resources/gameshow.js"></script>
-    <title>Game Page</title>
+    <script type="text/javascript" src="../resources/watchgame.js"></script>
+    <title>Watch Game Page</title>
 
     <style>
         #header {
@@ -112,23 +103,19 @@
 
 </head>
 <body>
-<a type="hidden" valueOfError="<%=valueOfError%>" userName="<%=userName%>" gameName="<%=gameName%>" id="parametersFromJsp"></a>
+<a type="hidden" gameName="<%=gameName%>" id="parametersFromJsp"></a>
 
 <div id="header">
-    <h1 align="center"><%= gameName %> Game Page:</h1>
+    <h1 align="center">Watch <%=gameName%> Game Page:</h1>
 </div>
 
 <div id="leftSideBar">
-    <h1 align="center">Player Statistics:</h1>
+    <h1 align="center">Current Player Statistics:</h1>
     <label for="playerName">Player name: </label>
     <p id="playerName"></p>
     <label for="playerScore">Player score: </label>
     <p id="playerScore"></p>
-    <label for="mineDiv">Put mine: </label>
-    <div id="mineDiv">
-        <img src="resources/mine.png" draggable="true" ondragstart="drag(event)" id="mineDrag" width=13px height=13px>
-    </div>
-    <label for="leaveGameButton">Leave game: </label>
+    <label for="leaveGameButton">Back to game lists: </label>
     <input type="button" value="Leave game" id="leaveGameButton"></input>
 </div>
 

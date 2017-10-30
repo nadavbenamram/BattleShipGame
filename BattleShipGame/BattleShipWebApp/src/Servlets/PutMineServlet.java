@@ -41,8 +41,8 @@ public class PutMineServlet extends HttpServlet
 		catch(Exception e)
 		{
 			res = "Invalid point to set mine - Should be:\n" +
-			                                   "Row: 1 - " + GameManager.Instance().GetBoardSize() + "\n" +
-			                                   "Column: A - " + (char)('A' + GameManager.Instance().GetBoardSize() - 1) + "\n";
+			      "Row: 1 - " + GameManager.Instance().GetBoardSize() + "\n" +
+			      "Column: A - " + (char)('A' + GameManager.Instance().GetBoardSize() - 1) + "\n";
 		}
 
 		//returning JSON objects, not HTML

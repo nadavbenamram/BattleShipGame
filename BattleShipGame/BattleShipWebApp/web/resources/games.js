@@ -47,19 +47,31 @@ function refreshGameRoomsList(gamesFromServer) {
             {
                 td6 = "<td align=\"center\"><input type=\"button\" class=\"watchButton\" data-title=\""+gamesFromServer[i]["Title"]+"\" value=\"Watch\"/></td>";
             }
-            $("#gamesTbody").append(trStart+td1+td2+td3+td4+td5+td6+trEnd);
+            td7 = "<td align=\"center\">"+"<input type=\"button\" value=\"Delete game\" indexOfGame=" + i + " id=\"deleteGame\"></input>"+"</td>";
+            $("#gamesTbody").append(trStart+td1+td2+td3+td4+td5+td6+td7+trEnd);
         }
 
         $(".joinButton").click(function (){
             window.location.replace("../joingame?gametitle=" + $(this).attr("data-title"));
         });
         $(".watchButton").click(function (){
-            window.location.replace("../watchgame?gametitle=" + $(this).attr("data-title"));
+            window.location.replace("../joinwatchgame?gametitle=" + $(this).attr("data-title"));
+        });
+        $("#deleteGame").click(function (){
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", "deletegame?"
+                + "gameName=" + gamesFromServer[$("#deleteGame").attr("indexOfGame")]["Title"]
+                , false );
+            xmlHttp.send( null );
+            var responseData = xmlHttp.responseText;
         });
     }
 }
 
 $(function() {
+    $("#logout").click(function (){
+        window.location.replace("../logout");
+    });
     $.ajaxSetup({cache: false});
     ajaxGameRoomsList();
     setInterval(ajaxGameRoomsList, 2000);

@@ -17,16 +17,16 @@
     <TITLE>Games Page</TITLE>
 </head>
 
-<body >
+<body>
 <%
     String value = (String)request.getAttribute(Constants.GAME_LOAD_FAILED_ATT_NAME);
+    String username = (String)request.getAttribute("username");
     if(value != null)
     {%>
 <script type="text/javascript">
     alert("<%= value %>");
 </script>
 <%}%>
-
 <style>
     #listsDiv{
         float: left;
@@ -77,7 +77,7 @@
             <thead>
             <tr>
                 <td align="center">User Name</td>
-                <td align="center">Number If Games</td>
+                <td align="center">Number Of Games</td>
             </tr>
             </thead>
             <tbody id="usersTbody">
@@ -94,9 +94,12 @@
         <input type="file" accept=".xml" name="gameData" id="gameUpload"/><br/><br/>
         <input type="submit" value="Upload Game" />
     </form>
+    <hr/>
 </div>
 
 
+<input type="button" value="Logout" id="logout"></input>
+<a type="hidden" userName="<%=username%>" id="parametersFromJsp"></a>
 </body>
 
 </html>
