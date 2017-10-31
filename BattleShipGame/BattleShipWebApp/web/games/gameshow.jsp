@@ -31,28 +31,28 @@
         }
 
         #leftSideBar {
-            height: 80%;
-            width: 20%;
+            height: 85%;
+            width: 15%;
             background-color: lightgray;
             float: left;
         }
 
         #mainContent {
-            height: 80%;
-            width: 60%;
+            height: 85%;
+            width: 70%;
             background-color: white;
             float: left;
         }
 
         #rightSideBar {
-            height: 80%;
-            width: 20%;
+            height: 85%;
+            width: 15%;
             background-color: lightgray;
             float: left;
         }
 
         #footer {
-            height: 10%;
+            height: 5%;
             width: 100%;
             background-color: darkgray;
             clear: both;
@@ -133,8 +133,8 @@
 </div>
 
 <!-- Boards -->
-<div id="mainContent">
-    <div id="GameDiv" overflow-y:auto;>
+<div id="mainContent" style="overflow-y:scroll; overflow-x:scroll;">
+    <div id="GameDiv">
         <p class="title">Game Board</p>
         <table id="GameTable">
         </table>

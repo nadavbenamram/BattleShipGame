@@ -47,7 +47,8 @@ function refreshGameRoomsList(gamesFromServer) {
             {
                 td6 = "<td align=\"center\"><input type=\"button\" class=\"watchButton\" data-title=\""+gamesFromServer[i]["Title"]+"\" value=\"Watch\"/></td>";
             }
-            td7 = "<td align=\"center\">"+"<input type=\"button\" value=\"Delete game\" indexOfGame=" + i + " id=\"deleteGame\"></input>"+"</td>";
+
+            td7 = "<td align=\"center\">"+"<input type=\"button\" class=\"deleteGame\" data-title=\""+gamesFromServer[i]["Title"]+"\" value=\"Delete game\"></input>"+"</td>";
             $("#gamesTbody").append(trStart+td1+td2+td3+td4+td5+td6+td7+trEnd);
         }
 
@@ -57,13 +58,14 @@ function refreshGameRoomsList(gamesFromServer) {
         $(".watchButton").click(function (){
             window.location.replace("../joinwatchgame?gametitle=" + $(this).attr("data-title"));
         });
-        $("#deleteGame").click(function (){
+        $(".deleteGame").click(function (){
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.open( "GET", "deletegame?"
-                + "gameName=" + gamesFromServer[$("#deleteGame").attr("indexOfGame")]["Title"]
-                , false );
-            xmlHttp.send( null );
-            var responseData = xmlHttp.responseText;
+                + "gameName=" + $(this).attr("data-title") + "&"
+                + "userName=" + $("#parameterJsp").attr("user-name")
+                , false);
+            xmlHttp.send(null);
+            alert(xmlHttp.responseText);
         });
     }
 }

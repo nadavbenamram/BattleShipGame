@@ -100,7 +100,7 @@
 
 <div id="header">
     <h1 align="center" id="TitleMsg"><%=title%></h1>
-    <input type="button" value="Return to lobby" id="returnToLobby"/>
+    <input type="button" value="Return" id="returnToLobby"/>
 </div>
 
 <div id="leftSideBar">

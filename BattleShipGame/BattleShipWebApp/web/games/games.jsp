@@ -14,6 +14,12 @@
     <script type="text/javascript" src="../resources/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="../resources/games.js"></script>
     <script type="text/javascript" src="../resources/users.js"></script>
+    <style>
+        a{
+            font-size: 20px;
+            text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
+        }
+    </style>
     <TITLE>Games Page</TITLE>
 </head>
 
@@ -51,6 +57,8 @@
         clear: both;
     }
 </style>
+
+<div type="hidden" id="parameterJsp" user-name="<%= username %>"></div>
 
 <div id="listsDiv">
     <div id="gamesDiv">
@@ -99,7 +107,6 @@
 
 
 <input type="button" value="Logout" id="logout"></input>
-<a type="hidden" userName="<%=username%>" id="parametersFromJsp"></a>
 </body>
 
 </html>

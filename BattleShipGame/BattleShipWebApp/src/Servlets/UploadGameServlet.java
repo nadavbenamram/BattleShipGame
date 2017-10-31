@@ -57,6 +57,7 @@ public class UploadGameServlet extends HttpServlet
 				User owner = SessionManager.Instance(request.getSession()).GetCurrentUser();
 				game.SetOwner(owner);
 				ContextManager.Instance().AddGame(game, owner);
+				request.setAttribute("username", owner.GetName());
 			}
 			catch (IllegalArgumentException e)
 			{
@@ -68,7 +69,7 @@ public class UploadGameServlet extends HttpServlet
 			}
 			finally
 			{
-				request.getRequestDispatcher("/games/games.jsp").forward(request,response);
+				request.getRequestDispatcher("/games/games.jsp?").forward(request,response);
 			}
 		}
 	}

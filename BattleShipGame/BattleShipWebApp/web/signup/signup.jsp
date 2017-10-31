@@ -11,7 +11,7 @@
 <h1>Welcome To BattleShip Website Game!</h1>
 <table>
     <tr>
-        <td><b>UserName</b></td>
+        <td><b>User name:</b></td>
         <td><input type="text" name="username" id="loginName"></td>
     </tr>
     <tr>

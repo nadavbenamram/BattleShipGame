@@ -7,6 +7,7 @@ import JsonObjects.PlayerStatsJson;
 import Utils.ContextManager;
 import Utils.Game;
 import Utils.SessionManager;
+import Utils.User;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;

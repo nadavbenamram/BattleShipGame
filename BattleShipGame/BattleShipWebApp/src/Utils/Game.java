@@ -41,7 +41,14 @@ public class Game
 
 	public int GetCurrentPlayersNum()
 	{
-		return m_CurrentGameUsers.length;
+		if(m_GameUsersList == null)
+		{
+			return 0;
+		}
+		else
+		{
+			return m_GameUsersList.size();
+		}
 	}
 
 	public User GetOwner()

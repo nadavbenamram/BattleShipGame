@@ -3,9 +3,16 @@ globalJsonObj = NaN;
 $(function() {
     $("#leaveGameButton").click(function ()
     {
-        window.location.replace("../gamefinished?gametitle="
-            + $("#parametersFromJsp").attr("gameName") + "&"
-            + "username=" + $("#parametersFromJsp").attr("userName"));
+        if(globalJsonObj.GameJson.CurrentPlayer.Name == $("#parametersFromJsp").attr("userName"))
+        {
+            window.location.replace("../gamefinished?gametitle="
+                + $("#parametersFromJsp").attr("gameName") + "&"
+                + "username=" + $("#parametersFromJsp").attr("userName"));
+        }
+        else
+        {
+            alert("You can leave at your own turn only!");
+        }
     });
     $.ajaxSetup({cache: false});
     ajaxGameShow();
