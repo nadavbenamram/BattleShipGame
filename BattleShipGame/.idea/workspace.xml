@@ -7,19 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54857b19-ffe3-4551-a49d-cd57a440ae7b" name="Default" comment="Checking point bug fix.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/SendChatMessageServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/BattleShipWebApp/BattleShipWebApp.war" afterPath="$PROJECT_DIR$/out/artifacts/BattleShipWebApp/BattleShipWebApp.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipWebApp/JsonObjects/GameJson.class" afterPath="$PROJECT_DIR$/out/production/BattleShipWebApp/JsonObjects/GameJson.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipWebApp/Utils/Constants.class" afterPath="$PROJECT_DIR$/out/production/BattleShipWebApp/Utils/Constants.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipWebApp/Utils/Game.class" afterPath="$PROJECT_DIR$/out/production/BattleShipWebApp/Utils/Game.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/src/JsonObjects/GameJson.java" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/JsonObjects/GameJson.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Constants.java" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Game.java" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/web/games/gameshow.jsp" afterPath="$PROJECT_DIR$/BattleShipWebApp/web/games/gameshow.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/web/games/watchgame.jsp" afterPath="$PROJECT_DIR$/BattleShipWebApp/web/games/watchgame.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/web/resources/gameshow.js" afterPath="$PROJECT_DIR$/BattleShipWebApp/web/resources/gameshow.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/web/resources/watchgame.js" afterPath="$PROJECT_DIR$/BattleShipWebApp/web/resources/watchgame.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -302,7 +290,7 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-385" />
     <option name="y" value="1" />
     <option name="width" value="4240" />
@@ -705,7 +693,7 @@
       <workItem from="1509205789975" duration="42667000" />
       <workItem from="1509402120200" duration="12787000" />
       <workItem from="1510992504882" duration="11245000" />
-      <workItem from="1511013736266" duration="9276000" />
+      <workItem from="1511013736266" duration="9765000" />
     </task>
     <task id="LOCAL-00001" summary="Almost finished first exercise">
       <created>1503247157402</created>
@@ -732,11 +720,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="309493000" />
+    <option name="totallyTimeSpent" value="309982000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-16" y="-16" width="3872" height="2092" extended-state="7" />
-    <editor active="true" />
+    <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6529507" sideWeight="0.50416666" order="7" side_tool="true" content_ui="tabs" />
