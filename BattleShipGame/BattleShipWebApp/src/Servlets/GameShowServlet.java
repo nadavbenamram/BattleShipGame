@@ -60,7 +60,7 @@ public class GameShowServlet extends HttpServlet
 					gamePlayerJson.setGameStartedNow(false);
 				}
 
-				if(game.GetActivePlayersNum() == 2 && game.IsActive() == false)
+				if(game.IsActive() == false && game.GetIsStarted() == true)
 				{
 					gamePlayerJson.setGameFinished(true);
 				}

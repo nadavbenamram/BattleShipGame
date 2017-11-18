@@ -109,6 +109,7 @@ public class ContextManager
 	{
 		getAllGames();
 
+		i_Game.GetOwner().RemoveGame(i_Game);
 		m_AllGames.remove(i_Game);
 		m_Context.setAttribute(Constants.ALL_GAMES_ATT_NAME, m_AllGames);
 	}

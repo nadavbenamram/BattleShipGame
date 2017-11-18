@@ -18,9 +18,9 @@
 </script>
 <%}%>
 <head>
-    <link rel="stylesheet" type="text/css" href="../resources/style.css">
-    <script type="text/javascript" src="../resources/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../resources/gameshow.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
+    <script type="text/javascript" src="resources/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="resources/gameshow.js"></script>
     <title>Game Page</title>
 
     <style>

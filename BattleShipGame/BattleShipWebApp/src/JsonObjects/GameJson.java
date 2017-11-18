@@ -11,6 +11,17 @@ public class GameJson
 	private int ActivePlayersNum;
 	private GameStatisticsJson GameStatistcs;
 	private UserJson CurrentPlayer;
+	private boolean IsStarted;
+
+	public boolean isStarted()
+	{
+		return IsStarted;
+	}
+
+	public void setStarted(boolean started)
+	{
+		IsStarted = started;
+	}
 
 	public String getTitle()
 	{

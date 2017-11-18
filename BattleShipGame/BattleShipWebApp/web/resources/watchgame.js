@@ -3,7 +3,7 @@ globalJsonObj = NaN;
 $(function() {
     $("#leaveGameButton").click(function ()
     {
-        window.location.replace("../games");
+        window.location.replace("games");
     });
     $.ajaxSetup({cache: false});
     ajaxWatchGame();
@@ -28,10 +28,11 @@ function refreshGameWatch()
         fillTables(jsonObj);
         fillPlayerStatistics(jsonObj);
         fillGameStatistics(jsonObj);
+        console.log(jsonObj);
         if(jsonObj.IsGameFinished)
         {
             alert("The game finished");
-            window.location.replace("../games");
+            window.location.replace("games");
         }
     })();
 }
@@ -96,19 +97,19 @@ function fillTables(jsonObj)
                     var imgSrc;
                     switch(jsonObj.GameBoard[i][j]) {
                         case 'EMPTY':
-                            imgSrc = "<img src=\"/resources/empty.png\" alt=\"empty cell\" style=\"width:13px;height:13px;\" "
+                            imgSrc = "<img src=\"resources/empty.png\" alt=\"empty cell\" style=\"width:13px;height:13px;\" "
                             break;
                         case 'BATTLE_SHIP':
-                            imgSrc = "<img src=\"/resources/battleShip.png\" alt=\"battle ship cell\" style=\"width:13px;height:13px;\" "
+                            imgSrc = "<img src=\"resources/battleShip.png\" alt=\"battle ship cell\" style=\"width:13px;height:13px;\" "
                             break;
                         case 'MINE':
-                            imgSrc = "<img src=\"/resources/mine.png\" alt=\"mine cell\" style=\"width:13px;height:13px;\" "
+                            imgSrc = "<img src=\"resources/mine.png\" alt=\"mine cell\" style=\"width:13px;height:13px;\" "
                             break;
                         case 'BATTLE_SHIP_HIT':
-                            imgSrc = "<img src=\"/resources/battleShipHit.png\" alt=\"battle ship hit cell\" style=\"width:13px;height:13px;\" "
+                            imgSrc = "<img src=\"resources/battleShipHit.png\" alt=\"battle ship hit cell\" style=\"width:13px;height:13px;\" "
                             break;
                         case 'HIT':
-                            imgSrc = "<img src=\"/resources/hit.png\" alt=\"hit cell\" style=\"width:13px;height:13px;\" "
+                            imgSrc = "<img src=\"resources/hit.png\" alt=\"hit cell\" style=\"width:13px;height:13px;\" "
                             break;
                     }
 
@@ -156,19 +157,19 @@ function fillTables(jsonObj)
                     var imgSrc;
                     switch(jsonObj.TraceBoard[i][j]) {
                         case 'EMPTY':
-                            imgSrc = "<img src=\"/resources/empty.png\" alt=\"empty cell\" style=\"width:13px;height:13px;\">"
+                            imgSrc = "<img src=\"resources/empty.png\" alt=\"empty cell\" style=\"width:13px;height:13px;\">"
                             break;
                         case 'BATTLE_SHIP':
-                            imgSrc = "<img src=\"/resources/battleShip.png\" alt=\"battle ship cell\" style=\"width:13px;height:13px;\">"
+                            imgSrc = "<img src=\"resources/battleShip.png\" alt=\"battle ship cell\" style=\"width:13px;height:13px;\">"
                             break;
                         case 'MINE':
-                            imgSrc = "<img src=\"/resources/mine.png\" alt=\"mine cell\" style=\"width:13px;height:13px;\">"
+                            imgSrc = "<img src=\"resources/mine.png\" alt=\"mine cell\" style=\"width:13px;height:13px;\">"
                             break;
                         case 'BATTLE_SHIP_HIT':
-                            imgSrc = "<img src=\"/resources/battleShipHit.png\" alt=\"battle ship hit cell\" style=\"width:13px;height:13px;\">"
+                            imgSrc = "<img src=\"resources/battleShipHit.png\" alt=\"battle ship hit cell\" style=\"width:13px;height:13px;\">"
                             break;
                         case 'HIT':
-                            imgSrc = "<img src=\"/resources/hit.png\" alt=\"hit cell\" style=\"width:13px;height:13px;\">"
+                            imgSrc = "<img src=\"resources/hit.png\" alt=\"hit cell\" style=\"width:13px;height:13px;\">"
                             break;
                     }
 

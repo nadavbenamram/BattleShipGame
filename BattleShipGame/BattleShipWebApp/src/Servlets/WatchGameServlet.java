@@ -28,6 +28,7 @@ public class WatchGameServlet extends HttpServlet
 		try (PrintWriter out = response.getWriter()) {
 			String gamename = (String) request.getParameter("gameName");
 			String json;
+
 			if(gamename != null && gamename.equals("") != true)
 			{
 				Game game = ContextManager.Instance().GetGameByTitle(gamename);
@@ -41,7 +42,7 @@ public class WatchGameServlet extends HttpServlet
 				gamePlayerJson.setPlayerStatistics(playerStatistics);
 				gamePlayerJson.Set(game, player);
 
-				if(game.GetActivePlayersNum() == 2 && game.IsActive() == false)
+				if(true == game.GetIsStarted() && game.IsActive() == false)
 				{
 					gamePlayerJson.setGameFinished(true);
 				}

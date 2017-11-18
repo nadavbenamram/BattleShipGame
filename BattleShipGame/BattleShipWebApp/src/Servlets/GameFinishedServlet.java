@@ -40,38 +40,61 @@ public class GameFinishedServlet extends HttpServlet
 			i++;
 		}
 
-		FinalGameStatistics gameStats = new FinalGameStatistics();
-		GameManager gameManager = game.GetGameManager();
-		gameStats.setGameDuration(gameManager.GetGameStatistics().GetGameDuration());
-		gameStats.setTotalSteps(gameManager.GetGameStatistics().GetSteps());
-		gameStats.getPlayersStatistics()[0] = new FinalPlayerStatistics();
-		gameStats.getPlayersStatistics()[0].setAverageStepTime(gameManager.GetAllPlayers()[0].GetPlayerStatistics().GetAvgStepTimeInSeconds());
-		gameStats.getPlayersStatistics()[0].setHit(gameManager.GetAllPlayers()[0].GetPlayerStatistics().GetHits());
-		gameStats.getPlayersStatistics()[0].setMiss(gameManager.GetAllPlayers()[0].GetPlayerStatistics().GetMisses());
-		gameStats.getPlayersStatistics()[0].setPoints(gameManager.GetAllPlayers()[0].GetPlayerStatistics().GetPoints());
-		gameStats.getPlayersStatistics()[0].setPlayerName(game.GetUserByIdx(0).GetName());
-
-		gameStats.getPlayersStatistics()[1] = new FinalPlayerStatistics();
-		gameStats.getPlayersStatistics()[1].setAverageStepTime(gameManager.GetAllPlayers()[1].GetPlayerStatistics().GetAvgStepTimeInSeconds());
-		gameStats.getPlayersStatistics()[1].setHit(gameManager.GetAllPlayers()[1].GetPlayerStatistics().GetHits());
-		gameStats.getPlayersStatistics()[1].setMiss(gameManager.GetAllPlayers()[1].GetPlayerStatistics().GetMisses());
-		gameStats.getPlayersStatistics()[1].setPoints(gameManager.GetAllPlayers()[1].GetPlayerStatistics().GetPoints());
-		gameStats.getPlayersStatistics()[1].setPlayerName(game.GetUserByIdx(1).GetName());
-
-		request.setAttribute("gameTitle", game.GetTitle());
-		if(userName != null && userName.equals("") == false)
+		if(game.GetIsStarted() == true)
 		{
-			gameStats.setPlayerLeft(true);
-			gameStats.setPlayerLeftName(userName);
-		}
+			FinalGameStatistics gameStats = new FinalGameStatistics();
+			GameManager gameManager = game.GetGameManager();
+			gameStats.setGameDuration(gameManager.GetGameStatistics().GetGameDuration());
+			gameStats.setTotalSteps(gameManager.GetGameStatistics().GetSteps());
+			gameStats.getPlayersStatistics()[0] = new FinalPlayerStatistics();
+			gameStats.getPlayersStatistics()[0].setAverageStepTime(gameManager.GetAllPlayers()[0].GetPlayerStatistics().GetAvgStepTimeInSeconds());
+			gameStats.getPlayersStatistics()[0].setHit(gameManager.GetAllPlayers()[0].GetPlayerStatistics().GetHits());
+			gameStats.getPlayersStatistics()[0].setMiss(gameManager.GetAllPlayers()[0].GetPlayerStatistics().GetMisses());
+			gameStats.getPlayersStatistics()[0].setPoints(gameManager.GetAllPlayers()[0].GetPlayerStatistics().GetPoints());
+			gameStats.getPlayersStatistics()[0].setPlayerName(game.GetUserByIdx(0).GetName());
 
-		if (game != null && i%2 == 0)
+			gameStats.getPlayersStatistics()[1] = new FinalPlayerStatistics();
+			gameStats.getPlayersStatistics()[1].setAverageStepTime(gameManager.GetAllPlayers()[1].GetPlayerStatistics().GetAvgStepTimeInSeconds());
+			gameStats.getPlayersStatistics()[1].setHit(gameManager.GetAllPlayers()[1].GetPlayerStatistics().GetHits());
+			gameStats.getPlayersStatistics()[1].setMiss(gameManager.GetAllPlayers()[1].GetPlayerStatistics().GetMisses());
+			gameStats.getPlayersStatistics()[1].setPoints(gameManager.GetAllPlayers()[1].GetPlayerStatistics().GetPoints());
+			gameStats.getPlayersStatistics()[1].setPlayerName(game.GetUserByIdx(1).GetName());
+
+			request.setAttribute("gameTitle", game.GetTitle());
+
+			String userLeftName = game.GetUserLeft();
+			if(userLeftName.equals("") == false)
+			{
+				gameStats.setPlayerLeft(true);
+				gameStats.setPlayerLeftName(userLeftName);
+			}
+			else if(userName != null && userName.equals("") == false)
+			{
+				game.SetUserLeft(userName);
+				gameStats.setPlayerLeft(true);
+				gameStats.setPlayerLeftName(userName);
+			}
+
+			if (game != null)
+			{
+				if(i%2 == 0)
+				{
+					game.ResetGame();
+				}
+				else
+				{
+					game.DiAactivateGame();
+				}
+			}
+
+			request.setAttribute("gamestats", gameStats);
+			request.getRequestDispatcher("/games/gamefinished.jsp").forward(request,response);
+		}
+		else if (game != null)
 		{
 			game.ResetGame();
+			response.sendRedirect("games");
 		}
-
-		request.setAttribute("gamestats", gameStats);
-		request.getRequestDispatcher("/games/gamefinished.jsp").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

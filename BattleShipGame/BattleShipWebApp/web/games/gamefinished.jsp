@@ -1,9 +1,11 @@
 <%@ page import="JsonObjects.FinalGameStatistics" %>
+<%@ page import="Utils.Game" %>
+<%@ page import="Utils.ContextManager" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../resources/style.css">
-    <script type="text/javascript" src="../resources/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
+    <script type="text/javascript" src="resources/jquery-3.2.1.min.js"></script>
     <title>Game finished</title>
 
     <style>
@@ -75,11 +77,13 @@
 <body>
 <%
     String gameTitle = (String)request.getAttribute("gameTitle");
+    Game game = ContextManager.Instance().GetGameByTitle(gameTitle);
     FinalGameStatistics gameStats = (FinalGameStatistics)request.getAttribute("gamestats");
     String title;
     if(gameStats.isPlayerLeft() == true)
     {
         title = "player " + gameStats.getPlayerLeftName() + " left the game and lose!";
+        //game.DiAactivateGame();
     }
     else
     {
@@ -138,7 +142,7 @@
 <script type="text/javascript">
     (function(){
         $("#returnToLobby").click(function(){
-            window.location.replace("../games");
+            window.location.replace("games");
         });
     })();
 </script>

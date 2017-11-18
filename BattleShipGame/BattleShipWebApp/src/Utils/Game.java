@@ -20,11 +20,27 @@ public class Game
 	private int m_CurrentPlayerIdx;
 	private boolean m_IsActive;
 	private GameManager m_GameManager;
+	private boolean m_Started;
+	private boolean m_IsUserLeft;
+	private String m_LeftUser;
+
+	public void SetUserLeft(String i_UserLeft)
+	{
+		m_IsUserLeft = true;
+		m_LeftUser = i_UserLeft;
+	}
+
+	public String GetUserLeft()
+	{
+		return (m_IsUserLeft == true) ? m_LeftUser : "";
+	}
 
 	public Game(String i_Title)
 	{
 		m_Title = i_Title;
 		m_IsActive = false;
+		m_Started = false;
+		m_IsUserLeft = false;
 	}
 
 	public int GetActivePlayersNum()
@@ -63,6 +79,7 @@ public class Game
 
 	public void ActivateGame()
 	{
+		m_Started = true;
 		m_IsActive = true;
 	}
 
@@ -106,6 +123,8 @@ public class Game
 	public void ResetGame() throws Exception
 	{
 		m_GameUsersList = null;
+		m_Started = false;
+		m_IsUserLeft = false;
 		DiAactivateGame();
 		initGame();
 	}
@@ -169,8 +188,14 @@ public class Game
 		gameJson.setGameType(GetGameManager().GetGameType());
 		gameJson.setActivePlayersNum(GetActivePlayersNum());
 		gameJson.setCurrentPlayer(GetCurrentUser().GetUserAsJson());
+		gameJson.setStarted(m_Started);
 
 		return gameJson;
+	}
+
+	public boolean GetIsStarted()
+	{
+		return m_Started;
 	}
 
 	public void RemoveUser(User i_User) throws Exception
