@@ -14,7 +14,7 @@ function refreshGameRoomsList(gamesFromServer) {
     if (typeof gamesFromServer != 'undefined') {
         for(var i=0;i<gamesFromServer.length;i++)
         {
-            var formStart = "<form method=\"post\" action=\"../joingame\">";
+            var formStart = "<form method=\"post\" action=\"joingame\">";
             var trStart = "<tr>";
             var td1="<td align=\"center\">"+gamesFromServer[i]["Title"]+"</td>";
             var td2="<td align=\"center\">"+gamesFromServer[i]["Owner"]+"</td>";
@@ -27,15 +27,15 @@ function refreshGameRoomsList(gamesFromServer) {
             var td5MiddleValue = "";
             if (td5ValueHelper == 2)
             {
-                td5MiddleValue = "<img src=\"/resources/red.png\" alt=\"active game\" style=\"width:15px;height:15px;\">";
+                td5MiddleValue = "<img src=\"resources/red.png\" alt=\"active game\" style=\"width:15px;height:15px;\">";
             }
             else if(td5ValueHelper == 1)
             {
-                td5MiddleValue = "<img src=\"/resources/yellow.png\" alt=\"inactive game\" style=\"width:15px;height:15px;\">";
+                td5MiddleValue = "<img src=\"resources/yellow.png\" alt=\"inactive game\" style=\"width:15px;height:15px;\">";
             }
             else if(td5MiddleValue == 0)
             {
-                td5MiddleValue = "<img src=\"/resources/green.jpg\" alt=\"inactive game\" style=\"width:15px;height:15px;\">";
+                td5MiddleValue = "<img src=\"resources/green.jpg\" alt=\"inactive game\" style=\"width:15px;height:15px;\">";
             }
             td5 += td5MiddleValue + "</td>";
             var td6;
@@ -53,10 +53,10 @@ function refreshGameRoomsList(gamesFromServer) {
         }
 
         $(".joinButton").click(function (){
-            window.location.replace("../joingame?gametitle=" + $(this).attr("data-title"));
+            window.location.replace("joingame?gametitle=" + $(this).attr("data-title"));
         });
         $(".watchButton").click(function (){
-            window.location.replace("../joinwatchgame?gametitle=" + $(this).attr("data-title"));
+            window.location.replace("joinwatchgame?gametitle=" + $(this).attr("data-title"));
         });
         $(".deleteGame").click(function (){
             var xmlHttp = new XMLHttpRequest();
@@ -72,7 +72,7 @@ function refreshGameRoomsList(gamesFromServer) {
 
 $(function() {
     $("#logout").click(function (){
-        window.location.replace("../logout");
+        window.location.replace("logout");
     });
     $.ajaxSetup({cache: false});
     ajaxGameRoomsList();

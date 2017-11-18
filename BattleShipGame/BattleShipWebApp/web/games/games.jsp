@@ -10,10 +10,10 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../resources/style.css">
-    <script type="text/javascript" src="../resources/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../resources/games.js"></script>
-    <script type="text/javascript" src="../resources/users.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
+    <script type="text/javascript" src="resources/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="resources/games.js"></script>
+    <script type="text/javascript" src="resources/users.js"></script>
     <style>
         a{
             font-size: 20px;
@@ -96,7 +96,7 @@
 
 <div id="uploadGame">
     <hr />
-    <form method="post" action="../uploadgame" enctype="multipart/form-data">
+    <form method="post" action="uploadgame" enctype="multipart/form-data">
         <label for="gameUpload">Upload game</label><br />
         <input type="text" name="gameTitle"/><br/><br/>
         <input type="file" accept=".xml" name="gameData" id="gameUpload"/><br/><br/>

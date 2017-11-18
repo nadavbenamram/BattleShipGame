@@ -26,7 +26,7 @@ public class LogOutServlet extends HttpServlet
 			e.printStackTrace();
 		}
 		SessionManager.Instance(request.getSession()).SetCurrentUser(null);
-		response.sendRedirect("/signup/signup.jsp");
+		response.sendRedirect("signup/signup.jsp");
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -41,6 +41,6 @@ public class LogOutServlet extends HttpServlet
 			e.printStackTrace();
 		}
 		SessionManager.Instance(request.getSession()).SetCurrentUser(null);
-		response.sendRedirect("/signup/signup.jsp");
+		response.sendRedirect("signup/signup.jsp");
 	}
 }

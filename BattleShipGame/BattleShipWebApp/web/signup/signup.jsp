@@ -20,14 +20,13 @@
 </table>
 
 <script type="text/javascript" src="../resources/jquery-3.2.1.min.js"></script>
-<!--<script type="text/javascript" src="signup.js"/>-->
 
 <script>
     $("#loginButton").click(function(){
-        $.get("/signup?username=" + $("#loginName").val(), function(data, status){
+        $.get("../signup?username=" + $("#loginName").val(), function(data, status){
             if (data.indexOf("YES") >= 0)
             {
-                window.location = "/games?username=" + $("#loginName").val();
+                window.location = "../games?username=" + $("#loginName").val();
             }
             else
             {
