@@ -156,11 +156,11 @@ public class Game
 
 		if(m_GameUsersList.size() == 0)
 		{
-			i_User.setPlayerIndex(0);
+			i_User.setPlayerIndex(m_Title, 0);
 		}
 		else
 		{
-			i_User.setPlayerIndex(1);
+			i_User.setPlayerIndex(m_Title, 1);
 		}
 
 		m_GameUsersList.add(i_User);

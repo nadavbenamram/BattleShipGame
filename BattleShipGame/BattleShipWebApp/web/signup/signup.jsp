@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
 <HTML>
-
 <HEAD>
     <link rel="stylesheet" type="text/css" href="../resources/style.css">
     <TITLE>Login Page</TITLE>
@@ -22,6 +21,13 @@
 <script type="text/javascript" src="../resources/jquery-3.2.1.min.js"></script>
 
 <script>
+    $.get("../signup?username=firstenter", function(data, status){
+        if (data.indexOf("YES") >= 0)
+        {
+            window.location = "../games";
+        }
+    });
+
     $("#loginButton").click(function(){
         $.get("../signup?username=" + $("#loginName").val(), function(data, status){
             if (data.indexOf("YES") >= 0)

@@ -38,9 +38,9 @@ public class GameShowServlet extends HttpServlet
 				PlayerStatsJson playerStatistics = new PlayerStatsJson();
 				playerStatistics.setName(SessionManager.Instance(request.getSession()).GetCurrentUser().GetName());
 				Game game = ContextManager.Instance().GetGameByTitle(gamename);
-				playerStatistics.setScore(game.GetGameManager().GetAllPlayers()[(SessionManager.Instance(request.getSession()).GetCurrentUser().getPlayerIndex() + 1) % 2].GetPlayerStatistics().GetPoints());
+				playerStatistics.setScore(game.GetGameManager().GetAllPlayers()[(SessionManager.Instance(request.getSession()).GetCurrentUser().getPlayerIndex(game.GetTitle()) + 1) % 2].GetPlayerStatistics().GetPoints());
 				gamePlayerJson.setPlayerStatistics(playerStatistics);
-				Player player = game.GetGameManager().GetAllPlayers()[SessionManager.Instance(request.getSession()).GetCurrentUser().getPlayerIndex()];
+				Player player = game.GetGameManager().GetAllPlayers()[SessionManager.Instance(request.getSession()).GetCurrentUser().getPlayerIndex(game.GetTitle())];
 				gamePlayerJson.Set(game, player);
 				if(game.GetActivePlayersNum() == 1)
 				{

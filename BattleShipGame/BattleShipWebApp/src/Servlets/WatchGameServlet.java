@@ -38,7 +38,7 @@ public class WatchGameServlet extends HttpServlet
 				GamePlayerJson gamePlayerJson = new GamePlayerJson();
 				PlayerStatsJson playerStatistics = new PlayerStatsJson();
 				playerStatistics.setName(game.GetCurrentUser().GetName());
-				playerStatistics.setScore(game.GetGameManager().GetAllPlayers()[(game.GetCurrentUser().getPlayerIndex() + 1) % 2].GetPlayerStatistics().GetPoints());
+				playerStatistics.setScore(game.GetGameManager().GetAllPlayers()[(game.GetCurrentUser().getPlayerIndex(game.GetTitle()) + 1) % 2].GetPlayerStatistics().GetPoints());
 				gamePlayerJson.setPlayerStatistics(playerStatistics);
 				gamePlayerJson.Set(game, player);
 

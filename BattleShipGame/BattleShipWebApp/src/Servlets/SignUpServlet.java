@@ -31,16 +31,23 @@ public class SignUpServlet extends HttpServlet
 			}
 			else
 			{
-				if(SessionManager.Instance(request.getSession(true)).GetCurrentUser() != null)
+				//if(SessionManager.Instance(request.getSession(true)).GetCurrentUser() != null) //TODO:check
+				if((username.equals("firstenter")) && (SessionManager.Instance(request.getSession()).GetCurrentUser() != null))
 				{
-					writer.println("You are already connected with the username " + SessionManager.Instance(request.getSession()).GetCurrentUser().GetName());
+					//writer.println("You are already connected with the username " + SessionManager.Instance(request.getSession()).GetCurrentUser().GetName());
+					writer.println("YES");
 				}
-				else
+				else if(username.equals("firstenter") == false)
 				{
 					User user = new User(username);
 					ContextManager.Instance().AddUser(user);
-					SessionManager.Instance(request.getSession(true)).SetCurrentUser(user);
+					//SessionManager.Instance(request.getSession(true)).SetCurrentUser(user); //TODO: check
+					SessionManager.Instance(request.getSession()).SetCurrentUser(user);
 					writer.println("YES");
+				}
+				else
+				{
+					writer.println("NO");
 				}
 			}
 		}

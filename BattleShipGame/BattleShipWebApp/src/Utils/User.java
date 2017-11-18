@@ -4,17 +4,20 @@ import JsonObjects.UserJson;
 
 import javax.naming.Name;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class User
 {
 	private String m_Name;
 	private List<Game> m_GamesList;
-	private int PlayerIndex;
+	Map<String, Integer> m_PlayerIndices;
 
 	public User(String i_Name)
 	{
 		m_Name = i_Name;
+		m_PlayerIndices = new HashMap<>();
 	}
 
 	public void AddGame(Game i_Game)
@@ -42,14 +45,14 @@ public class User
 		return m_GamesList == null ? 0 : m_GamesList.size();
 	}
 
-	public int getPlayerIndex()
+	public int getPlayerIndex(String name)
 	{
-		return PlayerIndex;
+		return m_PlayerIndices.get(name);
 	}
 
-	public void setPlayerIndex(int playerIndex)
+	public void setPlayerIndex(String gameName, int playerIndex)
 	{
-		PlayerIndex = playerIndex;
+		m_PlayerIndices.put(gameName, playerIndex);
 	}
 
 	public UserJson GetUserAsJson()
