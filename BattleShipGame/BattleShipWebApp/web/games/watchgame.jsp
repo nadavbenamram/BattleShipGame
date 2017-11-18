@@ -140,6 +140,13 @@
     <p id="gameType"></p>
     <label for="currentPlayer">Current player: </label>
     <p id="currentPlayer"></p>
+    <label for="activePlayers">Active players at room: </label>
+    <ul id="activePlayers">
+        <li><%=game.GetUserByIdx(0) != null ? game.GetUserByIdx(0).GetName() : ""%></li>
+        <li><%=game.GetUserByIdx(1) != null ? game.GetUserByIdx(1).GetName() : ""%></li>
+    </ul>
+    <label for="gameChat">Game chat: </label>
+    <div id="gameChat" style="overflow-y:scroll; overflow-x:scroll; width: 100%; height: 200px; border-style: solid;"></div>
 </div>
 
 <div id="footer">

@@ -28,7 +28,7 @@ function refreshGameWatch()
         fillTables(jsonObj);
         fillPlayerStatistics(jsonObj);
         fillGameStatistics(jsonObj);
-        console.log(jsonObj);
+        fillChat(jsonObj);
         if(jsonObj.IsGameFinished)
         {
             alert("The game finished");
@@ -52,6 +52,30 @@ function fillPlayerStatistics(jsonObj)
     {
         $("#playerName").text(jsonObj.PlayerStatistics.Name);
         $("#playerScore").text(jsonObj.PlayerStatistics.Score.toString());
+    }
+}
+
+function fillChat(jsonObj)
+{
+    if (typeof jsonObj != 'undefined') {
+        var ulStart = "<ul>";
+        var ulEnd = "</ul>";
+        var li;
+
+        $("#gameChat").empty();
+
+        $("#gameChat").append(ulStart);
+        for (var i = 0; i < jsonObj.GameJson.NumOfMessage; i++) {
+            li = "<li>"
+                + jsonObj.GameJson.UserNameChat[i]
+                + ": "
+                + jsonObj.GameJson.MessageChat[i]
+                + "</li>";
+
+            $("#gameChat").append(li);
+        }
+
+        $("#gameChat").append(ulEnd);
     }
 }
 

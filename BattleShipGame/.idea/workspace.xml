@@ -7,15 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54857b19-ffe3-4551-a49d-cd57a440ae7b" name="Default" comment="Checking point bug fix.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/SendChatMessageServlet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/BattleShipWebApp/BattleShipWebApp.war" afterPath="$PROJECT_DIR$/out/artifacts/BattleShipWebApp/BattleShipWebApp.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipWebApp/Servlets/SignUpServlet.class" afterPath="$PROJECT_DIR$/out/production/BattleShipWebApp/Servlets/SignUpServlet.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipWebApp/JsonObjects/GameJson.class" afterPath="$PROJECT_DIR$/out/production/BattleShipWebApp/JsonObjects/GameJson.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipWebApp/Utils/Constants.class" afterPath="$PROJECT_DIR$/out/production/BattleShipWebApp/Utils/Constants.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BattleShipWebApp/Utils/Game.class" afterPath="$PROJECT_DIR$/out/production/BattleShipWebApp/Utils/Game.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/GameShowServlet.java" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/GameShowServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/SignUpServlet.java" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/SignUpServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/WatchGameServlet.java" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/WatchGameServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/src/JsonObjects/GameJson.java" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/JsonObjects/GameJson.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Constants.java" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Constants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Game.java" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/src/Utils/User.java" afterPath="$PROJECT_DIR$/BattleShipWebApp/src/Utils/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/web/signup/signup.jsp" afterPath="$PROJECT_DIR$/BattleShipWebApp/web/signup/signup.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/web/games/gameshow.jsp" afterPath="$PROJECT_DIR$/BattleShipWebApp/web/games/gameshow.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/web/games/watchgame.jsp" afterPath="$PROJECT_DIR$/BattleShipWebApp/web/games/watchgame.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/web/resources/gameshow.js" afterPath="$PROJECT_DIR$/BattleShipWebApp/web/resources/gameshow.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BattleShipWebApp/web/resources/watchgame.js" afterPath="$PROJECT_DIR$/BattleShipWebApp/web/resources/watchgame.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,36 +37,124 @@
       <file leaf-file-name="GameShowServlet.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/GameShowServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="767">
-              <caret line="42" column="163" lean-forward="false" selection-start-line="42" selection-start-column="163" selection-end-line="42" selection-end-column="163" />
+            <state relative-caret-position="727">
+              <caret line="41" column="38" lean-forward="false" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Utils/User.java">
+      <file leaf-file-name="GameJson.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/JsonObjects/GameJson.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1038">
-              <caret line="47" column="42" lean-forward="false" selection-start-line="47" selection-start-column="42" selection-end-line="47" selection-end-column="42" />
+            <state relative-caret-position="560">
+              <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="34" />
               <folding>
-                <element signature="e#561#562#0" expanded="true" />
-                <element signature="e#594#595#0" expanded="true" />
-                <element signature="e#777#778#0" expanded="true" />
-                <element signature="e#816#817#0" expanded="true" />
-                <element signature="e#882#883#0" expanded="true" />
-                <element signature="e#931#932#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#462#463#0" expanded="true" />
+                <element signature="e#488#489#0" expanded="true" />
+                <element signature="e#552#553#0" expanded="true" />
+                <element signature="e#593#594#0" expanded="true" />
+                <element signature="e#637#638#0" expanded="true" />
+                <element signature="e#662#663#0" expanded="true" />
+                <element signature="e#724#725#0" expanded="true" />
+                <element signature="e#763#764#0" expanded="true" />
+                <element signature="e#863#864#0" expanded="true" />
+                <element signature="e#889#890#0" expanded="true" />
+                <element signature="e#1906#1907#0" expanded="true" />
+                <element signature="e#1932#1933#0" expanded="true" />
+                <element signature="e#1983#1984#0" expanded="true" />
+                <element signature="e#2017#2018#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WatchGameServlet.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WatchGameServlet.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/WatchGameServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1087">
-              <caret line="56" column="30" lean-forward="true" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+            <state relative-caret-position="746">
+              <caret line="37" column="30" lean-forward="false" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="30" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gameshow.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/resources/gameshow.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="920">
+              <caret line="62" column="8" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="26" />
+              <folding>
+                <marker date="1511023454613" expanded="true" signature="7458:7481" ph="..." />
+                <marker date="1511023454613" expanded="true" signature="7674:7697" ph="..." />
+                <marker date="1511023454613" expanded="true" signature="7870:7893" ph="..." />
+                <marker date="1511023454613" expanded="true" signature="8097:8120" ph="..." />
+                <marker date="1511023454613" expanded="true" signature="8290:8313" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Utils/Constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="6" column="65" lean-forward="false" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signup.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/signup/signup.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1000">
+              <caret line="25" column="9" lean-forward="false" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="watchgame.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/resources/watchgame.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3000">
+              <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+              <folding>
+                <marker date="1511025325846" expanded="true" signature="5600:5623" ph="..." />
+                <marker date="1511025325846" expanded="true" signature="5816:5839" ph="..." />
+                <marker date="1511025325846" expanded="true" signature="6012:6035" ph="..." />
+                <marker date="1511025325846" expanded="true" signature="6239:6262" ph="..." />
+                <marker date="1511025325846" expanded="true" signature="6432:6455" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gameshow.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/games/gameshow.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1132">
+              <caret line="155" column="0" lean-forward="false" selection-start-line="155" selection-start-column="0" selection-end-line="156" selection-end-column="124" />
+              <folding>
+                <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="watchgame.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/games/watchgame.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1230">
+              <caret line="143" column="27" lean-forward="false" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -70,8 +162,8 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Utils/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="158" column="30" lean-forward="false" selection-start-line="158" selection-start-column="30" selection-end-line="158" selection-end-column="30" />
+            <state relative-caret-position="974">
+              <caret line="204" column="49" lean-forward="false" selection-start-line="204" selection-start-column="49" selection-end-line="204" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -85,15 +177,14 @@
         <option value="package-info" />
         <option value="HTML File" />
         <option value="CSS File" />
-        <option value="Class" />
         <option value="Jsp File" />
         <option value="JavaScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.click</find>
       <find>attr(</find>
       <find>point</find>
       <find>y-value</find>
@@ -123,6 +214,7 @@
       <find>jsp</find>
       <find>get</find>
       <find>getPlayerIndex</find>
+      <find>playerName</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -136,10 +228,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/BattleShipWebApp/web/index.jsp" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/web/signup/signup.css" />
         <option value="$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameManagerTest.java" />
-        <option value="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Constants.java" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/src/Utils/SessionManager.java" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/web/games/games.js" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/BattleShipWebApp.iml" />
@@ -173,20 +263,22 @@
         <option value="$PROJECT_DIR$/BattleShipWebApp/web/games/games.jsp" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/web/resources/games.js" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/LogOutServlet.java" />
-        <option value="$PROJECT_DIR$/BattleShipWebApp/web/games/gameshow.jsp" />
-        <option value="$PROJECT_DIR$/BattleShipWebApp/web/games/watchgame.jsp" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/src/Utils/ContextManager.java" />
-        <option value="$PROJECT_DIR$/BattleShipWebApp/src/JsonObjects/GameJson.java" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/web/games/gamefinished.jsp" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/GameFinishedServlet.java" />
-        <option value="$PROJECT_DIR$/BattleShipWebApp/web/resources/gameshow.js" />
-        <option value="$PROJECT_DIR$/BattleShipWebApp/web/resources/watchgame.js" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/SignUpServlet.java" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/web/signup/signup.jsp" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/src/Utils/User.java" />
-        <option value="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Game.java" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/GameShowServlet.java" />
         <option value="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/WatchGameServlet.java" />
+        <option value="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Constants.java" />
+        <option value="$PROJECT_DIR$/BattleShipWebApp/src/Servlets/SendChatMessageServlet.java" />
+        <option value="$PROJECT_DIR$/BattleShipWebApp/src/JsonObjects/GameJson.java" />
+        <option value="$PROJECT_DIR$/BattleShipWebApp/src/Utils/Game.java" />
+        <option value="$PROJECT_DIR$/BattleShipWebApp/web/games/gameshow.jsp" />
+        <option value="$PROJECT_DIR$/BattleShipWebApp/web/resources/gameshow.js" />
+        <option value="$PROJECT_DIR$/BattleShipWebApp/web/resources/watchgame.js" />
+        <option value="$PROJECT_DIR$/BattleShipWebApp/web/games/watchgame.jsp" />
       </list>
     </option>
   </component>
@@ -211,8 +303,8 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="62" />
-    <option name="y" value="292" />
+    <option name="x" value="-385" />
+    <option name="y" value="1" />
     <option name="width" value="4240" />
     <option name="height" value="2196" />
   </component>
@@ -613,7 +705,7 @@
       <workItem from="1509205789975" duration="42667000" />
       <workItem from="1509402120200" duration="12787000" />
       <workItem from="1510992504882" duration="11245000" />
-      <workItem from="1511013736266" duration="2449000" />
+      <workItem from="1511013736266" duration="9276000" />
     </task>
     <task id="LOCAL-00001" summary="Almost finished first exercise">
       <created>1503247157402</created>
@@ -640,7 +732,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="302666000" />
+    <option name="totallyTimeSpent" value="309493000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3872" height="2092" extended-state="7" />
@@ -753,14 +845,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/BattleShipGameLogic/GameBoard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BattleShipGameLogic/src/BattleShipGameLogic/GameManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
@@ -804,6 +888,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="8" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -861,13 +946,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Utils/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/JoinWatchGameServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1239">
@@ -898,26 +976,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/JoinGameServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="40" column="9" lean-forward="false" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/UploadGameServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1219">
           <caret line="71" column="49" lean-forward="false" selection-start-line="71" selection-start-column="46" selection-end-line="71" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/GamesServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="24" column="26" lean-forward="false" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -927,7 +989,7 @@
         <state relative-caret-position="415">
           <caret line="28" column="8" lean-forward="false" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="51" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -936,13 +998,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
           <caret line="11" column="33" lean-forward="false" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/JsonObjects/GameJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="920">
-          <caret line="23" column="5" lean-forward="false" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -984,53 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/JsonObjects/GamePlayerJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="50" column="17" lean-forward="false" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
-          <folding>
-            <element signature="e#1941#1942#0" expanded="true" />
-            <element signature="e#1977#1978#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/games/watchgame.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3674">
-          <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/resources/watchgame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="30" column="29" lean-forward="false" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
-          <folding>
-            <marker date="1511010062091" expanded="true" signature="5045:5068" ph="..." />
-            <marker date="1511010062091" expanded="true" signature="5261:5284" ph="..." />
-            <marker date="1511010062091" expanded="true" signature="5457:5480" ph="..." />
-            <marker date="1511010062091" expanded="true" signature="5684:5707" ph="..." />
-            <marker date="1511010062091" expanded="true" signature="5877:5900" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/resources/gameshow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1840">
-          <caret line="46" column="33" lean-forward="false" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="33" />
-          <folding>
-            <marker date="1511010057652" expanded="true" signature="6428:6451" ph="..." />
-            <marker date="1511010057652" expanded="true" signature="6644:6667" ph="..." />
-            <marker date="1511010057652" expanded="true" signature="6840:6863" ph="..." />
-            <marker date="1511010057652" expanded="true" signature="7067:7090" ph="..." />
-            <marker date="1511010057652" expanded="true" signature="7260:7283" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/AttackServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="960">
@@ -1051,22 +1060,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="5" column="48" lean-forward="false" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/games/gameshow.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="18" column="5" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="18" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/SignUpServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="49" column="41" lean-forward="false" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -1107,14 +1100,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/signup/signup.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Utils/SessionManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
@@ -1138,27 +1123,163 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/JsonObjects/GamePlayerJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1474">
+          <caret line="64" column="16" lean-forward="false" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="16" />
+          <folding>
+            <element signature="e#1417#1418#0" expanded="false" />
+            <element signature="e#1459#1460#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/JoinGameServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="28" column="71" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/SignUpServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1480">
+          <caret line="53" column="40" lean-forward="false" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/SendChatMessageServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-146">
+          <caret line="14" column="67" lean-forward="false" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/GamesServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="24" column="26" lean-forward="false" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Utils/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="158" column="30" lean-forward="false" selection-start-line="158" selection-start-column="30" selection-end-line="158" selection-end-column="30" />
+        <state relative-caret-position="974">
+          <caret line="204" column="49" lean-forward="false" selection-start-line="204" selection-start-column="49" selection-end-line="204" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Utils/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="6" column="65" lean-forward="false" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/signup/signup.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1000">
+          <caret line="25" column="9" lean-forward="false" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/GameShowServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="767">
-          <caret line="42" column="163" lean-forward="false" selection-start-line="42" selection-start-column="163" selection-end-line="42" selection-end-column="163" />
+        <state relative-caret-position="727">
+          <caret line="41" column="38" lean-forward="false" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/games/gameshow.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1132">
+          <caret line="155" column="0" lean-forward="false" selection-start-line="155" selection-start-column="0" selection-end-line="156" selection-end-column="124" />
+          <folding>
+            <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/JsonObjects/GameJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#462#463#0" expanded="true" />
+            <element signature="e#488#489#0" expanded="true" />
+            <element signature="e#552#553#0" expanded="true" />
+            <element signature="e#593#594#0" expanded="true" />
+            <element signature="e#637#638#0" expanded="true" />
+            <element signature="e#662#663#0" expanded="true" />
+            <element signature="e#724#725#0" expanded="true" />
+            <element signature="e#763#764#0" expanded="true" />
+            <element signature="e#863#864#0" expanded="true" />
+            <element signature="e#889#890#0" expanded="true" />
+            <element signature="e#1906#1907#0" expanded="true" />
+            <element signature="e#1932#1933#0" expanded="true" />
+            <element signature="e#1983#1984#0" expanded="true" />
+            <element signature="e#2017#2018#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/resources/watchgame.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3000">
+          <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+          <folding>
+            <marker date="1511025325846" expanded="true" signature="5600:5623" ph="..." />
+            <marker date="1511025325846" expanded="true" signature="5816:5839" ph="..." />
+            <marker date="1511025325846" expanded="true" signature="6012:6035" ph="..." />
+            <marker date="1511025325846" expanded="true" signature="6239:6262" ph="..." />
+            <marker date="1511025325846" expanded="true" signature="6432:6455" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BattleShipWebApp/src/Servlets/WatchGameServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1087">
-          <caret line="56" column="30" lean-forward="true" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+        <state relative-caret-position="746">
+          <caret line="37" column="30" lean-forward="false" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/resources/gameshow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="920">
+          <caret line="62" column="8" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="26" />
+          <folding>
+            <marker date="1511023454613" expanded="true" signature="7458:7481" ph="..." />
+            <marker date="1511023454613" expanded="true" signature="7674:7697" ph="..." />
+            <marker date="1511023454613" expanded="true" signature="7870:7893" ph="..." />
+            <marker date="1511023454613" expanded="true" signature="8097:8120" ph="..." />
+            <marker date="1511023454613" expanded="true" signature="8290:8313" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BattleShipWebApp/web/games/watchgame.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1230">
+          <caret line="143" column="27" lean-forward="false" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

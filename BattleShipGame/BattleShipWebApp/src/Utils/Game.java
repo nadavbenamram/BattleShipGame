@@ -23,6 +23,8 @@ public class Game
 	private boolean m_Started;
 	private boolean m_IsUserLeft;
 	private String m_LeftUser;
+	private List<String> m_UserNameChat;
+	private List<String> m_MessageChat;
 
 	public void SetUserLeft(String i_UserLeft)
 	{
@@ -41,6 +43,14 @@ public class Game
 		m_IsActive = false;
 		m_Started = false;
 		m_IsUserLeft = false;
+		m_UserNameChat = new ArrayList<>();
+		m_MessageChat = new ArrayList<>();
+	}
+
+	public void AddMessage(String i_UserName, String i_Message)
+	{
+		m_UserNameChat.add(i_UserName);
+		m_MessageChat.add(i_Message);
 	}
 
 	public int GetActivePlayersNum()
@@ -127,6 +137,8 @@ public class Game
 		m_IsUserLeft = false;
 		DiAactivateGame();
 		initGame();
+		m_UserNameChat = new ArrayList<>();
+		m_MessageChat = new ArrayList<>();
 	}
 
 	public String GetXmlPath()
@@ -189,6 +201,9 @@ public class Game
 		gameJson.setActivePlayersNum(GetActivePlayersNum());
 		gameJson.setCurrentPlayer(GetCurrentUser().GetUserAsJson());
 		gameJson.setStarted(m_Started);
+		gameJson.setM_UserNameChat(m_UserNameChat);
+		gameJson.setM_MessageChat(m_MessageChat);
+		gameJson.setNumOfMessage(m_MessageChat.size());
 
 		return gameJson;
 	}

@@ -1,6 +1,7 @@
 globalJsonObj = NaN;
 
 $(function() {
+
     $("#leaveGameButton").click(function ()
     {
         if(globalJsonObj.GameJson.CurrentPlayer.Name == $("#parametersFromJsp").attr("userName"))
@@ -14,6 +15,20 @@ $(function() {
             alert("You can leave at your own turn only!");
         }
     });
+
+    $("#sendMessageButton").click(function(){
+        $.get("sendmessage?gametitle=" + $("#parametersFromJsp").attr("gameName")
+            + "&"
+            + "username=" + $("#parametersFromJsp").attr("userName")
+            + "&"
+            + "chatmessage=" + $("#sendMessageTextBox").val()
+            , function()
+            {
+                $("#sendMessageTextBox").val('');
+                ajaxGameShow();
+            });
+    });
+
     $.ajaxSetup({cache: false});
     ajaxGameShow();
     setInterval(ajaxGameShow, 2000);
@@ -40,10 +55,13 @@ function refreshGameShow(gamesFromServer) {
         var jsonData = xmlHttp.responseText;
         var jsonObj = JSON.parse(jsonData);
         globalJsonObj = jsonObj;
+
         fillTables(jsonObj);
         fillPlayerStatistics(jsonObj);
         fillGameStatistics(jsonObj);
         fillStatusLabel(jsonObj);
+        fillChat(jsonObj);
+
         if(jsonObj.IsGameFinished)
         {
             window.location.replace("gamefinished?gametitle=" + jsonObj.GameJson.Title + "&"
@@ -83,6 +101,30 @@ function fillPlayerStatistics(jsonObj)
     {
         $("#playerName").text(jsonObj.PlayerStatistics.Name);
         $("#playerScore").text(jsonObj.PlayerStatistics.Score.toString());
+    }
+}
+
+function fillChat(jsonObj)
+{
+    if (typeof jsonObj != 'undefined') {
+        var ulStart = "<ul>";
+        var ulEnd = "</ul>";
+        var li;
+
+        $("#gameChat").empty();
+
+        $("#gameChat").append(ulStart);
+        for (var i = 0; i < jsonObj.GameJson.NumOfMessage; i++) {
+            li = "<li>"
+                + jsonObj.GameJson.UserNameChat[i]
+                + ": "
+                + jsonObj.GameJson.MessageChat[i]
+                + "</li>";
+
+            $("#gameChat").append(li);
+        }
+
+        $("#gameChat").append(ulEnd);
     }
 }
 

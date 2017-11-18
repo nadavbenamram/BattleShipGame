@@ -2,6 +2,8 @@ package JsonObjects;
 
 import Utils.User;
 
+import java.util.List;
+
 public class GameJson
 {
 	private String Title;
@@ -12,6 +14,29 @@ public class GameJson
 	private GameStatisticsJson GameStatistcs;
 	private UserJson CurrentPlayer;
 	private boolean IsStarted;
+	private List<String> UserNameChat;
+	private List<String> MessageChat;
+	private int NumOfMessage;
+
+	public List<String> getM_UserNameChat()
+	{
+		return UserNameChat;
+	}
+
+	public void setM_UserNameChat(List<String> m_UserNameChat)
+	{
+		this.UserNameChat = m_UserNameChat;
+	}
+
+	public List<String> getM_MessageChat()
+	{
+		return MessageChat;
+	}
+
+	public void setM_MessageChat(List<String> m_MessageChat)
+	{
+		this.MessageChat = m_MessageChat;
+	}
 
 	public boolean isStarted()
 	{
@@ -91,5 +116,15 @@ public class GameJson
 	public void setCurrentPlayer(UserJson currentPlayer)
 	{
 		CurrentPlayer = currentPlayer;
+	}
+
+	public int getNumOfMessage()
+	{
+		return NumOfMessage;
+	}
+
+	public void setNumOfMessage(int numOfMessage)
+	{
+		NumOfMessage = numOfMessage;
 	}
 }

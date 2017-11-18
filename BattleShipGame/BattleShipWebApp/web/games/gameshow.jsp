@@ -153,6 +153,10 @@
     <p id="gameType"></p>
     <label for="currentPlayer">Current player: </label>
     <p id="currentPlayer"></p>
+    <label for="gameChat">Game chat: </label>
+    <div id="gameChat" style="overflow-y:scroll; overflow-x:scroll; width: 100%; height: 200px; border-style: solid;"></div>
+    <input type="text" name="messagetextbox" style="width: 100%;" id="sendMessageTextBox"/>
+    <input type="button" value="Send message" style="width: 100%;" id="sendMessageButton"/>
 </div>
 
 <div id="footer">
